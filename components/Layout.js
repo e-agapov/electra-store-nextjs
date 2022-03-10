@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import HeadTag from './HeadTag';
 import MobileMenu from './MobileMenu';
 import Navbar from './Navbar';
@@ -8,6 +8,7 @@ function Layout({ home, children, description, themeColor, title }) {
 
 	function toggleMenu() {
 		setMenuVisibility(!menuVisibility);
+		document.body.classList.toggle('hide-body');
 	}
 
 	return (
@@ -19,10 +20,12 @@ function Layout({ home, children, description, themeColor, title }) {
 			/>
 
 			<MobileMenu isVisible={menuVisibility} toggleMenu={toggleMenu} />
-			<Navbar toggleMenu={toggleMenu} />
-			<main className={menuVisibility && 'hide-body'}>
-				{children}
-			</main>
+			{!menuVisibility && (
+				<>
+					<Navbar toggleMenu={toggleMenu} />
+					<main>{children}</main>
+				</>
+			)}
 		</div>
 	);
 }
