@@ -1,16 +1,27 @@
-html,
+@import '~reseter.css/src/scss/reseter';
+@import '~bootstrap/scss/bootstrap-grid';
+@import './variables';
+@import './fonts/Roboto';
+
+@import './components/subNavbar';
+@import './components/navbar';
+
 body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+	font-family: 'Roboto', sans-serif;
+	overflow-x: hidden;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
+main {
+	transition: 0.15s;
+	opacity: 1;
 }
 
-* {
-  box-sizing: border-box;
+.hide-body {
+	overflow: hidden;
+	max-width: 100vw;
+	max-height: 100vh;
+	background: black !important;
+	opacity: 0;
+	display: block;
+	background: black;
 }

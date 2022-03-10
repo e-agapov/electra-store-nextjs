@@ -1,0 +1,24 @@
+@import '../../functions/rem';
+@import '../../functions/breakpoint';
+@import '../../variables';
+
+.burgerMenuBtn {
+	cursor: pointer;
+	padding: rem(10) rem(20);
+	margin-left: rem(5);
+	border-radius: rem(5);
+	transition: 0.15s;
+
+	&:hover,
+	&:focus {
+		background: lighten($primary, 50);
+	}
+	&:active {
+		background: lighten($primary, 40);
+	}
+
+	@media screen and (min-width: bp(md)) {
+		display: none;
+		visibility: hidden;
+	}
+}

@@ -1,0 +1,48 @@
+@import '../functions/rem';
+@import '../variables';
+
+.navbar {
+	background: white;
+	user-select: none;
+	border-bottom: rem(1) transparentize($dark-gray, 0.75) solid;
+
+	.rowContainer {
+		display: flex;
+		align-items: center;
+	}
+
+	.NavLinksContainer {
+		@include media-breakpoint-down(md) {
+			display: none;
+			visibility: hidden;
+		}
+
+		display: flex;
+
+		.navLink {
+			color: $dark;
+			text-decoration: none;
+			margin-right: rem(70);
+			transition: 0.15s;
+
+			&:hover,
+			&:focus {
+				color: lighten($dark, 15);
+			}
+
+			&:active {
+				transform: scale(0.95);
+			}
+		}
+	}
+
+	.navbarLogotypeLink {
+		max-width: rem(157);
+		max-height: rem(62);
+
+		.navbarLogotypeImg {
+			width: 100%;
+			height: 100%;
+		}
+	}
+}
