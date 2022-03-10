@@ -1,6 +1,6 @@
 import Image from 'next/image';
-import headerPic from '../assets/images/mainPageHeaderImg.png';
 import headerPicMobile from '../assets/images/mainMobilePageHeaderImg.png';
+import headerPic from '../assets/images/mainPageHeaderImg.png';
 import Layout from '../components/Layout';
 import styles from '../scss/pages/Home.module.scss';
 

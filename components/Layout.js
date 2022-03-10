@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import HeadTag from './HeadTag';
 import MobileMenu from './MobileMenu';
 import Navbar from './Navbar';

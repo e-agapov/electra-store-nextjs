@@ -1,10 +1,9 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import LogoImage from '../assets/images/logo.png';
-
-import CartIcon from './ui/CartIcon';
 import SubNavbar from './SubNavbar';
 import BurgerMenuBtn from './ui/BurgerMenuBtn';
+import CartIcon from './ui/CartIcon';
 
 function Navbar({ toggleMenu }) {
 	return (

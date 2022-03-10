@@ -1,5 +1,4 @@
 import Link from 'next/link';
-
 import LocationIcon from './ui/sub-navbar/LocationIcon';
 import PureIcon from './ui/sub-navbar/PureIcon';
 import ServiceIcon from './ui/sub-navbar/ServiceIcon';
