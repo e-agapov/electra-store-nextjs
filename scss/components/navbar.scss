@@ -2,6 +2,11 @@
 @import '../variables';
 
 .navbar {
+	position: fixed;
+	z-index: 900;
+	width: 100%;
+	top: 0;
+
 	background: white;
 	user-select: none;
 	border-bottom: rem(1) transparentize($dark-gray, 0.75) solid;
