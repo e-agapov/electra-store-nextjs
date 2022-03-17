@@ -2,6 +2,7 @@ import Image from 'next/image';
 import headerPicMobile from '../assets/images/mainMobilePageHeaderImg.png';
 import headerPic from '../assets/images/mainPageHeaderImg.png';
 import Layout from '../components/Layout';
+import TransportSection from '../components/sections/TransportSection';
 import styles from '../scss/pages/Home.module.scss';
 
 export default function Home() {
@@ -10,11 +11,16 @@ export default function Home() {
 			<section className={`d-none d-sm-block mt-5`}>
 				<Image src={headerPic} alt="" priority />
 			</section>
+
 			<section
 				className={`d-block d-sm-none mt-5 ${styles.mobileHeaderPic}`}
 			>
 				<Image src={headerPicMobile} alt="" priority />
 			</section>
+
+			<div className="container">
+				<TransportSection />
+			</div>
 		</Layout>
 	);
 }

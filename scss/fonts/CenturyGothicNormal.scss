@@ -1,9 +1,4 @@
-// font-family: 'CenturyGothic', sans-serif;
-
 @font-face {
-  font-family: CenturyGothic;
-  font-style: normal;
-  font-weight: 400;
-  src: local("../../assets/fonts/GOTHIC.TTF");
-  font-display: swap;
+	font-family: 'CenturyGothic';
+	src: url('../../assets/fonts/GOTHIC.TTF') format('truetype');
 }
