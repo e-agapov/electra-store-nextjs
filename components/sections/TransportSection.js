@@ -31,8 +31,8 @@ const TransportSection = () => {
 					<a className={styles.linkTag}>
 						<div className={styles.imageLink}>
 							<Image alt={'bikes link'} src={BikesImage} />
+							<ArrowToRight styles={styles.ArrowToRight} />
 						</div>
-						<ArrowToRight styles={styles.ArrowToRight} />
 
 						<div className={styles.linkTitle}>Bikes</div>
 						<div className={styles.description}>

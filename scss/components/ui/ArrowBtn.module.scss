@@ -1,0 +1,48 @@
+@import '../../functions/rem';
+
+.arrowLineBtn {
+	transition: 0.15s;
+
+	color: black;
+	font-size: rem(16);
+	border: rem(2) solid black;
+	border-radius: rem(30);
+	padding: rem(10) rem(30);
+	text-decoration: none;
+	text-transform: uppercase;
+	display: inline-block;
+
+	.arrow {
+		transition: 0.15s;
+		margin-left: rem(20);
+
+		svg {
+			transition: 0.15s;
+			transform: translateY(rem(3));
+		}
+	}
+
+	&:hover,
+	&:focus {
+		border-color: transparent;
+
+		.arrow {
+			svg {
+				transform: translateY(rem(3)) translateX(rem(-10));
+			}
+		}
+	}
+
+	&:active {
+		opacity: 0.5;
+		transform: scale(0.95);
+
+		.arrow {
+			opacity: 0;
+
+			svg {
+				transform: translateY(rem(3)) translateX(rem(100));
+			}
+		}
+	}
+}

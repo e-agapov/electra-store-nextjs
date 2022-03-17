@@ -1,3 +1,5 @@
+@import '../functions/rem';
+
 .mobileHeaderPic {
 	max-height: 200vh;
 	display: block;
@@ -9,4 +11,19 @@
 		max-height: 100%;
 		max-width: 100vw;
 	}
+}
+
+.headlineForColumn {
+	font-size: rem(60);
+	font-family: 'CenturyGothic', sans-serif;
+	font-weight: 400;
+
+	margin: {
+		bottom: rem(45);
+	}
+}
+
+.textForColumn {
+	font-size: rem(18);
+	line-height: rem(30);
 }

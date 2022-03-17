@@ -44,7 +44,6 @@
 		}
 
 		@media (max-width: 1200px) {
-			// .imageLink,
 			.ArrowToRight {
 				display: none !important;
 			}
@@ -53,11 +52,11 @@
 				height: rem(300);
 
 				img {
-					object-fit: fill !important;
+					transform: translateY(-55%);
 				}
 			}
 
-			border-bottom: rem(2) solid $dark;
+			border-bottom: rem(2) solid transparentize($dark, 0.75);
 			padding-bottom: rem(10);
 			background: transparentize($dark, 0.95);
 
@@ -82,12 +81,13 @@
 
 			.ArrowToRight {
 				transition: 0.15s ease-out;
+				display: block;
 				position: absolute;
 				margin-top: rem(-80);
 				background: rgba(0, 0, 0, 0.15);
-				box-shadow: 0 0 rem(10) rem(10) rgba(0, 0, 0, 0.15);
+				box-shadow: 0 0 rem(10) rem(5) rgba(0, 0, 0, 0.15);
 				z-index: 100;
-				transform: translate(rem(270));
+				transform: translateX(rem(270));
 				border-radius: 100%;
 			}
 
@@ -113,6 +113,10 @@
 
 		&:active {
 			transform: scale(0.95);
+			opacity: 0.75;
+			.ArrowToRight {
+				opacity: 0;
+			}
 		}
 	}
 }

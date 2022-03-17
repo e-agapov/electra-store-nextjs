@@ -4,6 +4,9 @@ import headerPic from '../assets/images/mainPageHeaderImg.png';
 import Layout from '../components/Layout';
 import TransportSection from '../components/sections/TransportSection';
 import styles from '../scss/pages/Home.module.scss';
+import ArrowBtn from '../components/ArrowLink';
+import MenOnScooterImage from '../assets/images/index/menOnScooter.png';
+import MenOnBikesImage from '../assets/images/index/mensOnBikes.png';
 
 export default function Home() {
 	return (
@@ -20,6 +23,64 @@ export default function Home() {
 
 			<div className="container">
 				<TransportSection />
+
+				<section className="d-flex flex-column flex-lg-row px-3 px-lg-5">
+					<div className="col-lg-6 pe-lg-5">
+						<div className={styles.headlineForColumn}>
+							Electra <br /> Transport
+						</div>
+						<div className={styles.textForColumn}>
+							We gethered differend kinds of scooters. Everyone
+							can find a scooter for themselves.WeWe gethered
+							differend kinds of scooters. Everyone can find a
+							scooter for themselves.We gethered differend kinds
+							of scooters. Everyone can find a scooter for
+							themselves. gethered differend kinds of scooters.
+							Everyone can find a scooter for themselves.We
+							gethered differend kinds of scooters. Everyone can
+							find a scooter for themselves.We gethered differend
+							kinds of scooters. Everyone can find a scooter for
+							themselves.
+						</div>
+
+						<div className={'my-4'}>
+							<ArrowBtn href={'/'} name={'Transport'} />
+						</div>
+					</div>
+					<div className="col-lg-6 d-none d-lg-block">
+						<div className="d-flex flex-column justify-content-end">
+							<Image alt="" src={MenOnScooterImage} />
+						</div>
+					</div>
+				</section>
+
+				<section className="d-flex flex-column flex-lg-row px-3 px-lg-5">
+					<div className="col-lg-6 mt-4 mb-5 my-lg-0">
+						<Image alt="" src={MenOnBikesImage} />
+					</div>
+					<div className="col-lg-6 ps-lg-5 pt-4">
+						<div className={styles.headlineForColumn}>
+							Electra <br /> Transport
+						</div>
+						<div className={styles.textForColumn}>
+							We gethered differend kinds of scooters. Everyone
+							can find a scooter for themselves.WeWe gethered
+							differend kinds of scooters. Everyone can find a
+							scooter for themselves.We gethered differend kinds
+							of scooters. Everyone can find a scooter for
+							themselves. gethered differend kinds of scooters.
+							Everyone can find a scooter for themselves.We
+							gethered differend kinds of scooters. Everyone can
+							find a scooter for themselves.We gethered differend
+							kinds of scooters. Everyone can find a scooter for
+							themselves.
+						</div>
+
+						<div className={'my-4'}>
+							<ArrowBtn href={'/'} name={'Transport'} />
+						</div>
+					</div>
+				</section>
 			</div>
 		</Layout>
 	);
