@@ -1,12 +1,14 @@
 import Image from 'next/image';
+import MenOnScooterImage from '../assets/images/index/menOnScooter.png';
+import MenOnBikesImage from '../assets/images/index/mensOnBikes.png';
 import headerPicMobile from '../assets/images/mainMobilePageHeaderImg.png';
 import headerPic from '../assets/images/mainPageHeaderImg.png';
+import ArrowBtn from '../components/ArrowLink';
+import CollapseGroup from '../components/CollapseGroup';
 import Layout from '../components/Layout';
 import TransportSection from '../components/sections/TransportSection';
 import styles from '../scss/pages/Home.module.scss';
-import ArrowBtn from '../components/ArrowLink';
-import MenOnScooterImage from '../assets/images/index/menOnScooter.png';
-import MenOnBikesImage from '../assets/images/index/mensOnBikes.png';
+import FAQData from '../data/faq.js';
 
 export default function Home() {
 	return (
@@ -81,6 +83,12 @@ export default function Home() {
 						</div>
 					</div>
 				</section>
+
+				<CollapseGroup
+					title={'FAQ'}
+					classes={styles.faq}
+					data={FAQData}
+				/>
 			</div>
 		</Layout>
 	);

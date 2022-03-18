@@ -1,0 +1,114 @@
+@import '../fonts/CenturyGothicNormal';
+@import '../functions/rem';
+@import '../variables';
+
+.title {
+	font-family: 'CenturyGothic', sans-serif;
+	font-size: rem(60);
+	text-align: center;
+}
+
+.collapseWrapper {
+	margin: rem(80) 0;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+
+	.collapseElement {
+		transition: 0.15s cubic-bezier(0.86, 0, 0.07, 1);
+		display: block;
+		width: 100%;
+		background: white;
+		padding: rem(25) rem(5);
+
+		cursor: pointer;
+
+		border: {
+			top: rem(1) solid transparent;
+			left: rem(1) solid transparent;
+			right: rem(1) solid transparent;
+			bottom: rem(1) solid transparentize($dark, 0.75);
+		}
+
+		&:hover,
+		&:focus {
+			border: rem(1) solid transparent;
+			background: transparentize($dark, 0.975);
+
+			.titleWrapper {
+				background: transparentize($dark, 0.995);
+			}
+
+			.plus_svg {
+				transform: scale(1.15);
+			}
+		}
+
+		&:active {
+			background: transparentize($dark, 0.95);
+
+			.plus_svg {
+				transform: scale(1);
+			}
+		}
+
+		.titleWrapper {
+			transition: 0.15s;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			background: white;
+
+			.elementTitle {
+				font-size: rem(24);
+				font-weight: 400;
+				color: $dark-gray;
+				text-transform: uppercase;
+			}
+
+			.plus_svg {
+				transition: 0.15s;
+				padding-right: 5vmin;
+
+				svg {
+					transition: 0.35s;
+				}
+			}
+		}
+
+		.collapseContent {
+			transition: 0.5s cubic-bezier(0.86, 0, 0.07, 1);
+			transform: translateY(rem(-5));
+			opacity: 0;
+			max-height: 0;
+			overflow: hidden;
+			visibility: hidden;
+			text-align: left;
+			max-width: 83.5%;
+			font-size: rem(16);
+			line-height: rem(24);
+			color: $dark-gray;
+
+			&.collapsed {
+				transition: 0.5s cubic-bezier(0.86, 0, 0.07, 1);
+				transform: translateY(10px);
+				opacity: 1;
+				max-height: rem(999);
+				visibility: visible;
+			}
+		}
+	}
+}
+
+.collapsed {
+	transition: 0.75s cubic-bezier(0.86, 0, 0.07, 1);
+
+	.titleWrapper {
+		.plus_svg {
+			svg {
+				transform: rotate(230deg);
+			}
+		}
+	}
+}
