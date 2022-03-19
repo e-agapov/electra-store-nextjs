@@ -2,6 +2,7 @@ import { useState } from 'react';
 import HeadTag from './HeadTag';
 import MobileMenu from './MobileMenu';
 import Navbar from './Navbar';
+import Footer from './Footer';
 
 function Layout({ home, children, description, themeColor, title }) {
 	const [menuVisibility, setMenuVisibility] = useState(false);
@@ -24,6 +25,7 @@ function Layout({ home, children, description, themeColor, title }) {
 				<>
 					<Navbar toggleMenu={toggleMenu} />
 					<main>{children}</main>
+					<Footer />
 				</>
 			)}
 		</div>

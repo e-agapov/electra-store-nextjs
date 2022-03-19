@@ -1,0 +1,63 @@
+@import '../variables';
+@import '../functions/rem';
+
+.footer {
+	background: $dark;
+
+	.footerLogotypeWrapper {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
+		.footerLogotype {
+			max-width: rem(260);
+			max-height: rem(130);
+			transform: translateY(-50%);
+		}
+	}
+
+	.SubNavbar {
+		background: white;
+		padding: rem(20);
+	}
+
+	.footerLink {
+		text-decoration: none;
+		color: darken($linkColor, 35);
+
+		&:hover,
+		&:focus {
+			color: black;
+		}
+
+		&:active {
+			transform: scale(0.95);
+		}
+	}
+
+	.footerContentWrapper {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		padding: 5vmin 0 15vmin 0;
+		max-width: 100vw;
+
+		.footerLink {
+			text-align: center;
+			color: $linkColor;
+			padding: rem(10);
+			display: block;
+
+			width: 25%;
+
+			@media (max-width: 991.98px) {
+				width: 50%;
+			}
+
+			&:hover,
+			&:focus {
+				color: white;
+			}
+		}
+	}
+}
