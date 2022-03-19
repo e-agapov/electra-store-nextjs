@@ -45,7 +45,7 @@ const SectionBlock = ({
 		</div>
 	) : (
 		<div className="d-flex flex-column flex-lg-row align-items-center justify-content-between px-3 px-lg-5">
-			<div className="col-lg-6 pe-lg-5">
+			<div className="col-lg-6 pe-lg-5 order-1 order-lg-0">
 				{title && (
 					<div className={styles.headlineForColumn}>{title}</div>
 				)}
@@ -68,7 +68,7 @@ const SectionBlock = ({
 				)}
 			</div>
 			{imgSrc && (
-				<div className="col-lg-6 d-none d-lg-block">
+				<div className="col-lg-6 order-0 order-lg-1 mt-4 mb-5 my-lg-0">
 					<div className="d-flex flex-column justify-content-end">
 						<Image alt={imgAlt} src={imgSrc} />
 					</div>

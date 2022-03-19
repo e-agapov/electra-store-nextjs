@@ -1,6 +1,6 @@
 import Image from 'next/image';
-import headerPicMobile from '../assets/images/mainMobilePageHeaderImg.png';
-import headerPic from '../assets/images/mainPageHeaderImg.png';
+import HeaderImageMobile from '../assets/images/mainMobilePageHeaderImg.png';
+import HeaderImage from '../assets/images/mainPageHeaderImg.png';
 import CollapseGroup from '../components/CollapseGroup';
 import Layout from '../components/Layout';
 import SectionBlock from '../components/SectionBlock';
@@ -34,11 +34,13 @@ export default function Home() {
 	return (
 		<Layout home={true} title="Electra Store" description="Internet store">
 			<section className={`d-none d-sm-block`}>
-				<Image src={headerPic} alt="" priority />
+				<Image src={HeaderImage} alt="" priority />
 			</section>
 
-			<section className={`d-block d-sm-none ${styles.mobileHeaderPic}`}>
-				<Image src={headerPicMobile} alt="" priority />
+			<section
+				className={`d-block d-sm-none ${styles.mobileHeaderImage}`}
+			>
+				<Image src={HeaderImageMobile} alt="" priority />
 			</section>
 
 			<div className="container">
