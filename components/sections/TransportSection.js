@@ -6,10 +6,10 @@ import ScootersImage from '../../assets/images/index/transport-section/Scooters.
 import ArrowToRight from '../../components/ui/ArrowToRight';
 import styles from '../../scss/components/sections/transport.module.scss';
 
-const TransportSection = () => {
+const TransportSection = ({ classes = null }) => {
 	return (
 		<section
-			className={`${styles.transportSection} d-flex flex-column flex-lg-row justify-content-between`}
+			className={`${styles.transportSection} ${classes} d-flex flex-column flex-lg-row justify-content-between`}
 		>
 			<div className={`${styles.link} px-3 px-lg-5`}>
 				<Link href={'/'}>

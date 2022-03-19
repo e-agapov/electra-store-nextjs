@@ -6,14 +6,27 @@
 @import './components/subNavbar';
 @import './components/navbar';
 
+@import './functions/rem';
+
 body {
 	font-family: 'Roboto', sans-serif;
 	overflow-x: hidden;
 }
 
 main {
+	@include media-breakpoint-down(md) {
+		margin-top: rem(62);
+	}
+
+	margin-top: rem(105);
 	transition: 0.15s;
 	opacity: 1;
+}
+
+.layout {
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
 }
 
 .hide-body {

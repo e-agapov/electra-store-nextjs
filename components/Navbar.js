@@ -29,7 +29,7 @@ function Navbar({ toggleMenu }) {
 
 					<div className="rowContainer">
 						<div className="NavLinksContainer">
-							<Link href={'/'}>
+							<Link href={'/transport'}>
 								<a className="navLink">Transport</a>
 							</Link>
 							<Link href={'/'}>

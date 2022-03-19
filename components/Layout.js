@@ -13,7 +13,7 @@ function Layout({ home, children, description, themeColor, title }) {
 	}
 
 	return (
-		<div>
+		<div className={'layout'}>
 			<HeadTag
 				description={description}
 				title={title}

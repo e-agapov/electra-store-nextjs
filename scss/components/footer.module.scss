@@ -2,6 +2,7 @@
 @import '../functions/rem';
 
 .footer {
+	margin-top: rem(100);
 	background: $dark;
 
 	.footerLogotypeWrapper {
