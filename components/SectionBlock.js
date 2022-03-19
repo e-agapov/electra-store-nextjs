@@ -1,5 +1,4 @@
 import Image from 'next/image';
-
 import ArrowBtn from '../components/ArrowLink';
 import styles from '../scss/components/SectionBlock.module.scss';
 
@@ -10,10 +9,13 @@ const SectionBlock = ({
 	linkName,
 	textForColumn,
 	imgSrc,
-	imgAlt = ''
+	imgAlt = '',
+	classes = null
 }) => {
 	return imagePosition === 'left' ? (
-		<div className="d-flex flex-column flex-lg-row align-items-center justify-content-between px-3 px-lg-5">
+		<div
+			className={`d-flex flex-column flex-lg-row align-items-center justify-content-between px-3 px-lg-5 ${classes}`}
+		>
 			{imgSrc && (
 				<div className="col-lg-6 mt-4 mb-5 my-lg-0">
 					<Image alt={imgAlt} src={imgSrc} />
@@ -44,7 +46,9 @@ const SectionBlock = ({
 			</div>
 		</div>
 	) : (
-		<div className="d-flex flex-column flex-lg-row align-items-center justify-content-between px-3 px-lg-5">
+		<div
+			className={`d-flex flex-column flex-lg-row align-items-center justify-content-between px-3 px-lg-5 ${classes}`}
+		>
 			<div className="col-lg-6 pe-lg-5 order-1 order-lg-0">
 				{title && (
 					<div className={styles.headlineForColumn}>{title}</div>

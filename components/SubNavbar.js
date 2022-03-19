@@ -8,7 +8,7 @@ export default function SubNavbar() {
 		<div className="subNavbar">
 			<div className="container">
 				<div className="linkWrapper">
-					<Link href={'/'}>
+					<Link href={'/showrooms'}>
 						<a className="subNavLink">
 							Showrooms <LocationIcon className="icon" />
 						</a>
