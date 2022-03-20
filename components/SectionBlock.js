@@ -10,19 +10,24 @@ const SectionBlock = ({
 	textForColumn,
 	imgSrc,
 	imgAlt = '',
-	classes = null
+	classes = null,
+	colWidthText = '6'
 }) => {
 	return imagePosition === 'left' ? (
 		<div
 			className={`d-flex flex-column flex-lg-row align-items-center justify-content-between px-3 px-lg-5 ${classes}`}
 		>
 			{imgSrc && (
-				<div className="col-lg-6 mt-4 mb-5 my-lg-0">
+				<div
+					className={`col-lg-${
+						colWidthText ? 12 - colWidthText : false || 6
+					} mt-4 mb-5 my-lg-0`}
+				>
 					<Image alt={imgAlt} src={imgSrc} />
 				</div>
 			)}
 
-			<div className="col-lg-6 ps-lg-5 pt-4">
+			<div className={`col-lg-${colWidthText || '6'} ps-lg-5 pt-4`}>
 				{title && (
 					<div className={styles.headlineForColumn}>{title}</div>
 				)}

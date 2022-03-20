@@ -32,7 +32,7 @@ const MobileMenu = ({ isVisible = false, toggleMenu }) => {
 						Pure
 					</a>
 				</Link>
-				<Link href={'/'}>
+				<Link href={'/service'}>
 					<a onClick={toggleMenu} className={styles.Link}>
 						Service
 					</a>

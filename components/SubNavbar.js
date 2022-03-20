@@ -13,7 +13,7 @@ export default function SubNavbar() {
 							Showrooms <LocationIcon className="icon" />
 						</a>
 					</Link>
-					<Link href={'/'}>
+					<Link href={'/service'}>
 						<a className="subNavLink">
 							Service <ServiceIcon className="icon" />
 						</a>
