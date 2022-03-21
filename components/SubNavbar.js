@@ -18,7 +18,7 @@ export default function SubNavbar() {
 							Service <ServiceIcon className="icon" />
 						</a>
 					</Link>
-					<Link href={'/'}>
+					<Link href={'/pure'}>
 						<a className="subNavLink">
 							Pure <PureIcon className="icon" />
 						</a>

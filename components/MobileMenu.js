@@ -27,7 +27,7 @@ const MobileMenu = ({ isVisible = false, toggleMenu }) => {
 				X
 			</button>
 			<div className={styles.LinksWrapper}>
-				<Link href={'/'}>
+				<Link href={'/pure'}>
 					<a onClick={toggleMenu} className={styles.Link}>
 						Pure
 					</a>

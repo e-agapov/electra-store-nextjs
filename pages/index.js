@@ -1,14 +1,13 @@
 import Image from 'next/image';
+import MenOnScooterImage from '../assets/images/index/menOnScooter.png';
+import MenOnBikesImage from '../assets/images/index/mensOnBikes.png';
 import HeaderImageMobile from '../assets/images/mainMobilePageHeaderImg.png';
 import HeaderImage from '../assets/images/mainPageHeaderImg.png';
-import CollapseGroup from '../components/CollapseGroup';
+import FAQComponent from '../components/FAQComponent';
 import Layout from '../components/Layout';
 import SectionBlock from '../components/SectionBlock';
 import TransportSection from '../components/sections/TransportSection';
-import FAQData from '../data/faq.js';
 import styles from '../scss/pages/Home.module.scss';
-import MenOnBikesImage from '../assets/images/index/mensOnBikes.png';
-import MenOnScooterImage from '../assets/images/index/menOnScooter.png';
 
 export default function Home() {
 	const textRightColumn = `We gethered differend kinds of scooters. Everyone
@@ -63,11 +62,7 @@ export default function Home() {
 					linkName={'Transport'}
 				/>
 
-				<CollapseGroup
-					title={'FAQ'}
-					classes={styles.faq}
-					data={FAQData}
-				/>
+				<FAQComponent classes={styles.faq} />
 			</div>
 		</Layout>
 	);

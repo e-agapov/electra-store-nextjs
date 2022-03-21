@@ -1,0 +1,21 @@
+@import '../functions/rem';
+
+.headerImage {
+	img {
+		transform: scale(1.15);
+	}
+}
+
+.textSectionWithText {
+	margin: 15vmin 0;
+}
+
+.textWeCreateTransportSystem {
+	margin-top: rem(40);
+	font-size: rem(24);
+	line-height: rem(50);
+}
+
+.faq {
+	margin-top: 30vmin;
+}
