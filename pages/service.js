@@ -14,21 +14,21 @@ export default function Transport() {
 		<>
 			<div className="d-flex flex-column flex-lg-row">
 				<div className="col-lg-4 px-3">
-					<div className={`${styles.decimal} mx-auto mx-lg-0`}>1</div>
+					<div className={`${styles.decimal} mx-auto mx-sm-0`}>1</div>
 					<div className={`${styles.text} mt-3`}>
 						We gethered differend kinds of scooters. Everyone can
 						find a scooter for themselves.
 					</div>
 				</div>
 				<div className="col-lg-4 mt-5 mt-lg-0 px-3">
-					<div className={`${styles.decimal} mx-auto mx-lg-0`}>2</div>
+					<div className={`${styles.decimal} mx-auto mx-sm-0`}>2</div>
 					<div className={`${styles.text} mt-3`}>
 						We gethered differend kinds of scooters. Everyone can
 						find a scooter for themselves.
 					</div>
 				</div>
 				<div className="col-lg-4 mt-5 mt-lg-0 px-3">
-					<div className={`${styles.decimal} mx-auto mx-lg-0`}>3</div>
+					<div className={`${styles.decimal} mx-auto mx-sm-0`}>3</div>
 					<div className={`${styles.text} mt-3`}>
 						We gethered differend kinds of scooters.
 					</div>
