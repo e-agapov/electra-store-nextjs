@@ -27,7 +27,7 @@ const TransportSection = ({ classes = null }) => {
 				</Link>
 			</div>
 			<div className={`${styles.link} mt-3 mt-lg-0 px-3 px-lg-5`}>
-				<Link href={'/'}>
+				<Link href={'/bikes'}>
 					<a className={styles.linkTag}>
 						<div className={styles.imageLink}>
 							<Image alt={'bikes link'} src={BikesImage} />
@@ -43,7 +43,7 @@ const TransportSection = ({ classes = null }) => {
 				</Link>
 			</div>
 			<div className={`${styles.link} mt-3 mt-lg-0 px-3 px-lg-5`}>
-				<Link href={'/'}>
+				<Link href={'/bikes'}>
 					<a className={styles.linkTag}>
 						<div className={styles.imageLink}>
 							<Image

@@ -7,11 +7,11 @@ import SectionBlock from '../components/SectionBlock';
 import locationsData from '../data/locations';
 import styles from '../scss/pages/Showrooms.module.scss';
 
-export default function Transport() {
+export default function Showrooms() {
 	const textForColumn = `We gethered differend kinds of scooters. Everyone can find a scooter for themselves.WeWe gethered differend kinds of scooters. Everyone can find a scooter for themselves.We gethered differend kinds of scooters. Everyone can find a scooter for themselves. gethered differend kinds of scooters. Everyone can find a scooter for themselves.We gethered differend kinds of scooters. Everyone can find a scooter for themselves.We gethered differend kinds of scooters. Everyone can find a scooter for themselves.`;
 
 	return (
-		<Layout home={true} title="Electra Store" description="Internet store">
+		<Layout title="Showrooms - Electra" description="">
 			<section className={`py-5 px-4 px-md-5`}>
 				<Image src={HeaderImage} alt="" priority />
 			</section>

@@ -1,9 +1,13 @@
+import Head from 'next/head';
 import Link from 'next/link';
 import styles from '../scss/pages/404.module.scss';
 
 export default function Custom404() {
 	return (
 		<div className={styles.wrapper}>
+			<Head>
+				<title>404 – Electra</title>
+			</Head>
 			<div className={styles.infoWrapper}>
 				<div className={styles.titlePage}>Page not found</div>
 				<div className={styles.text404}>404</div>

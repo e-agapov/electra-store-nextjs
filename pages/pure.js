@@ -13,7 +13,7 @@ const Pure = () => {
 	const textForColumn = `We gethered differend kinds of scooters. Everyone can find a scooter for themselves.WeWe gethered differend kinds of scooters. Everyone can find a scooter for themselves.We gethered differend kinds of scooters. Everyone can find a scooter for themselves. gethered differend kinds of scooters. Everyone can find a scooter for themselves.We gethered differend kinds of scooters. Everyone can find a scooter for themselves.We gethered differend kinds of scooters. Everyone can find a scooter for themselves.`;
 
 	return (
-		<Layout home={true} title="Electra Store" description="Internet store">
+		<Layout title="Pure – Electra" description="Internet store">
 			<section className={styles.headerImage}>
 				<Image src={HeaderImage} alt="" priority />
 			</section>

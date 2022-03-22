@@ -31,7 +31,7 @@ export default function Home() {
 					scooters. Everyone can find a scooter for themselves.
 					`;
 	return (
-		<Layout home={true} title="Electra Store" description="Internet store">
+		<Layout title="Electra Store" description="Internet store">
 			<section className={`d-none d-sm-block`}>
 				<Image src={HeaderImage} alt="" priority />
 			</section>

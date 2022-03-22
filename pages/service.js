@@ -7,38 +7,36 @@ import Layout from '../components/Layout';
 import SectionBlock from '../components/SectionBlock';
 import styles from '../scss/pages/Service.module.scss';
 
-export default function Transport() {
+export default function Service() {
 	const textForColumn = `We gethered differend kinds of scooters. Everyone can find a scooter for themselves.WeWe gethered differend kinds of scooters. Everyone can find a scooter for themselves.We gethered differend kinds of scooters. Everyone can find a scooter for themselves. gethered differend kinds of scooters. Everyone can find a scooter for themselves.We gethered differend kinds of scooters. Everyone can find a scooter for themselves.We gethered differend kinds of scooters. Everyone can find a scooter for themselves.`;
 
 	const divSection = (
-		<>
-			<div className="d-flex flex-column flex-lg-row">
-				<div className="col-lg-4 px-3">
-					<div className={`${styles.decimal} mx-auto mx-sm-0`}>1</div>
-					<div className={`${styles.text} mt-3`}>
-						We gethered differend kinds of scooters. Everyone can
-						find a scooter for themselves.
-					</div>
-				</div>
-				<div className="col-lg-4 mt-5 mt-lg-0 px-3">
-					<div className={`${styles.decimal} mx-auto mx-sm-0`}>2</div>
-					<div className={`${styles.text} mt-3`}>
-						We gethered differend kinds of scooters. Everyone can
-						find a scooter for themselves.
-					</div>
-				</div>
-				<div className="col-lg-4 mt-5 mt-lg-0 px-3">
-					<div className={`${styles.decimal} mx-auto mx-sm-0`}>3</div>
-					<div className={`${styles.text} mt-3`}>
-						We gethered differend kinds of scooters.
-					</div>
+		<div className="d-flex flex-column flex-lg-row">
+			<div className="col-lg-4 px-3">
+				<div className={`${styles.decimal} mx-auto mx-sm-0`}>1</div>
+				<div className={`${styles.text} mt-3`}>
+					We gethered differend kinds of scooters. Everyone can find a
+					scooter for themselves.
 				</div>
 			</div>
-		</>
+			<div className="col-lg-4 mt-5 mt-lg-0 px-3">
+				<div className={`${styles.decimal} mx-auto mx-sm-0`}>2</div>
+				<div className={`${styles.text} mt-3`}>
+					We gethered differend kinds of scooters. Everyone can find a
+					scooter for themselves.
+				</div>
+			</div>
+			<div className="col-lg-4 mt-5 mt-lg-0 px-3">
+				<div className={`${styles.decimal} mx-auto mx-sm-0`}>3</div>
+				<div className={`${styles.text} mt-3`}>
+					We gethered differend kinds of scooters.
+				</div>
+			</div>
+		</div>
 	);
 
 	return (
-		<Layout home={true} title="Electra Store" description="Internet store">
+		<Layout title="Service – Electra" description="Internet store">
 			<section className={`py-5 px-4 px-md-5 ${styles.headerImage}`}>
 				<Image src={HeaderImage} alt="" priority />
 			</section>
