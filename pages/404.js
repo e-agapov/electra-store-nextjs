@@ -23,7 +23,7 @@ export default function Custom404() {
 					onClick={() => router.back()}
 					className={styles.goHomeBtn}
 				>
-					Go home
+					Go back
 				</button>
 			</div>
 		</div>
