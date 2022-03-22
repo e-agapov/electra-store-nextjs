@@ -1,8 +1,10 @@
 import Head from 'next/head';
-import Link from 'next/link';
 import styles from '../scss/pages/404.module.scss';
+import { useRouter } from 'next/router';
 
 export default function Custom404() {
+	const router = useRouter();
+
 	return (
 		<div className={styles.wrapper}>
 			<Head>
@@ -15,9 +17,14 @@ export default function Custom404() {
 					The page you are looking for was moved, removed or maybe
 					never existed. Please go to the main page.
 				</div>
-				<Link href={'/'}>
-					<a className={styles.goHomeBtn}>Go home</a>
-				</Link>
+
+				<button
+					type="button"
+					onClick={() => router.back()}
+					className={styles.goHomeBtn}
+				>
+					Go home
+				</button>
 			</div>
 		</div>
 	);
