@@ -42,3 +42,16 @@ main {
 		visibility: hidden;
 	}
 }
+
+.headerImage {
+	user-select: none;
+	pointer-events: none;
+}
+
+a {
+	user-select: none;
+}
+
+img {
+	user-select: none;
+}

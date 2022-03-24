@@ -12,7 +12,7 @@ const TransportSection = ({ classes = null }) => {
 			className={`${styles.transportSection} ${classes} d-flex flex-column flex-lg-row justify-content-between`}
 		>
 			<div className={`${styles.link} px-3 px-lg-5`}>
-				<Link href={'/'}>
+				<Link href={'/scooters'}>
 					<a className={styles.linkTag}>
 						<div className={styles.imageLink}>
 							<Image alt={'scooters link'} src={ScootersImage} />
@@ -43,7 +43,7 @@ const TransportSection = ({ classes = null }) => {
 				</Link>
 			</div>
 			<div className={`${styles.link} mt-3 mt-lg-0 px-3 px-lg-5`}>
-				<Link href={'/bikes'}>
+				<Link href={'/motorbikes'}>
 					<a className={styles.linkTag}>
 						<div className={styles.imageLink}>
 							<Image

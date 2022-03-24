@@ -12,11 +12,13 @@ export default function Transport() {
 
 	return (
 		<Layout title="Transport – Electra" description="">
-			<section className={`d-none d-sm-block`}>
+			<section className={`d-none d-sm-block headerImage`}>
 				<Image src={HeaderImage} alt="" priority />
 			</section>
 
-			<section className={`d-block d-sm-none ${styles.mobileHeaderPic}`}>
+			<section
+				className={`d-block d-sm-none headerImage ${styles.mobileHeaderPic}`}
+			>
 				<Image src={HeaderMobileImage} alt="" priority />
 			</section>
 

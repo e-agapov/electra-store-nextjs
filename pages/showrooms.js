@@ -12,7 +12,7 @@ export default function Showrooms() {
 
 	return (
 		<Layout title="Showrooms - Electra" description="">
-			<section className={`py-5 px-4 px-md-5`}>
+			<section className={`py-5 px-4 px-md-5 headerImage`}>
 				<Image src={HeaderImage} alt="" priority />
 			</section>
 

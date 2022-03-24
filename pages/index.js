@@ -32,12 +32,12 @@ export default function Home() {
 					`;
 	return (
 		<Layout title="Electra Store" description="Internet store">
-			<section className={`d-none d-sm-block`}>
+			<section className={`d-none d-sm-block headerImage`}>
 				<Image src={HeaderImage} alt="" priority />
 			</section>
 
 			<section
-				className={`d-block d-sm-none ${styles.mobileHeaderImage}`}
+				className={`d-block d-sm-none headerImage ${styles.mobileHeaderImage}`}
 			>
 				<Image src={HeaderImageMobile} alt="" priority />
 			</section>

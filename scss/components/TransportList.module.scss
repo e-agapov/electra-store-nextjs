@@ -1,0 +1,138 @@
+@import '../variables';
+@import '../fonts/CenturyGothicNormal';
+@import '../functions/rem';
+
+.productsListWrapper {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+
+	margin-top: rem(60);
+
+	@media (max-width: 991.98px) {
+		flex-direction: column;
+	}
+
+	.productItem {
+		display: flex;
+		flex-wrap: wrap;
+		flex-direction: column;
+		padding: rem(16);
+		margin: 0 auto;
+		text-decoration: none;
+		color: black;
+
+		@media (min-width: 991.98px) {
+			max-width: 28.5%;
+		}
+
+		&:hover,
+		&:focus {
+			background: #0000000d;
+		}
+
+		&:active {
+			background: #00000015;
+
+			.image {
+				transform: scale(0.95);
+			}
+		}
+
+		.isWaterproof,
+		.priceOfProduct {
+			background: black;
+			display: inline-block;
+			margin-left: auto;
+			color: white;
+			padding: rem(5) rem(25);
+			border-radius: rem(25);
+			font-size: rem(14);
+		}
+
+		.image {
+			transition: 0.15s;
+			align-self: center;
+			border-radius: rem(25);
+			overflow: hidden;
+			max-height: rem(300);
+			background: white;
+			margin: rem(10);
+			padding: rem(5);
+
+			img {
+				max-height: rem(300);
+			}
+		}
+
+		.nameOfProduct {
+			font-size: rem(14);
+			line-clamp: 2;
+			max-width: 100%;
+			overflow: hidden;
+			display: -webkit-box;
+			-webkit-line-clamp: 2;
+			-webkit-box-orient: vertical;
+			margin-bottom: rem(15);
+			line-height: 180%;
+		}
+
+		.priceOfProduct {
+			background: #07ccd6;
+			margin-left: 0;
+			margin-right: auto;
+			font-size: rem(16);
+		}
+	}
+}
+
+.links {
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+
+	@media (max-width: 991.98px) {
+		justify-content: space-between;
+	}
+
+	.link {
+		@media (max-width: 991.98px) {
+			font-size: rem(18);
+			margin-bottom: rem(24);
+		}
+
+		transition: 0.15s;
+		color: $dark-gray;
+		font-size: rem(34);
+		text-decoration: none;
+		font-family: 'CenturyGothic', sans-serif;
+		display: inline-block;
+
+		&:hover,
+		&:focus {
+			transform: scale(1.15);
+			color: $purple;
+		}
+
+		&:active {
+			transform: none;
+			color: $purple;
+		}
+	}
+
+	.activeLink {
+		color: $purple;
+		font-size: rem(36);
+	}
+}
+
+.listIsEmpty {
+	user-select: none;
+	pointer-events: none;
+
+	font-family: 'CenturyGothic', sans-serif;
+	text-align: center;
+	font-size: rem(36);
+	margin-top: rem(48);
+	color: lighten($dark-gray, 65);
+}

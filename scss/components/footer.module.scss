@@ -14,6 +14,8 @@
 			justify-content: center;
 
 			.footerLogotype {
+				user-select: none;
+				pointer-events: none;
 				max-width: rem(260);
 				max-height: rem(130);
 				transform: translateY(-50%);

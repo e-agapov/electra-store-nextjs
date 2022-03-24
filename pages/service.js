@@ -37,7 +37,9 @@ export default function Service() {
 
 	return (
 		<Layout title="Service – Electra" description="Internet store">
-			<section className={`py-5 px-4 px-md-5 ${styles.headerImage}`}>
+			<section
+				className={`py-5 px-4 px-md-5 headerImage ${styles.headerImage}`}
+			>
 				<Image src={HeaderImage} alt="" priority />
 			</section>
 

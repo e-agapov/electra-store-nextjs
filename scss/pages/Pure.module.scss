@@ -1,6 +1,9 @@
 @import '../functions/rem';
 
 .headerImage {
+	user-select: none;
+	pointer-events: none;
+
 	img {
 		transform: scale(1.15);
 	}
