@@ -32,7 +32,7 @@ function Navbar({ toggleMenu }) {
 							<Link href={'/transport'}>
 								<a className="navLink">Transport</a>
 							</Link>
-							<Link href={'/'}>
+							<Link href={'/accessories'}>
 								<a className="navLink">
 									Accessories {'&'} Parts
 								</a>

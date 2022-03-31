@@ -1,5 +1,6 @@
 import Layout from '../components/Layout';
-import TransportList from '../components/TransportList';
+import Products from '../components/Products';
+import bikes from '../data/bikes';
 
 const Bikes = () => {
 	const linksCatalog = [
@@ -11,7 +12,7 @@ const Bikes = () => {
 	return (
 		<Layout title="Products, Bikes – Electra" description="">
 			<div className="container my-4 mt-md-5">
-				<TransportList linksCatalog={linksCatalog} />
+				<Products dataList={bikes} linksCatalog={linksCatalog} />
 			</div>
 		</Layout>
 	);

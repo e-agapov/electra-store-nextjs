@@ -47,7 +47,7 @@ const MobileMenu = ({ isVisible = false, toggleMenu }) => {
 						Showrooms
 					</a>
 				</Link>
-				<Link href={'/'}>
+				<Link href={'/accessories'}>
 					<a onClick={toggleMenu} className={styles.Link}>
 						Accessories {'&'} Parts
 					</a>
