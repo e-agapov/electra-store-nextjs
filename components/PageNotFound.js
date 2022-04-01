@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import styles from '../scss/pages/404.module.scss';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 
 const PageNotFound = () => {
 	const router = useRouter();
@@ -17,7 +18,6 @@ const PageNotFound = () => {
 					The page you are looking for was moved, removed or maybe
 					never existed. Please go to the main page.
 				</div>
-
 				<button
 					type="button"
 					onClick={() => router.back()}
@@ -25,6 +25,10 @@ const PageNotFound = () => {
 				>
 					Go back
 				</button>
+				<div className={`${styles.moreInfoText} mt-3`}>or</div>
+				<Link href={'/'}>
+					<a className={styles.goHomeBtn}>Go home</a>
+				</Link>
 			</div>
 		</div>
 	);
