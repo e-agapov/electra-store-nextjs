@@ -1,8 +1,35 @@
 import styles from '../../scss/components/ui/cart.module.scss';
+import { useState, useEffect } from 'react';
 
 const Cart = () => {
+	const [active, setActive] = useState(false);
+
+	function getCartStorage() {
+		return localStorage.getItem('cart')
+			? localStorage.getItem('cart')
+			: false;
+	}
+
+	useEffect(() => {
+		const cartStorage = getCartStorage();
+
+		if (cartStorage) {
+			setActive(true);
+		} else {
+			setActive(false);
+		}
+
+		return () => {
+			if (cartStorage) {
+				setActive(true);
+			} else {
+				setActive(false);
+			}
+		};
+	});
+
 	return (
-		<div className={styles.cart + ' ' + styles.active}>
+		<div className={styles.cart + ' ' + (active ? styles.active : null)}>
 			<svg width="33" height="33" viewBox="0 0 33 33">
 				<g clipPath="url(#clip0_616_81)">
 					<path d="M10.6736 25.9674C11.0628 25.9674 11.3783 25.6519 11.3783 25.2628C11.3783 24.8736 11.0628 24.5581 10.6736 24.5581C10.2845 24.5581 9.96899 24.8736 9.96899 25.2628C9.96899 25.6519 10.2845 25.9674 10.6736 25.9674Z" />

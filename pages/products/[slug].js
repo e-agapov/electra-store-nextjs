@@ -9,12 +9,14 @@ import ImageLoader from '../../utils/imageLoader';
 
 const Product = () => {
 	const router = useRouter();
+
 	const product = products.find(
 		(product) => product.uri === router.query['slug']
 	);
 
-	const [image, setImage] = useState(product?.dataImages[0].src);
-	const [getColor, setColor] = useState(product?.dataColors[0].id);
+	const [image, setImage] = useState(product?.dataImages[0]?.src);
+	const [getColor, setColor] = useState(1);
+	const [inCart, setInCart] = useState(false);
 
 	const options =
 		product?.Free20DaysInsurance === true ||
@@ -23,13 +25,53 @@ const Product = () => {
 
 	useEffect(() => {
 		setImage(image);
+		setInCart(false);
+		setColor(getColor || product?.dataColors[0]?.id || null);
 
 		return () => {
 			setImage(image);
+			setInCart(false);
+			setColor(getColor);
 		};
-	}, [image]);
+	}, [image, getColor, product?.dataColors]);
 
-	return product ? (
+	function addToCart() {
+		if (product?.dataColors) {
+			var productColor =
+				product?.dataColors?.find((col) => col.id === getColor) || null;
+		}
+
+		const cartStorage = JSON.parse(localStorage.getItem('cart') || '[]');
+		const productToCart = {
+			id: product.id,
+			name: product.name,
+			category: product.category,
+			color: productColor ? productColor?.name : null,
+			uri: product.uri,
+			count: 1
+		};
+
+		cartStorage.length > 0
+			? cartStorage.find((el) => {
+					if (
+						el.id !== productToCart.id ||
+						productColor?.name === el?.color
+					) {
+						localStorage.setItem(
+							'cart',
+							JSON.stringify([productToCart, ...cartStorage])
+						);
+					}
+			  })
+			: localStorage.setItem(
+					'cart',
+					JSON.stringify([productToCart, ...cartStorage])
+			  );
+
+		setInCart(true);
+	}
+
+	return (
 		<Layout title={`${product?.name} – Electra`} description={''}>
 			<div className="container my-3 mt-lg-5">
 				<div className="d-flex flex-column flex-lg-row">
@@ -54,7 +96,6 @@ const Product = () => {
 									</button>
 								))}
 							</div>
-
 							{(image || product?.dataImages[0]) && (
 								<div
 									className={`${styles.imageAProduct} order-1 order-sm-2`}
@@ -72,49 +113,65 @@ const Product = () => {
 							)}
 						</div>
 					)}
-
 					<div className="col-lg-4">
 						<div className={styles.nameOfProduct}>
 							Raleigh Motus Tour
 						</div>
-
 						<div className={styles.descriptionOfProduct}>
 							Raleigh Motus Tour Lowstep Derailleur Electric
 							Hybrid Bike Raleigh Motus Tour Lowstep Derailleur
 							Electric Hybrid Bike Raleigh Motus Tour Lowstep
 							Derailleur Electric Hybrid Bike.
 						</div>
-
-						<div className={styles.price}>1000 $</div>
-
-						<div className={styles.colorsHeaderText}>COLORS</div>
-						<div className={styles.colorsList}>
-							{product?.dataColors.map((color) => (
-								<button
-									onClick={() => setColor(color.id)}
-									className={`${styles.colorBtn} ${
-										getColor == color.id &&
-										styles.currentColor
-									}`}
-									key={color.id}
-									value={color.name}
-									style={{ background: color.code }}
-								/>
-							))}
-						</div>
+						<div className={styles.price}> 1000 $ </div>
+						{product?.dataColors && (
+							<>
+								<div className={styles.colorsHeaderText}>
+									COLORS
+								</div>
+								<div className={styles.colorsList}>
+									{product?.dataColors.map((color) => (
+										<button
+											onClick={() => setColor(color.id)}
+											className={`${styles.colorBtn} ${
+												getColor === color?.id &&
+												styles.currentColor
+											}`}
+											key={color.id}
+											value={color.name}
+											style={{
+												background: color.code
+											}}
+										/>
+									))}
+								</div>
+							</>
+						)}
 
 						<div className={styles.btns}>
-							<button className={styles.addToCartBtn}>
-								add to cart
-							</button>
-
-							<button className={styles.buyNowBtn}>
-								buy now
-							</button>
+							{!inCart ? (
+								<button
+									onClick={addToCart}
+									className={styles.addToCartBtn}
+								>
+									add to cart
+								</button>
+							) : (
+								<>
+									<div className="mt-5 px-3">
+										Added to cart
+									</div>
+									<button
+										onClick={() => router.push('/cart')}
+										className={styles.buyNowBtn}
+									>
+										view in cart
+									</button>
+								</>
+							)}
 						</div>
 					</div>
 				</div>
-
 				<div
 					className={`d-flex flex-column flex-lg-row ${styles.moreInfoBlock}`}
 				>
@@ -140,7 +197,6 @@ const Product = () => {
 								</div>
 							</>
 						)}
-
 						{product?.dataSpecifications && (
 							<div className="mt-5 pt-5">
 								<div className={styles.sectionHeader}>
@@ -199,7 +255,6 @@ const Product = () => {
 								{product?.idealFor}
 							</div>
 						)}
-
 						{options ? (
 							<div className={styles.idealForBlock}>
 								{product?.freeInStoreRides && (
@@ -233,7 +288,7 @@ const Product = () => {
 											</svg>
 										</div>
 										<div className={styles.textOfIdealFor}>
-											Free In-store Rides
+											Free In - store Rides
 										</div>
 									</div>
 								)}
@@ -285,7 +340,6 @@ const Product = () => {
 										</div>
 									</div>
 								)}
-
 								{product?.Free20DaysInsurance && (
 									<div
 										className={
@@ -304,7 +358,6 @@ const Product = () => {
 														d="M54.4801 7.97987L36.4801 0.10067C36.174 -0.0329057 35.8261 -0.0329057 35.5201 0.10067L17.52 7.97987C17.0829 8.17064 16.8003 8.60215 16.8 9.07907V27.9191C16.8066 32.1531 18.8411 36.1276 22.272 38.6087L34.7125 47.5811C35.4808 48.1372 36.5193 48.1372 37.2877 47.5811L49.7281 38.6099C53.159 36.1288 55.1936 32.1543 55.2001 27.9203V9.07907C55.1998 8.60215 54.9172 8.17064 54.4801 7.97987ZM52.8001 27.9203C52.7946 31.3834 51.1303 34.6342 48.3241 36.6635L36.0001 45.5519L23.676 36.6635C20.8698 34.6342 19.2055 31.3834 19.2 27.9203V9.86387L36.0001 2.51027L52.8001 9.86387V27.9203Z"
 														fill="black"
 													/>
-
 													<path
 														d="M35.5201 5.33993L22.3201 11.1191C21.883 11.3099 21.6003 11.7414 21.6001 12.2183V27.9203C21.6038 30.6127 22.8979 33.1402 25.0801 34.7171L35.2981 42.0875C35.7173 42.3899 36.2829 42.3899 36.7021 42.0875L46.9201 34.7171C49.1023 33.1402 50.3964 30.6127 50.4001 27.9203V12.2183C50.3998 11.7414 50.1172 11.3099 49.6801 11.1191L36.4801 5.33993C36.174 5.20635 35.8262 5.20635 35.5201 5.33993ZM48.0001 13.0019V27.9203C47.9964 29.8416 47.0729 31.6449 45.5161 32.7707L36.0001 39.6347L26.4841 32.7707C24.9273 31.6449 24.0038 29.8416 24.0001 27.9203V13.0019L36.0001 7.74953L48.0001 13.0019Z"
 														fill="black"
@@ -352,8 +405,6 @@ const Product = () => {
 				</div>
 			</div>
 		</Layout>
-	) : (
-		<PageNotFound />
 	);
 };
 

@@ -39,7 +39,7 @@ function Navbar({ toggleMenu }) {
 							</Link>
 						</div>
 
-						<Link href={'/'}>
+						<Link href={'/cart'}>
 							<a className="navbarCartLink">
 								<CartIcon />
 							</a>
