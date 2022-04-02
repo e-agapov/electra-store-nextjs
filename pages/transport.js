@@ -8,7 +8,9 @@ import TransportSection from '../components/sections/TransportSection';
 import styles from '../scss/pages/Transport.module.scss';
 
 export default function Transport() {
-	const textForColumn = `We gethered differend kinds of scooters. Everyone can find a scooter for themselves.WeWe gethered differend kinds of scooters. Everyone can find a scooter for themselves.We gethered differend kinds of scooters. Everyone can find a scooter for themselves. gethered differend kinds of scooters. Everyone can find a scooter for themselves.We gethered differend kinds of scooters. Everyone can find a scooter for themselves.We gethered differend kinds of scooters. Everyone can find a scooter for themselves.`;
+	const texts = {
+		main: 'We gettered different kinds of scooters. Everyone can find a scooter for themselves. WeWe gettered different kinds of scooters. Everyone can find a scooter for themselves.We gettered different kinds of scooters.'
+	};
 
 	return (
 		<Layout title="Transport – Electra" description="">
@@ -29,7 +31,7 @@ export default function Transport() {
 					title={'Accessories'}
 					imagePosition={'right'}
 					imgSrc={HelmetImage}
-					textForColumn={textForColumn}
+					textForColumn={texts.main}
 					link={'/accessories'}
 					linkName={'Accessories'}
 				/>

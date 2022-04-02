@@ -1,0 +1,10 @@
+@import '../functions/rem';
+
+.headline {
+    font-size: rem(36);
+    text-transform: uppercase;
+}
+
+.cartList {
+    margin-top: rem(60)
+}

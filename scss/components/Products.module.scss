@@ -9,11 +9,12 @@
 
 	margin-top: rem(60);
 
-	@media (max-width: 991.98px) {
+	@media (max-width: 550.98px) {
 		flex-direction: column;
 	}
 
 	.productItem {
+		transition: 0.15s;
 		position: relative;
 		display: flex;
 		flex-wrap: wrap;
@@ -22,9 +23,19 @@
 		margin: 0 auto;
 		text-decoration: none;
 		color: black;
+		max-width: 100vw;
+		width: 100%;
 
-		@media (min-width: 991.98px) {
-			max-width: 28.5%;
+		@media (min-width: 550.98px) {
+			max-width: 48.5%;
+		}
+
+		@media (min-width: 767.98px) {
+			max-width: 29.5%;
+		}
+
+		@media (min-width: 1200px) {
+			max-width: 24.5%;
 		}
 
 		&:hover,
@@ -56,14 +67,17 @@
 			align-self: center;
 			border-radius: rem(25);
 			overflow: hidden;
-			max-height: rem(300);
+			height: 100%;
+			max-height: rem(370);
 			background: white;
 			margin: rem(10);
 			padding: rem(5);
 
-			img {
-				max-height: rem(300);
-			}
+			// img {
+			// 	max-height: rem(350);
+				min-width: 90%;
+				min-height: 100%;
+			// }
 
 			span {
 				position: unset !important;

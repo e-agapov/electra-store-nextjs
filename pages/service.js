@@ -8,7 +8,9 @@ import SectionBlock from '../components/SectionBlock';
 import styles from '../scss/pages/Service.module.scss';
 
 export default function Service() {
-	const textForColumn = `We gethered differend kinds of scooters. Everyone can find a scooter for themselves.WeWe gethered differend kinds of scooters. Everyone can find a scooter for themselves.We gethered differend kinds of scooters. Everyone can find a scooter for themselves. gethered differend kinds of scooters. Everyone can find a scooter for themselves.We gethered differend kinds of scooters. Everyone can find a scooter for themselves.We gethered differend kinds of scooters. Everyone can find a scooter for themselves.`;
+	const texts = {
+		main: `We gethered differend kinds of scooters. Everyone can find a scooter for themselves.WeWe gethered differend kinds of scooters. Everyone can find a scooter for themselves.We gethered differend kinds of scooters. Everyone can find a scooter for themselves. gethered differend kinds of scooters. Everyone can find a scooter for themselves.We gethered differend kinds of scooters. Everyone can find a scooter for themselves.We gethered differend kinds of scooters. Everyone can find a scooter for themselves.`
+	};
 
 	const divSection = (
 		<div className="d-flex flex-column flex-lg-row">
@@ -48,7 +50,7 @@ export default function Service() {
 					classes={styles.textSectionWithText}
 					title={'We provide service for every client'}
 					imgSrc={carbonFibersImage}
-					textForColumn={textForColumn}
+					textForColumn={texts.main}
 					link={'/accessories'}
 					linkName={'Accessories'}
 				/>

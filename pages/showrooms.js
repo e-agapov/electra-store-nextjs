@@ -8,7 +8,9 @@ import locationsData from '../data/locations';
 import styles from '../scss/pages/Showrooms.module.scss';
 
 export default function Showrooms() {
-	const textForColumn = `We gethered differend kinds of scooters. Everyone can find a scooter for themselves.WeWe gethered differend kinds of scooters. Everyone can find a scooter for themselves.We gethered differend kinds of scooters. Everyone can find a scooter for themselves. gethered differend kinds of scooters. Everyone can find a scooter for themselves.We gethered differend kinds of scooters. Everyone can find a scooter for themselves.We gethered differend kinds of scooters. Everyone can find a scooter for themselves.`;
+	const texts = {
+		main: `We gettered different kinds of scooters. Everyone can find a scooter for themselves. WeWe gettered different kinds of scooters. Everyone can find a scooter for themselves.We gettered different kinds of scooters. Everyone can find a scooter for themselves. gettered different kinds of scooters.`
+	};
 
 	return (
 		<Layout title="Showrooms - Electra" description="">
@@ -22,7 +24,7 @@ export default function Showrooms() {
 					title={'Showrooms all over the world'}
 					imagePosition={'right'}
 					imgSrc={SectionBlockImage}
-					textForColumn={textForColumn}
+					textForColumn={texts.main}
 					link={'/accessories'}
 					linkName={'Accessories'}
 				/>

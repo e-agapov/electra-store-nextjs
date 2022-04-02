@@ -1,7 +1,7 @@
 module.exports = {
 	reactStrictMode: true,
-	swcMinify: true,
-	images: {
-		domains: ['www.tradeinn.com']
-	}
+	swcMinify: true
+	// images: {
+	// 	domains: ['www.example.com']
+	// }
 };

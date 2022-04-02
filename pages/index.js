@@ -10,26 +10,12 @@ import TransportSection from '../components/sections/TransportSection';
 import styles from '../scss/pages/Home.module.scss';
 
 export default function Home() {
-	const textRightColumn = `We gethered differend kinds of scooters. Everyone
-					scooter for themselves.WeWe gethered differend kinds of
-					scooters. Everyone can find a scooter for themselves.We
-					gethered differend kinds of scooters. Everyone can find a
-					scooter for themselves. gethered differend kinds of
-					scooters. Everyone can find a scooter for themselves.We
-					gethered differend kinds of scooters. Everyone can find a
-					scooter for themselves.We gethered differend kinds of
-					scooters. Everyone can find a scooter for themselves.
-					`;
-	const textLeftColumn = `We gethered differend kinds of scooters. Everyone
-					scooter for themselves.WeWe gethered differend kinds of
-					scooters. Everyone can find a scooter for themselves.We
-					gethered differend kinds of scooters. Everyone can find a
-					scooter for themselves. gethered differend kinds of
-					scooters. Everyone can find a scooter for themselves.We
-					gethered differend kinds of scooters. Everyone can find a
-					scooter for themselves.We gethered differend kinds of
-					scooters. Everyone can find a scooter for themselves.
-					`;
+	const texts = {
+		left: 'We gettered different kinds of scooters. Everyone scooter for themselves.WeWe gettered different kinds of scooters. Everyone can find a scooter for themselves.',
+
+		right: 'We gettered different kinds of scooters. Everyone scooter for themselves.WeWe gettered different kinds of scooters. Everyone can find a scooter for themselves.'
+	};
+
 	return (
 		<Layout title="Electra Store" description="Internet store">
 			<section className={`d-none d-sm-block headerImage`}>
@@ -49,7 +35,7 @@ export default function Home() {
 					title={'Electra Transport'}
 					imagePosition={'right'}
 					imgSrc={MenOnScooterImage}
-					textForColumn={textLeftColumn}
+					textForColumn={texts.left}
 					link={'/transport'}
 					linkName={'Transport'}
 				/>
@@ -57,7 +43,7 @@ export default function Home() {
 				<SectionBlock
 					title={'We solve traffic problems'}
 					imgSrc={MenOnBikesImage}
-					textForColumn={textRightColumn}
+					textForColumn={texts.right}
 					link={'/transport'}
 					linkName={'Transport'}
 				/>

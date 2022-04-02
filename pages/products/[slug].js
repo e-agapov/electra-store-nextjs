@@ -44,7 +44,6 @@ const Product = () => {
 		const cartStorage = JSON.parse(localStorage.getItem('cart') || '[]');
 		const productToCart = {
 			id: product.id,
-			name: product.name,
 			category: product.category,
 			color: productColor ? productColor?.name : null,
 			uri: product.uri,
@@ -54,13 +53,20 @@ const Product = () => {
 		cartStorage.length > 0
 			? cartStorage.find((el) => {
 					if (
-						el.id !== productToCart.id ||
+						el.uri !== productToCart.uri ||
 						productColor?.name === el?.color
 					) {
 						localStorage.setItem(
 							'cart',
 							JSON.stringify([productToCart, ...cartStorage])
 						);
+					} else {
+						if (productColor?.name !== el?.color) {
+							localStorage.setItem(
+								'cart',
+								JSON.stringify([productToCart, ...cartStorage])
+							);
+						}
 					}
 			  })
 			: localStorage.setItem(
@@ -69,6 +75,7 @@ const Product = () => {
 			  );
 
 		setInCart(true);
+		console.log(localStorage.getItem('cart'));
 	}
 
 	return (

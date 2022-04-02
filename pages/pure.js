@@ -10,7 +10,13 @@ import SectionBlock from '../components/SectionBlock';
 import styles from '../scss/pages/Pure.module.scss';
 
 const Pure = () => {
-	const textForColumn = `We gethered differend kinds of scooters. Everyone can find a scooter for themselves.WeWe gethered differend kinds of scooters. Everyone can find a scooter for themselves.We gethered differend kinds of scooters. Everyone can find a scooter for themselves. gethered differend kinds of scooters. Everyone can find a scooter for themselves.We gethered differend kinds of scooters. Everyone can find a scooter for themselves.We gethered differend kinds of scooters. Everyone can find a scooter for themselves.`;
+	const texts = {
+		first: 'We gethered differend kinds of scooters. Everyone can find a scooter for themselves.WeWe gethered differend kinds of scooters. Everyone can find a scooter for themselves.We gethered differend kinds of scooters. Everyone can find a scooter for themselves. gethered differend kinds of scooters. Everyone can find a scooter for themselves.We gethered differend kinds of scooters. Everyone can find a scooter for themselves.We gethered differend kinds of scooters. Everyone can find a scooter for themselves.',
+
+		second: 'Everyone can find a scooter for themselves. gethered differend kinds of scooters. Everyone can find a scooter for themselves.We gethered differend kinds of scooters. Everyone can find a scooter for themselves.We gethered differend kinds of scooters. Everyone can find a scooter for themselves.',
+
+		last: 'lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
+	};
 
 	return (
 		<Layout title="Pure – Electra" description="Internet store">
@@ -24,7 +30,7 @@ const Pure = () => {
 					title={'Showrooms all over the world'}
 					imagePosition={'right'}
 					imgSrc={palmLeaf}
-					textForColumn={textForColumn}
+					textForColumn={texts.first}
 					link={'/transport'}
 					linkName={'Transport'}
 				/>
@@ -46,7 +52,7 @@ const Pure = () => {
 						title={'Transport sharing'}
 						imagePosition={'right'}
 						imgSrc={mwwws}
-						textForColumn={textForColumn}
+						textForColumn={texts.second}
 						link={'/transport'}
 						linkName={'Transport'}
 					/>
@@ -54,7 +60,7 @@ const Pure = () => {
 					<SectionBlock
 						title={'We solve traffic problems'}
 						imgSrc={mws}
-						textForColumn={textForColumn}
+						textForColumn={texts.last}
 						link={'/transport'}
 						linkName={'Transport'}
 					/>
