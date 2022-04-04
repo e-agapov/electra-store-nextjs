@@ -1,10 +1,9 @@
 import Image from 'next/image';
-import { useState, useEffect } from 'react';
-import Layout from '../../components/Layout';
-import styles from '../../scss/pages/Product.module.scss';
-import products from '../../data/products';
 import { useRouter } from 'next/router';
-import PageNotFound from '../../components/PageNotFound';
+import { useEffect, useState } from 'react';
+import Layout from '../../components/Layout';
+import products from '../../data/products';
+import styles from '../../scss/pages/Product.module.scss';
 import ImageLoader from '../../utils/imageLoader';
 
 const Product = () => {
@@ -41,6 +40,8 @@ const Product = () => {
 				product?.dataColors?.find((col) => col.id === getColor) || null;
 		}
 
+		console.log(productColor?.name);
+
 		const cartStorage = JSON.parse(localStorage.getItem('cart') || '[]');
 		const productToCart = {
 			id: product.id,
@@ -50,32 +51,21 @@ const Product = () => {
 			count: 1
 		};
 
-		cartStorage.length > 0
-			? cartStorage.find((el) => {
-					if (
-						el.uri !== productToCart.uri ||
-						productColor?.name === el?.color
-					) {
-						localStorage.setItem(
-							'cart',
-							JSON.stringify([productToCart, ...cartStorage])
-						);
-					} else {
-						if (productColor?.name !== el?.color) {
-							localStorage.setItem(
-								'cart',
-								JSON.stringify([productToCart, ...cartStorage])
-							);
-						}
-					}
-			  })
-			: localStorage.setItem(
-					'cart',
-					JSON.stringify([productToCart, ...cartStorage])
-			  );
+		const findProducts = cartStorage.filter(
+			(item) =>
+				item.id === product.id && item.color === productColor?.name
+		);
+
+		console.log(findProducts);
+
+		if (findProducts.length) return false;
+
+		localStorage.setItem(
+			'cart',
+			JSON.stringify([productToCart, ...cartStorage])
+		);
 
 		setInCart(true);
-		console.log(localStorage.getItem('cart'));
 	}
 
 	return (
@@ -122,13 +112,10 @@ const Product = () => {
 					)}
 					<div className="col-lg-4">
 						<div className={styles.nameOfProduct}>
-							Raleigh Motus Tour
+							{product?.name}
 						</div>
 						<div className={styles.descriptionOfProduct}>
-							Raleigh Motus Tour Lowstep Derailleur Electric
-							Hybrid Bike Raleigh Motus Tour Lowstep Derailleur
-							Electric Hybrid Bike Raleigh Motus Tour Lowstep
-							Derailleur Electric Hybrid Bike.
+							{product?.description}
 						</div>
 						<div className={styles.price}> 1000 $ </div>
 						{product?.dataColors && (

@@ -4,6 +4,8 @@ const scooters = [
 		uri: 'scooter-1',
 		category: 'scooters',
 		name: 'Raleigh Motus Tour',
+		description:
+			'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quaerat.',
 		price: 1000,
 		idealFor:
 			'Exercise, commuting, urban riding, going off the beaten path',
