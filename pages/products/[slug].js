@@ -35,37 +35,60 @@ const Product = () => {
 	}, [image, getColor, product?.dataColors]);
 
 	function addToCart() {
-		if (product?.dataColors) {
-			var productColor =
-				product?.dataColors?.find((col) => col.id === getColor) || null;
-		}
-
-		console.log(productColor?.name);
+		const productColor =
+			product?.dataColors?.find((col) => col.id === getColor) || null;
 
 		const cartStorage = JSON.parse(localStorage.getItem('cart') || '[]');
-		const productToCart = {
-			id: product.id,
-			category: product.category,
-			color: productColor ? productColor?.name : null,
-			uri: product.uri,
-			count: 1
-		};
-
-		const findProducts = cartStorage.filter(
-			(item) =>
-				item.id === product.id && item.color === productColor?.name
-		);
-
-		console.log(findProducts);
-
-		if (findProducts.length) return false;
-
-		localStorage.setItem(
-			'cart',
-			JSON.stringify([productToCart, ...cartStorage])
-		);
 
 		setInCart(true);
+
+		if (product.dataColors) {
+			const hasProducts = cartStorage.filter(
+				(item) =>
+					item.id === product.id && item.color === productColor?.name
+			);
+
+			console.log(hasProducts + 'products');
+
+			if (hasProducts.length) {
+				return false;
+			} else {
+				const productToCart = {
+					id: product.id,
+					category: product.category,
+					color: productColor ? productColor?.name : false,
+					uri: product.uri,
+					count: 1
+				};
+
+				localStorage.setItem(
+					'cart',
+					JSON.stringify([productToCart, ...cartStorage])
+				);
+			}
+		} else {
+			const hasProduct = cartStorage.find(
+				(item) => item.id === product.id
+			);
+
+			console.log(hasProduct);
+
+			if (hasProduct) {
+				return false;
+			} else {
+				const productToCart = {
+					id: product.id,
+					category: product.category,
+					uri: product.uri,
+					count: 1
+				};
+
+				localStorage.setItem(
+					'cart',
+					JSON.stringify([productToCart, ...cartStorage])
+				);
+			}
+		}
 	}
 
 	return (
