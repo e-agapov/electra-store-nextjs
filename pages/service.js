@@ -9,7 +9,8 @@ import styles from '../scss/pages/Service.module.scss';
 
 export default function Service() {
 	const texts = {
-		main: `We gethered differend kinds of scooters. Everyone can find a scooter for themselves.WeWe gethered differend kinds of scooters. Everyone can find a scooter for themselves.We gethered differend kinds of scooters. Everyone can find a scooter for themselves. gethered differend kinds of scooters. Everyone can find a scooter for themselves.We gethered differend kinds of scooters. Everyone can find a scooter for themselves.We gethered differend kinds of scooters. Everyone can find a scooter for themselves.`
+		main: `We gethered differend kinds of scooters. Everyone can find a scooter for themselves.WeWe gethered differend kinds of scooters. Everyone can find a scooter for themselves.We gethered differend kinds of scooters. Everyone can find a scooter for themselves. gethered differend kinds of scooters. Everyone can find a scooter for themselves.We gethered differend kinds of scooters. Everyone can find a scooter for themselves.We gethered differend kinds of scooters. Everyone can find a scooter for themselves.`,
+		second: `We gethered differend kinds of sc surroundings that can find a scooter for themselves. We gethered differend kinds of sc surroundings that can find`
 	};
 
 	const divSection = (
@@ -62,7 +63,7 @@ export default function Service() {
 				classes={styles.textSectionWithText}
 				title={'WE ARE HAPPY TO HELP YOU WITH:'}
 				imgSrc={scooterImage}
-				textForColumn={divSection}
+				textForColumn={texts.second}
 				colWidthText={7}
 			/>
 
@@ -70,7 +71,7 @@ export default function Service() {
 				<SectionBlock
 					classes={styles.textSectionWithText}
 					title={'Difficulties you can face with'}
-					textForColumn={textForColumn}
+					textForColumn={texts.main}
 					link={'/news'}
 					linkName={'More News'}
 				/>

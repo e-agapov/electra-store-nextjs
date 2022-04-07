@@ -127,13 +127,13 @@ const scooters = [
 			}
 		],
 
-		dataColors: [
-			{
-				id: 1,
-				code: '#003322',
-				name: 'Green'
-			}
-		],
+		// dataColors: [
+		// 	{
+		// 		id: 1,
+		// 		code: '#003322',
+		// 		name: 'Green'
+		// 	}
+		// ],
 
 		dataKeyFeatures: [
 			{

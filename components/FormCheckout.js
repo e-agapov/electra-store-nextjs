@@ -6,7 +6,7 @@ import PageNotFound from './PageNotFound';
 
 const stripe = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
 
-const FormCheckout = () => {
+const FormCheckout = ({ totalPrice }) => {
 	const [clientSecret, setClientSecret] = useState('');
 	const [paymentIntent, setPaymentIntent] = useState('');
 	const [isLoading, setLoading] = useState(false);
@@ -18,7 +18,7 @@ const FormCheckout = () => {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify({
-				amount: 1000,
+				amount: totalPrice || 0,
 				payment_intent_id: ''
 			})
 		})

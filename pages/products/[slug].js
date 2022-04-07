@@ -48,7 +48,6 @@ const Product = () => {
 					item.id === product.id && item.color === productColor?.name
 			);
 
-			console.log(hasProducts + 'products');
 
 			if (hasProducts.length) {
 				return false;
@@ -70,8 +69,6 @@ const Product = () => {
 			const hasProduct = cartStorage.find(
 				(item) => item.id === product.id
 			);
-
-			console.log(hasProduct);
 
 			if (hasProduct) {
 				return false;
