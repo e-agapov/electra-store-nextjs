@@ -5,14 +5,12 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 const handler = async (req, res) => {
 	const { amount, payment_intent_id } = req.body;
 
-	if (payment_intent_id) {
+	if (payment_intent_id && amount) {
 		try {
-			// If a payment_intent_id is passed, retrieve the paymentIntent
 			const current_intent = await stripe.paymentIntents.retrieve(
 				payment_intent_id
 			);
 
-			// If a paymentIntent is retrieved update its amount
 			if (current_intent) {
 				const updated_intent = await stripe.paymentIntents.update(
 					payment_intent_id,
@@ -41,8 +39,8 @@ const handler = async (req, res) => {
 		// Create PaymentIntent
 		const params = {
 			amount: amount,
-			currency: 'eur',
-			description: 'Payment description',
+			currency: 'usd',
+			description: '',
 			automatic_payment_methods: {
 				enabled: true
 			}
@@ -50,7 +48,6 @@ const handler = async (req, res) => {
 
 		const payment_intent = await stripe.paymentIntents.create(params);
 
-		// Return the payment_intent object
 		res.status(200).json(payment_intent);
 	} catch (err) {
 		const errorMessage =

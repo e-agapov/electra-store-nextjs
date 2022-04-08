@@ -19,7 +19,7 @@ const FormCheckout = ({ totalPrice }) => {
 			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify({
 				amount: totalPrice || 0,
-				payment_intent_id: ''
+				payment_intent_id: paymentIntent || ''
 			})
 		})
 			.then((res) => res.json())
@@ -33,14 +33,20 @@ const FormCheckout = ({ totalPrice }) => {
 		clientSecret
 	};
 
-	if (isLoading) return <p>Loading...</p>;
-	if (!clientSecret) return <PageNotFound />;
+	if (!clientSecret && !isLoading) return <PageNotFound />;
 
 	return (
 		<div>
 			{clientSecret && (
 				<Elements options={options} stripe={stripe}>
-					<CheckoutForm paymentIntent={paymentIntent} />
+					{isLoading ? (
+						<div>Please, wait...</div>
+					) : (
+						<CheckoutForm
+							paymentIntent={paymentIntent}
+							totalPrice={totalPrice}
+						/>
+					)}
 				</Elements>
 			)}
 		</div>

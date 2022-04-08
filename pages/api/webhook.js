@@ -43,7 +43,6 @@ const handler = async (req, res) => {
 			);
 			break;
 
-		// ... handle other event types
 		default:
 			console.log(`Unhandled event type ${event.type}`);
 	}

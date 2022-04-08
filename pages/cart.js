@@ -246,7 +246,9 @@ const Cart = () => {
 	return (
 		<Layout title="Products, Motorbikes – Electra" description="">
 			{isCheckout ? (
-				<Checkout totalPrice={totalCartPrice} />
+				<div className="col-lg-6 mx-auto">
+					<Checkout totalPrice={totalCartPrice} />
+				</div>
 			) : (
 				<div className="container my-3 my-lg-5">
 					<div className={styles.headline}>Shopping cart</div>

@@ -4,21 +4,27 @@ import {
 	useStripe
 } from '@stripe/react-stripe-js';
 import { useEffect, useState } from 'react';
+import styles from '../scss/components/Checkout.module.scss';
 
-const FormComponent = ({ paymentIntent }) => {
+const FormComponent = ({ paymentIntent, totalPrice }) => {
 	const [email, setEmail] = useState('');
-	const [locAmount, setLocAmount] = useState('300');
+	const [firstName, setFirstName] = useState('');
+	const [lastName, setLastName] = useState('');
+	const [phoneNumber, setPhoneNumber] = useState('');
+	const [city, setCity] = useState('');
+	const [address, setAddress] = useState('');
+	const [zip, setZipCode] = useState('');
+	const [locAmount, setLocAmount] = useState(0);
 	const [message, setMessage] = useState(null);
 	const [isLoading, setIsLoading] = useState(false);
 	const stripe = useStripe();
 	const elements = useElements();
 
 	useEffect(() => {
-		if (!stripe) {
-			return;
-		}
+		setLocAmount(totalPrice);
 
-		//Grab the client secret from url params
+		if (!stripe) return;
+
 		const clientSecret = new URLSearchParams(window.location.search).get(
 			'payment_intent_client_secret'
 		);
@@ -45,27 +51,12 @@ const FormComponent = ({ paymentIntent }) => {
 					break;
 			}
 		});
-	}, [stripe]);
-
-	const handleAmount = async (val) => {
-		setLocAmount(val);
-		fetch('api/stripe_intent', {
-			method: 'POST',
-			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify({
-				amount: val * 100,
-				payment_intent_id: paymentIntent.paymentIntent
-			})
-		});
-	};
+	}, [paymentIntent.paymentIntent, stripe, totalPrice]);
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 
-		// Stripe.js has not yet loaded.
-		if (!stripe || !elements) {
-			return;
-		}
+		if (!stripe || !elements) return;
 
 		setIsLoading(true);
 
@@ -95,46 +86,111 @@ const FormComponent = ({ paymentIntent }) => {
 		setIsLoading(false);
 	};
 
+	if (isLoading) return <div>Please, wait...</div>;
+
 	return (
 		<>
+			<div className={styles.headline}>Check out</div>
+
 			<form id="payment-form" onSubmit={handleSubmit} className="m-auto">
+				<div className={styles.h2}>Contact information</div>
+				<div className="row row-cols-1 row-cols-md-2">
+					<div className="mb-3">
+						<input
+							className={styles.input}
+							id="firstName"
+							type="text"
+							value={firstName}
+							placeholder="Enter your first name"
+							onChange={(e) => setFirstName(e.target.value)}
+						/>
+					</div>
+					<div className="mb-3">
+						<input
+							className={styles.input}
+							id="lastName"
+							type="text"
+							value={lastName}
+							onChange={(e) => setLastName(e.target.value)}
+							placeholder="Enter your last name"
+						/>
+					</div>
+					<div className="mb-3">
+						<input
+							className={styles.input}
+							id="email"
+							type="text"
+							value={email}
+							onChange={(e) => setEmail(e.target.value)}
+							placeholder="Enter email address"
+						/>
+					</div>
+					<div className="mb-3">
+						<input
+							className={styles.input}
+							id="phoneNumber"
+							type="text"
+							value={phoneNumber}
+							onChange={(e) => setPhoneNumber(e.target.value)}
+							placeholder="Enter phone number"
+						/>
+					</div>
+				</div>
+
+				<div className={styles.h2}>Delivery Address</div>
+
 				<div className="mb-3">
-					Cart Total:
 					<input
-						id="amount"
+						className={styles.input}
+						id="city"
 						type="text"
-						value={locAmount}
-						className={''}
-						onChange={(e) => handleAmount(e.target.value)}
-						placeholder="Enter email address"
+						value={city}
+						onChange={(e) => setCity(e.target.value)}
+						placeholder="Enter city"
 					/>
 				</div>
-				<div className="mb-6">
-					Email address:
+				<div className="mb-3">
 					<input
-						className={''}
-						id="email"
+						className={styles.input}
+						id="address"
 						type="text"
-						value={email}
-						onChange={(e) => setEmail(e.target.value)}
-						placeholder="Enter email address"
+						value={address}
+						onChange={(e) => setAddress(e.target.value)}
+						placeholder="Enter address"
 					/>
 				</div>
-				<PaymentElement id="payment-element" />
-				<button
-					className="elements-style-background"
-					disabled={isLoading || !stripe || !elements}
-					id="submit"
-				>
-					<span id="button-text">
-						{isLoading ? (
-							<div className="spinner" id="spinner"></div>
-						) : (
-							'Pay now'
-						)}
-					</span>
-				</button>
-				{/* Show any error or success messages */}
+				<div className="mb-3">
+					<input
+						className={styles.input}
+						id="zip"
+						type="text"
+						value={zip}
+						onChange={(e) => setZipCode(e.target.value)}
+						placeholder="Enter zip-code"
+					/>
+				</div>
+
+				<PaymentElement id="payment-element" className={`${styles.paymentInfo} mt-3 my-md-5`} />
+
+				<div className="d-flex justify-content-center">
+					<div className={styles.totalPrice}>
+						Cart Total {locAmount} $
+					</div>
+					<button
+						className={styles.payNowBtn}
+						disabled={isLoading || !stripe || !elements}
+						id="submit"
+					>
+						<span id="button-text">
+							{isLoading ? (
+								<div className="spinner" id="spinner"></div>
+							) : (
+								'Pay now'
+							)}
+						</span>
+					</button>
+				</div>
+
 				{message && <div id="payment-message">{message}</div>}
 			</form>
 		</>

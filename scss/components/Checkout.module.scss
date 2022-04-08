@@ -1,0 +1,91 @@
+@import '../variables';
+@import '../functions/rem';
+@import '../fonts/CenturyGothicNormal';
+
+.headline {
+	font-size: rem(34);
+	text-transform: uppercase;
+	font-family: 'CenturyGothic', sans-serif;
+}
+
+.h2 {
+	padding-top: rem(30);
+	margin: rem(30) 0;
+	border-top: rem(1) solid $linkColor;
+	font-size: rem(22);
+	font-family: 'CenturyGothic', sans-serif;
+}
+
+.input {
+	transition: 0.15s;
+	width: 100%;
+	font-size: rem(18);
+	font-family: 'CenturyGothic', sans-serif;
+	padding: rem(10) rem(15);
+
+	border: {
+		top: rem(2) solid transparent;
+		left: rem(2) solid transparent;
+		right: rem(2) solid transparent;
+		bottom: rem(2) solid black;
+	}
+
+	&::placeholder {
+		transition: 0.1s;
+	}
+
+	&:focus,
+	&:hover {
+		box-shadow: none;
+		outline: none;
+
+		&::placeholder {
+			transform: translateX(rem(-15)) scale(0.85);
+		}
+
+		border-color: black;
+	}
+
+	&:active {
+		&::placeholder {
+			transform: translateX(rem(-10)) scale(0.85);
+		}
+	}
+}
+
+.totalPrice {
+	font-family: 'CenturyGothic', sans-serif;
+	font-size: rem(30);
+
+	margin-top: rem(40);
+	margin-bottom: rem(15);
+}
+
+.payNowBtn {
+	transition: 0.15s;
+	margin-top: rem(30);
+	background: black;
+	color: white;
+	padding: rem(15) rem(30);
+	border-radius: rem(25);
+	font-weight: bold;
+	font-size: rem(20);
+	text-decoration: none;
+	margin-left: rem(30);
+
+	cursor: pointer;
+
+	&:hover,
+	&:focus {
+		transform: scale(1.15);
+	}
+
+	&:active {
+		transform: none;
+	}
+}
+
+.paymentInfo {
+    padding: rem(15);
+	box-shadow: 0px 8px 28px -6px rgba(24, 39, 75, 0.12);
+}
