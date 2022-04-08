@@ -3,9 +3,9 @@ import {
 	useElements,
 	useStripe
 } from '@stripe/react-stripe-js';
+import Router from 'next/router';
 import { useEffect, useState } from 'react';
 import styles from '../scss/components/Checkout.module.scss';
-import Router from 'next/router';
 
 const FormComponent = ({ paymentIntent, totalPrice = 0 }) => {
 	const [email, setEmail] = useState('');

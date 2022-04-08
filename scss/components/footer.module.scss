@@ -29,7 +29,7 @@
 
 		.footerLink {
 			text-decoration: none;
-			color: darken($linkColor, 35);
+			color: darken($light-gray, 35);
 
 			&:hover,
 			&:focus {
@@ -44,13 +44,12 @@
 		.footerContentWrapper {
 			display: flex;
 			flex-wrap: wrap;
-			justify-content: space-between;
 			padding: 5vmin 0 15vmin 0;
 			max-width: 100vw;
 
 			.footerLink {
 				text-align: center;
-				color: $linkColor;
+				color: $light-gray;
 				padding: rem(10);
 				display: block;
 

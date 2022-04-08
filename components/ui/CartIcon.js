@@ -1,5 +1,5 @@
+import { useEffect, useState } from 'react';
 import styles from '../../scss/components/ui/cart.module.scss';
-import { useState, useEffect } from 'react';
 
 const Cart = () => {
 	const [active, setActive] = useState(false);

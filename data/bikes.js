@@ -1,4 +1,3 @@
-const bikes = [
-];
+const bikes = [];
 
 export default bikes;

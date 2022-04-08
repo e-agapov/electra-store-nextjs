@@ -1,6 +1,6 @@
+import { useState } from 'react';
 import styles from '../scss/components/CollapseMenu.module.scss';
 import PlusSvg from './ui/PlusSvg';
-import { useState } from 'react';
 
 const CollapseMenu = ({ title, classes, data = [] }) => {
 	const [collapse, setCollapse] = useState([...data]);

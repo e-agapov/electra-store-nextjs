@@ -1,4 +1,3 @@
-const motorbikes = [
-];
+const motorbikes = [];
 
 export default motorbikes;

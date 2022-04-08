@@ -40,11 +40,11 @@
 
 		&:hover,
 		&:focus {
-			background: #0000000d;
+			background: #00000005;
 		}
 
 		&:active {
-			background: #00000015;
+			background: transparent;
 
 			.image {
 				transform: scale(0.95);

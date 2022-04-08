@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import Router from 'next/router';
 import { useEffect, useState } from 'react';
 import Layout from '../components/Layout';
@@ -30,6 +31,23 @@ const Successful = () => {
 				<div className={styles.h1}>Success!</div>
 
 				<div className={styles.text}>{texts.success}</div>
+
+				<div className={styles.text}>
+					Our contact information have{' '}
+					<Link href={'/service'}>
+						<a
+							className={styles.goHomeLink}
+							onClick={(e) => {
+								e.preventDefault(false);
+								localStorage.clear();
+								router.push('/');
+							}}
+						>
+							service page
+						</a>
+					</Link>
+					.
+				</div>
 
 				<a
 					className={styles.goHomeLink}

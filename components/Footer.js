@@ -1,10 +1,23 @@
 import Image from 'next/image';
-import footerLogoImg from '../assets/images/footerLogo.png';
-import styles from '../scss/components/footer.module.scss';
 import Link from 'next/link';
-import SubNavbar from './SubNavbar';
+import footerLogoImg from '../assets/images/footerLogo.png';
+import styles from '../scss/components/Footer.module.scss';
 
 const Footer = () => {
+	const footerLinks = [
+		{ href: '/transport', name: 'Transport' },
+		{ href: '/service', name: 'Service' },
+		{ href: '/parts', name: 'Parts' },
+		{ href: '/bikes', name: 'Bikes' },
+		{ href: '/motorbikes', name: 'Motorbikes' },
+		{ href: '/scooters', name: 'Scooters' }
+	];
+
+	const subFooterLinks = [
+		{ href: '/terms', name: 'Terms' },
+		{ href: '/privacy', name: 'Privacy' }
+	];
+
 	return (
 		<div className={styles.footerWrapper}>
 			<footer className={styles.footer}>
@@ -15,68 +28,25 @@ const Footer = () => {
 				</div>
 				<div className="container">
 					<div className={styles.footerContentWrapper}>
-						<Link href={'/'}>
-							<a className={styles.footerLink}>Transport</a>
-						</Link>
-						<Link href={'/'}>
-							<a className={styles.footerLink}>Transport</a>
-						</Link>
-						<Link href={'/'}>
-							<a className={styles.footerLink}>Transport</a>
-						</Link>
-						<Link href={'/'}>
-							<a className={styles.footerLink}>Transport</a>
-						</Link>
-						<Link href={'/'}>
-							<a className={styles.footerLink}>Transport</a>
-						</Link>
-						<Link href={'/'}>
-							<a className={styles.footerLink}>Transport</a>
-						</Link>
-						<Link href={'/'}>
-							<a className={styles.footerLink}>Transport</a>
-						</Link>
-						<Link href={'/'}>
-							<a className={styles.footerLink}>Transport</a>
-						</Link>
-						<Link href={'/'}>
-							<a className={styles.footerLink}>Transport</a>
-						</Link>
-						<Link href={'/'}>
-							<a className={styles.footerLink}>Transport</a>
-						</Link>
-						<Link href={'/'}>
-							<a className={styles.footerLink}>Transport</a>
-						</Link>
-						<Link href={'/'}>
-							<a className={styles.footerLink}>Transport</a>
-						</Link>
-						<Link href={'/'}>
-							<a className={styles.footerLink}>Transport</a>
-						</Link>
-						<Link href={'/'}>
-							<a className={styles.footerLink}>Transport</a>
-						</Link>
-						<Link href={'/'}>
-							<a className={styles.footerLink}>Transport</a>
-						</Link>
-						<Link href={'/'}>
-							<a className={styles.footerLink}>Transport</a>
-						</Link>
+						{footerLinks.map((footerLink, index) => (
+							<Link href={footerLink.href} key={index}>
+								<a className={styles.footerLink}>
+									{footerLink.name}
+								</a>
+							</Link>
+						))}
 					</div>
 				</div>
 				<div className={styles.SubNavbar}>
 					<div className="container">
 						<div className="row row-cols-auto align-items-center">
-							<Link href={'/'}>
-								<a className={styles.footerLink}>Transport</a>
-							</Link>
-							<Link href={'/'}>
-								<a className={styles.footerLink}>Transport</a>
-							</Link>
-							<Link href={'/'}>
-								<a className={styles.footerLink}>Transport</a>
-							</Link>
+							{subFooterLinks.map((subFooterLink, index) => (
+								<Link href={subFooterLink.href} key={index}>
+									<a className={styles.footerLink}>
+										{subFooterLink.name}
+									</a>
+								</Link>
+							))}
 						</div>
 					</div>
 				</div>

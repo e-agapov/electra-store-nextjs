@@ -3,8 +3,8 @@
 @import './variables';
 @import './fonts/Roboto';
 
-@import './components/subNavbar';
-@import './components/navbar';
+@import './components/SubNavbar';
+@import './components/Navbar';
 
 @import './functions/rem';
 
@@ -59,7 +59,7 @@ img {
 }
 
 .text-error {
-		font-family: 'CenturyGothic', sans-serif;
+	font-family: 'CenturyGothic', sans-serif;
 	color: $accent;
 	font-size: rem(20);
 }

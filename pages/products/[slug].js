@@ -48,7 +48,6 @@ const Product = () => {
 					item.id === product.id && item.color === productColor?.name
 			);
 
-
 			if (hasProducts.length) {
 				return false;
 			} else {

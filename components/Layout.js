@@ -1,8 +1,8 @@
 import { useState } from 'react';
+import Footer from './Footer';
 import HeadTag from './HeadTag';
 import MobileMenu from './MobileMenu';
 import Navbar from './Navbar';
-import Footer from './Footer';
 
 function Layout({ home, children, description, themeColor, title }) {
 	const [menuVisibility, setMenuVisibility] = useState(false);

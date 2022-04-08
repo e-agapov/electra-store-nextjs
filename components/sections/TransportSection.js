@@ -4,7 +4,7 @@ import BikesImage from '../../assets/images/index/transport-section/Bikes.png';
 import MotorbikesImage from '../../assets/images/index/transport-section/Motorbikes.png';
 import ScootersImage from '../../assets/images/index/transport-section/Scooters.png';
 import ArrowToRight from '../../components/ui/ArrowToRight';
-import styles from '../../scss/components/sections/transport.module.scss';
+import styles from '../../scss/components/sections/Transport.module.scss';
 
 const TransportSection = ({ classes = null }) => {
 	return (

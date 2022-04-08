@@ -19,7 +19,7 @@
 		flex-direction: row;
 		flex-wrap: wrap;
 
-		border-top: rem(1) solid $linkColor;
+		border-top: rem(1) solid $light-gray;
 		padding: rem(20) rem(10);
 		margin: rem(10) 0;
 
@@ -94,7 +94,7 @@
 			box-shadow: none;
 			margin: 0 rem(15);
 			font-size: rem(24);
-			color: $linkColor;
+			color: $light-gray;
 			border-radius: rem(2.5);
 			padding: rem(5) rem(10);
 
@@ -138,7 +138,7 @@
 }
 
 .goods {
-	color: $linkColor;
+	color: $light-gray;
 	margin-bottom: rem(20);
 }
 
@@ -155,7 +155,7 @@
 
 .checkoutBlock {
 	.moreInfoText {
-		color: $linkColor;
+		color: $light-gray;
 	}
 
 	.checkoutBtn {

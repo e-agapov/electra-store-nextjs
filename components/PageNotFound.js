@@ -1,7 +1,7 @@
 import Head from 'next/head';
-import styles from '../scss/pages/404.module.scss';
-import { useRouter } from 'next/router';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
+import styles from '../scss/pages/404.module.scss';
 
 const PageNotFound = () => {
 	const router = useRouter();
