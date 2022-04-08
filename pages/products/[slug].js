@@ -54,6 +54,7 @@ const Product = () => {
 			} else {
 				const productToCart = {
 					id: product.id,
+					name: `${product.name} ${productColor?.name}`,
 					category: product.category,
 					color: productColor ? productColor?.name : false,
 					uri: product.uri,
@@ -75,6 +76,7 @@ const Product = () => {
 			} else {
 				const productToCart = {
 					id: product.id,
+					name: `${product.name}`,
 					category: product.category,
 					uri: product.uri,
 					count: 1
