@@ -5,7 +5,11 @@ const Cart = () => {
 	const [active, setActive] = useState(false);
 
 	function getCartStorage() {
-		return JSON.parse(localStorage.getItem('cart')).lenth ? true : false;
+		if (localStorage.getItem('cart')) {
+			return JSON.parse(localStorage.getItem('cart')).lenth !== 0
+				? true
+				: false;
+		}
 	}
 
 	useEffect(() => {

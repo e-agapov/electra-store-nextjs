@@ -5,8 +5,9 @@ import {
 } from '@stripe/react-stripe-js';
 import { useEffect, useState } from 'react';
 import styles from '../scss/components/Checkout.module.scss';
+import PageNotFound from './PageNotFound';
 
-const FormComponent = ({ paymentIntent, totalPrice }) => {
+const FormComponent = ({ paymentIntent, totalPrice = 0 }) => {
 	const [email, setEmail] = useState('');
 	const [firstName, setFirstName] = useState('');
 	const [lastName, setLastName] = useState('');
@@ -15,7 +16,7 @@ const FormComponent = ({ paymentIntent, totalPrice }) => {
 	const [address, setAddress] = useState('');
 	const [zip, setZipCode] = useState('');
 	const [locAmount, setLocAmount] = useState(0);
-	const [message, setMessage] = useState(null);
+	const [message, setMessage] = useState('');
 	const [isLoading, setIsLoading] = useState(false);
 	const stripe = useStripe();
 	const elements = useElements();
@@ -87,6 +88,7 @@ const FormComponent = ({ paymentIntent, totalPrice }) => {
 	};
 
 	if (isLoading) return <div>Please, wait...</div>;
+	if (totalPrice === 0 && !isLoading) <PageNotFound />;
 
 	return (
 		<>
@@ -170,7 +172,10 @@ const FormComponent = ({ paymentIntent, totalPrice }) => {
 					/>
 				</div>
 
-				<PaymentElement id="payment-element" className={`${styles.paymentInfo} mt-3 my-md-5`} />
+				<PaymentElement
+					id="payment-element"
+					className={`${styles.paymentInfo} mt-3 my-md-5`}
+				/>
 
 				<div className="d-flex justify-content-center">
 					<div className={styles.totalPrice}>

@@ -1,11 +1,10 @@
 import Image from 'next/image';
-import Link from 'next/link';
 import { useEffect, useState } from 'react';
+import Checkout from '../components/Checkout';
 import Layout from '../components/Layout';
+import productsData from '../data/products';
 import styles from '../scss/pages/Cart.module.scss';
 import ImageLoader from '../utils/imageLoader';
-import productsData from '../data/products';
-import Checkout from '../components/Checkout';
 
 const isCurrent = (item, uri, color = false) => {
 	if (item.uri === uri) {
@@ -28,6 +27,7 @@ const Cart = () => {
 	const [isCheckout, setCheckout] = useState(false);
 
 	useEffect(() => {
+		setLoading(true);
 		if (isLoading) {
 			const storage = localStorage.getItem('cart')
 				? JSON.parse(localStorage.getItem('cart'))
@@ -62,7 +62,6 @@ const Cart = () => {
 			});
 		}
 
-		// set total price cart
 		const totalPrice = products.reduce((acc, item) => {
 			return acc + item.totalPrice;
 		}, 0);
