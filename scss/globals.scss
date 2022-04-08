@@ -8,6 +8,8 @@
 
 @import './functions/rem';
 
+@import './fonts/CenturyGothicNormal';
+
 body {
 	font-family: 'Roboto', sans-serif;
 	overflow-x: hidden;
@@ -54,4 +56,10 @@ a {
 
 img {
 	user-select: none;
+}
+
+.text-error {
+		font-family: 'CenturyGothic', sans-serif;
+	color: $accent;
+	font-size: rem(20);
 }

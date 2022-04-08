@@ -3,7 +3,7 @@ import Stripe from 'stripe';
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 const handler = async (req, res) => {
-	const { amount, payment_intent_id } = req.body;
+	const { amount, payment_intent_id, products } = req.body;
 
 	if (payment_intent_id && amount) {
 		try {
@@ -36,11 +36,10 @@ const handler = async (req, res) => {
 		}
 	}
 	try {
-		// Create PaymentIntent
 		const params = {
 			amount: amount,
 			currency: 'usd',
-			description: '',
+			description: products,
 			automatic_payment_methods: {
 				enabled: true
 			}

@@ -18,8 +18,9 @@ const FormCheckout = ({ totalPrice }) => {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify({
-				amount: totalPrice || 0,
-				payment_intent_id: paymentIntent || ''
+				amount: totalPrice * 100,
+				payment_intent_id: paymentIntent || '',
+				products: localStorage.getItem('cart')
 			})
 		})
 			.then((res) => res.json())
@@ -27,13 +28,18 @@ const FormCheckout = ({ totalPrice }) => {
 				setClientSecret(data.client_secret), setPaymentIntent(data.id);
 				setLoading(false);
 			});
-	}, []);
+	}, [paymentIntent, totalPrice]);
 
 	const options = {
 		clientSecret
 	};
 
-	if (!clientSecret && !isLoading) return <PageNotFound />;
+	if (!clientSecret && !isLoading)
+		return (
+			<>
+				<PageNotFound />
+			</>
+		);
 
 	return (
 		<div>

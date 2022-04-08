@@ -5,7 +5,7 @@ import {
 } from '@stripe/react-stripe-js';
 import { useEffect, useState } from 'react';
 import styles from '../scss/components/Checkout.module.scss';
-import PageNotFound from './PageNotFound';
+import Router from 'next/router';
 
 const FormComponent = ({ paymentIntent, totalPrice = 0 }) => {
 	const [email, setEmail] = useState('');
@@ -21,8 +21,15 @@ const FormComponent = ({ paymentIntent, totalPrice = 0 }) => {
 	const stripe = useStripe();
 	const elements = useElements();
 
+	const [data, setData] = useState(JSON.parse(localStorage.getItem('cart')));
+
+	const router = Router;
+
+	if (totalPrice === 0 || !totalPrice) router.push('/');
+
 	useEffect(() => {
 		setLocAmount(totalPrice);
+		setData(localStorage.getItem('cart'));
 
 		if (!stripe) return;
 
@@ -30,9 +37,7 @@ const FormComponent = ({ paymentIntent, totalPrice = 0 }) => {
 			'payment_intent_client_secret'
 		);
 
-		if (!clientSecret) {
-			return;
-		}
+		if (!clientSecret) return;
 
 		stripe.retrievePaymentIntent(clientSecret).then(({ paymentIntent }) => {
 			switch (paymentIntent.status) {
@@ -52,7 +57,7 @@ const FormComponent = ({ paymentIntent, totalPrice = 0 }) => {
 					break;
 			}
 		});
-	}, [paymentIntent.paymentIntent, stripe, totalPrice]);
+	}, [stripe, totalPrice]);
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -66,13 +71,20 @@ const FormComponent = ({ paymentIntent, totalPrice = 0 }) => {
 			confirmParams: {
 				return_url: 'http://localhost:3000/successful',
 				receipt_email: email,
-				shipping: {
-					address: { city: 'NY' },
-					name: 'Shipping user'
-				},
+				// metadata: {
+				// 	products: data
+				// },
+
 				payment_method_data: {
 					billing_details: {
-						name: 'Billing user'
+						name: `${firstName} ${lastName}` || 'Noname',
+						email: email || '',
+						phone: phoneNumber || '',
+						address: {
+							city: city || '',
+							line1: address || '',
+							postal_code: zip || ''
+						}
 					}
 				}
 			}
@@ -81,21 +93,18 @@ const FormComponent = ({ paymentIntent, totalPrice = 0 }) => {
 		if (error.type === 'card_error' || error.type === 'validation_error') {
 			setMessage(error.message);
 		} else {
-			setMessage('An unexpected error occurred.');
+			setMessage(error.message);
 		}
 
 		setIsLoading(false);
 	};
 
-	if (isLoading) return <div>Please, wait...</div>;
-	if (totalPrice === 0 && !isLoading) <PageNotFound />;
-
 	return (
 		<>
 			<div className={styles.headline}>Check out</div>
 
+			<div className={styles.h2}>Contact information</div>
 			<form id="payment-form" onSubmit={handleSubmit} className="m-auto">
-				<div className={styles.h2}>Contact information</div>
 				<div className="row row-cols-1 row-cols-md-2">
 					<div className="mb-3">
 						<input
@@ -172,10 +181,18 @@ const FormComponent = ({ paymentIntent, totalPrice = 0 }) => {
 					/>
 				</div>
 
-				<PaymentElement
-					id="payment-element"
-					className={`${styles.paymentInfo} mt-3 my-md-5`}
-				/>
+				{paymentIntent && elements && (
+					<PaymentElement
+						id="payment-element"
+						className={`${styles.paymentInfo} mt-3 my-md-5`}
+					/>
+				)}
+
+				{message && (
+					<div className="d-flex mt-5 text-error">
+						<div className="mx-auto">{message}</div>
+					</div>
+				)}
 
 				<div className="d-flex justify-content-center">
 					<div className={styles.totalPrice}>
@@ -187,16 +204,10 @@ const FormComponent = ({ paymentIntent, totalPrice = 0 }) => {
 						id="submit"
 					>
 						<span id="button-text">
-							{isLoading ? (
-								<div className="spinner" id="spinner"></div>
-							) : (
-								'Pay now'
-							)}
+							{isLoading ? <div>Please, wait...</div> : 'Pay now'}
 						</span>
 					</button>
 				</div>
-
-				{message && <div id="payment-message">{message}</div>}
 			</form>
 		</>
 	);
