@@ -71,9 +71,6 @@ const FormComponent = ({ paymentIntent, totalPrice = 0 }) => {
 			confirmParams: {
 				return_url: 'http://localhost:3000/successful',
 				receipt_email: email,
-				// metadata: {
-				// 	products: data
-				// },
 
 				payment_method_data: {
 					billing_details: {
