@@ -6,7 +6,6 @@ import styles from '../scss/pages/Successful.module.scss';
 
 const Successful = () => {
 	const router = Router;
-	const [storage, setStorage] = useState();
 	const texts = {
 		success:
 			'Thank you for your order! We confirm your order and will contact you shortly. If you have any questions, you can contact us. Our contact information have service page.'

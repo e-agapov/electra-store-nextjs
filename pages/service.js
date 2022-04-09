@@ -63,7 +63,7 @@ export default function Service() {
 				classes={styles.textSectionWithText}
 				title={'WE ARE HAPPY TO HELP YOU WITH:'}
 				imgSrc={scooterImage}
-				textForColumn={texts.second}
+				textForColumn={divSection}
 				colWidthText={7}
 			/>
 
@@ -71,7 +71,7 @@ export default function Service() {
 				<SectionBlock
 					classes={styles.textSectionWithText}
 					title={'Difficulties you can face with'}
-					textForColumn={texts.main}
+					textForColumn={texts.second}
 					link={'/news'}
 					linkName={'More News'}
 				/>
