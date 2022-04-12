@@ -7,5 +7,8 @@ module.exports = {
 			args: 'start',
 			exec_mode: 'cluster'
 		}
-	]
+	],
+	images: {
+		domains: ['www.electrasharing.shop', 'electrasharing.shop', 'localhost']
+	}
 };
