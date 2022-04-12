@@ -69,7 +69,7 @@ const FormComponent = ({ paymentIntent, totalPrice = 0 }) => {
 		const { error } = await stripe.confirmPayment({
 			elements,
 			confirmParams: {
-				return_url: 'http://localhost:3000/successful',
+				return_url: 'http://electrasharing.shop:3000/successful',
 				receipt_email: email,
 
 				payment_method_data: {
