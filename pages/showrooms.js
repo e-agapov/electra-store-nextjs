@@ -9,7 +9,7 @@ import styles from '../scss/pages/Showrooms.module.scss';
 
 export default function Showrooms() {
 	const texts = {
-		main: `We gettered different kinds of scooters. Everyone can find a scooter for themselves. WeWe gettered different kinds of scooters. Everyone can find a scooter for themselves.We gettered different kinds of scooters. Everyone can find a scooter for themselves. gettered different kinds of scooters.`
+		main: `We have showrooms all over Europe, you can always come to our store and choose your transport and accessories to your liking. A large selection will help you find everything you need for comfortable movement through the streets of your city.`
 	};
 
 	return (

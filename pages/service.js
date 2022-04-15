@@ -9,34 +9,35 @@ import styles from '../scss/pages/Service.module.scss';
 
 export default function Service() {
 	const texts = {
-		main: `We gethered differend kinds of scooters. Everyone can find a scooter for themselves.WeWe gethered differend kinds of scooters. Everyone can find a scooter for themselves.We gethered differend kinds of scooters. Everyone can find a scooter for themselves. gethered differend kinds of scooters. Everyone can find a scooter for themselves.We gethered differend kinds of scooters. Everyone can find a scooter for themselves.We gethered differend kinds of scooters. Everyone can find a scooter for themselves.`,
-		second: `We gethered differend kinds of sc surroundings that can find a scooter for themselves. We gethered differend kinds of sc surroundings that can find`
+		main: `Every client and his peace of mind is important to us. That is why we provide our service for the maintenance and repair of your electric transport. For your convenience, our services are located near the showrooms, you can always ask for help from our team of craftsmen. We employ only certified masters with experience in the repair and maintenance of electric vehicles.`,
+
+		second: ``
 	};
 
-	const divSection = (
-		<div className="d-flex flex-column flex-lg-row">
-			<div className="col-lg-4 px-3">
-				<div className={`${styles.decimal} mx-auto mx-sm-0`}>1</div>
-				<div className={`${styles.text} mt-3`}>
-					We gethered differend kinds of scooters. Everyone can find a
-					scooter for themselves.
-				</div>
-			</div>
-			<div className="col-lg-4 mt-5 mt-lg-0 px-3">
-				<div className={`${styles.decimal} mx-auto mx-sm-0`}>2</div>
-				<div className={`${styles.text} mt-3`}>
-					We gethered differend kinds of scooters. Everyone can find a
-					scooter for themselves.
-				</div>
-			</div>
-			<div className="col-lg-4 mt-5 mt-lg-0 px-3">
-				<div className={`${styles.decimal} mx-auto mx-sm-0`}>3</div>
-				<div className={`${styles.text} mt-3`}>
-					We gethered differend kinds of scooters.
-				</div>
-			</div>
-		</div>
-	);
+	// const divSection = (
+	// 	<div className="d-flex flex-column flex-lg-row">
+	// 		<div className="col-lg-4 px-3">
+	// 			<div className={`${styles.decimal} mx-auto mx-sm-0`}>1</div>
+	// 			<div className={`${styles.text} mt-3`}>
+	// 				We gethered differend kinds of scooters. Everyone can find a
+	// 				scooter for themselves.
+	// 			</div>
+	// 		</div>
+	// 		<div className="col-lg-4 mt-5 mt-lg-0 px-3">
+	// 			<div className={`${styles.decimal} mx-auto mx-sm-0`}>2</div>
+	// 			<div className={`${styles.text} mt-3`}>
+	// 				We gethered differend kinds of scooters. Everyone can find a
+	// 				scooter for themselves.
+	// 			</div>
+	// 		</div>
+	// 		<div className="col-lg-4 mt-5 mt-lg-0 px-3">
+	// 			<div className={`${styles.decimal} mx-auto mx-sm-0`}>3</div>
+	// 			<div className={`${styles.text} mt-3`}>
+	// 				We gethered differend kinds of scooters.
+	// 			</div>
+	// 		</div>
+	// 	</div>
+	// );
 
 	return (
 		<Layout title="Service – Electra" description="Internet store">
@@ -59,18 +60,18 @@ export default function Service() {
 
 			<Image src={ImgWithManAndScooter} alt="" />
 
-			<SectionBlock
+			{/* <SectionBlock
 				classes={styles.textSectionWithText}
 				title={'WE ARE HAPPY TO HELP YOU WITH:'}
 				imgSrc={scooterImage}
 				textForColumn={divSection}
 				colWidthText={7}
-			/>
+			/> */}
 
 			<div className="container">
 				<SectionBlock
 					classes={styles.textSectionWithText}
-					title={'Difficulties you can face with'}
+					title={'Check our news'}
 					textForColumn={texts.second}
 					link={'/news'}
 					linkName={'More News'}

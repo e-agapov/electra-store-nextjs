@@ -20,7 +20,7 @@ const TransportSection = ({ classes = null }) => {
 						</div>
 						<div className={styles.linkTitle}>Scooters</div>
 						<div className={styles.description}>
-							We gethered differend kinds of scooters. Everyone
+							We gettered different kinds of scooters. Everyone
 							can find a scooter for themselves.
 						</div>
 					</a>
@@ -36,8 +36,8 @@ const TransportSection = ({ classes = null }) => {
 
 						<div className={styles.linkTitle}>Bikes</div>
 						<div className={styles.description}>
-							We gethered differend kinds of scooters. Everyone
-							can find a scooter for themselves.
+							Our store has a large selection of different bikes
+							for everyone.
 						</div>
 					</a>
 				</Link>
@@ -55,8 +55,9 @@ const TransportSection = ({ classes = null }) => {
 
 						<div className={styles.linkTitle}>Motorbikes</div>
 						<div className={styles.description}>
-							We gethered differend kinds of scooters. Everyone
-							can find a scooter for themselves.
+							Do you want to buy a moped? You have come to the
+							right place, a huge selection, different models for
+							every taste.
 						</div>
 					</a>
 				</Link>
