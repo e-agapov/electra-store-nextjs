@@ -11,7 +11,7 @@ function Navbar({ toggleMenu }) {
 			<div className="container">
 				<nav
 					className={
-						'd-flex align-items-center justify-content-between'
+						'd-flex align-items-center justify-content-start'
 					}
 				>
 					<div className="navbarLogotypeLink">
@@ -40,7 +40,7 @@ function Navbar({ toggleMenu }) {
 						</div>
 
 						<Link href={'/cart'}>
-							<a className="navbarCartLink">
+							<a className="navbarCartLink ms-auto">
 								<CartIcon />
 							</a>
 						</Link>

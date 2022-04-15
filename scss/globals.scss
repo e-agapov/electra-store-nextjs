@@ -17,10 +17,10 @@ body {
 
 main {
 	@include media-breakpoint-down(md) {
-		margin-top: rem(62);
+		margin-top: rem(60);
 	}
 
-	margin-top: rem(105);
+	margin-top: rem(95);
 	transition: 0.15s;
 	opacity: 1;
 }

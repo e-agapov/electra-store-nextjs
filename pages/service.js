@@ -1,4 +1,5 @@
 import Image from 'next/image';
+
 import carbonFibersImage from '../assets/images/service/carbon-fibers.jpg';
 import HeaderImage from '../assets/images/service/header.png';
 import scooterImage from '../assets/images/service/scooter.jpg';
@@ -6,8 +7,14 @@ import ImgWithManAndScooter from '../assets/images/transport/headline.png';
 import Layout from '../components/Layout';
 import SectionBlock from '../components/SectionBlock';
 import styles from '../scss/pages/Service.module.scss';
+import ComingSoon from '../components/ComingSoon';
 
 export default function Service() {
+	return (
+		<Layout title="Service – Electra" description="Internet store">
+			<ComingSoon />
+		</Layout>
+	);
 	const texts = {
 		main: `Every client and his peace of mind is important to us. That is why we provide our service for the maintenance and repair of your electric transport. For your convenience, our services are located near the showrooms, you can always ask for help from our team of craftsmen. We employ only certified masters with experience in the repair and maintenance of electric vehicles.`,
 
