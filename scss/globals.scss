@@ -10,6 +10,8 @@
 
 @import './fonts/CenturyGothicNormal';
 
+@import '/node_modules/swiper/swiper.scss';
+
 body {
 	font-family: 'Roboto', sans-serif;
 	overflow-x: hidden;
@@ -17,7 +19,7 @@ body {
 
 main {
 	@include media-breakpoint-down(md) {
-		margin-top: rem(60);
+		margin-top: rem(50);
 	}
 
 	margin-top: rem(95);
@@ -62,4 +64,40 @@ img {
 	font-family: 'CenturyGothic', sans-serif;
 	color: $accent;
 	font-size: rem(20);
+}
+
+.swiper-button-prev, .swiper-button-next {
+	transition: 0.15s;
+	width: rem(60);
+	height: 0;
+	border-top: 30px solid transparent;
+	border-bottom: 30px solid transparent;
+	border-right: 20px solid rgba(255, 255, 255, 0.5);
+	background: transparent;
+	z-index: 4000;
+	cursor: pointer;
+
+	display: block;
+	position: absolute;
+	transform: translateY(35vh);
+
+	&:hover, &:focus {
+		border-right-color: white;
+	}
+
+	&:active {
+		opacity: 0.2;
+	}
+}
+
+.swiper-button-next {
+	right: 0;
+	border-right: 20px solid rgba(255, 255, 255, 0.5);
+	border-left: 20px solid transparent;
+
+	transform: translateY(35vh) rotate(180deg);
+}
+
+.swiper-button-prev {
+	padding-left: rem(20);
 }

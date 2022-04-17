@@ -1,11 +1,11 @@
 import Image from 'next/image';
-import HeaderMobileImage from '../assets/images/transport/headline-mobile.png';
+import { Navigation, Pagination } from 'swiper';
+import { Swiper, SwiperSlide } from 'swiper/react';
 import HeaderImage from '../assets/images/transport/headline.png';
 import HelmetImage from '../assets/images/transport/Helmet-Black.jpg';
 import Layout from '../components/Layout';
 import SectionBlock from '../components/SectionBlock';
 import TransportSection from '../components/sections/TransportSection';
-import styles from '../scss/pages/Transport.module.scss';
 
 export default function Transport() {
 	const texts = {
@@ -16,15 +16,25 @@ export default function Transport() {
 
 	return (
 		<Layout title="Transport – Electra" description="">
-			<section className={`d-none d-sm-block headerImage`}>
-				<Image src={HeaderImage} alt="" priority />
-			</section>
-
-			<section
-				className={`d-block d-sm-none headerImage ${styles.mobileHeaderPic}`}
+			<Swiper
+				rewind={true}
+				navigation={true}
+				pagination={true}
+				modules={[Navigation, Pagination]}
 			>
-				<Image src={HeaderMobileImage} alt="" priority />
-			</section>
+				<SwiperSlide>
+					<Image src={HeaderImage} alt="" priority />
+				</SwiperSlide>
+				<SwiperSlide>
+					<Image src={HeaderImage} alt="" priority />
+				</SwiperSlide>
+				<SwiperSlide>
+					<Image src={HeaderImage} alt="" priority />
+				</SwiperSlide>
+				<SwiperSlide>
+					<Image src={HeaderImage} alt="" priority />
+				</SwiperSlide>
+			</Swiper>
 
 			<div className="container">
 				<TransportSection />

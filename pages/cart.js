@@ -234,7 +234,7 @@ const Cart = () => {
 
 	if (isLoading) {
 		return (
-			<Layout title="Products, Motorbikes – Electra" description="">
+			<Layout title="Products – Electra" description="">
 				<div className="cart-page">
 					<div className="cart-page__loader">loading...</div>
 				</div>
@@ -243,7 +243,7 @@ const Cart = () => {
 	}
 
 	return (
-		<Layout title="Products, Motorbikes – Electra" description="">
+		<Layout title="Cart – Electra" description="">
 			{isCheckout ? (
 				<div className="col-lg-6 mx-auto">
 					<Checkout totalPrice={totalCartPrice} />

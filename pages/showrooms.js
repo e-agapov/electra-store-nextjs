@@ -10,7 +10,7 @@ import ComingSoon from '../components/ComingSoon';
 
 export default function Showrooms() {
 	return (
-		<Layout title="Service – Electra" description="Internet store">
+		<Layout title="Showrooms – Electra" description="Internet store">
 			<ComingSoon />
 		</Layout>
 	);

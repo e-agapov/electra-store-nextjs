@@ -1,7 +1,8 @@
 import Image from 'next/image';
 import MenOnScooterImage from '../assets/images/index/menOnScooter.png';
 import MenOnBikesImage from '../assets/images/index/mensOnBikes.png';
-import HeaderImageMobile from '../assets/images/mainMobilePageHeaderImg.png';
+import { Navigation, Pagination } from 'swiper';
+import { Swiper, SwiperSlide } from 'swiper/react';
 import HeaderImage from '../assets/images/mainPageHeaderImg.png';
 import FAQComponent from '../components/FAQComponent';
 import Layout from '../components/Layout';
@@ -21,15 +22,25 @@ export default function Home() {
 
 	return (
 		<Layout title="Electra Store" description="Internet store">
-			<section className={`d-none d-sm-block headerImage`}>
-				<Image src={HeaderImage} alt="" priority />
-			</section>
-
-			<section
-				className={`d-block d-sm-none headerImage ${styles.mobileHeaderImage}`}
+			<Swiper
+				rewind={true}
+				navigation={true}
+				pagination={true}
+				modules={[Navigation, Pagination]}
 			>
-				<Image src={HeaderImageMobile} alt="" priority />
-			</section>
+				<SwiperSlide>
+					<Image src={HeaderImage} alt="" priority />
+				</SwiperSlide>
+				<SwiperSlide>
+					<Image src={HeaderImage} alt="" priority />
+				</SwiperSlide>
+				<SwiperSlide>
+					<Image src={HeaderImage} alt="" priority />
+				</SwiperSlide>
+				<SwiperSlide>
+					<Image src={HeaderImage} alt="" priority />
+				</SwiperSlide>
+			</Swiper>
 
 			<div className="container">
 				<TransportSection />
