@@ -1,8 +1,8 @@
 import Image from 'next/image';
-import MenOnScooterImage from '../assets/images/index/menOnScooter.png';
-import MenOnBikesImage from '../assets/images/index/mensOnBikes.png';
 import { Navigation, Pagination } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import MenOnScooterImage from '../assets/images/index/menOnScooter.png';
+import MenOnBikesImage from '../assets/images/index/mensOnBikes.png';
 import HeaderImage from '../assets/images/mainPageHeaderImg.png';
 import FAQComponent from '../components/FAQComponent';
 import Layout from '../components/Layout';
