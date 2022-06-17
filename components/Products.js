@@ -1,38 +1,36 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
 import styles from '../scss/components/Products.module.scss';
 import ImageLoader from '../utils/imageLoader';
 
-const Products = ({ linksCatalog, dataList, category }) => {
-	const router = useRouter();
-	const products = dataList;
+const Products = ({ data }) => {
+	const [products, setProducts] = useState([]);
+	const [loading, setLoading] = useState(true);
+
+	useEffect(() => {
+		setLoading(true);
+
+		data ? setProducts(data) : setProducts([]);
+
+		setLoading(false);
+
+		return () => {
+			setProducts([]);
+			setLoading(false);
+		};
+	}, [data]);
 
 	return (
 		<div className="d-flex flex-column">
-			{linksCatalog && (
-				<div className={styles.links}>
-					{linksCatalog.map((linkCatalog) => (
-						<Link key={linkCatalog.path} href={linkCatalog.path}>
-							<a
-								className={`${styles.link} ${
-									router.pathname === linkCatalog.path &&
-									styles.activeLink
-								}`}
-							>
-								{linkCatalog.name}
-							</a>
-						</Link>
-					))}
-				</div>
-			)}
+			{loading && <div className={styles.listIsEmpty}>Loading...</div>}
 
-			{products?.length ? (
+			{products?.length && !loading ? (
 				<div className={styles.productsListWrapper}>
 					{products.map(
 						(product) =>
 							product.id &&
-							product.dataImages[0] &&
+							product.images[0] &&
 							product.name &&
 							product.price &&
 							product.uri && (
@@ -53,7 +51,7 @@ const Products = ({ linksCatalog, dataList, category }) => {
 												className={styles.imageWrapper}
 												loader={ImageLoader}
 												alt=""
-												src={product.dataImages[0].src}
+												src={product.images[0]}
 												layout="fill"
 											/>
 										</div>

@@ -1,9 +1,20 @@
+import { useEffect, useState } from 'react';
+import CatalogLinks from '../components/CatalogLinks';
 import Layout from '../components/Layout';
 import Products from '../components/Products';
-import parts from '../data/parts';
 
 const Parts = () => {
-	const linksCatalog = [
+	const [data, setData] = useState([]);
+
+	useEffect(() => {
+		fetch('api/parts')
+			.then((res) => res.json())
+			.then((data) => setData(data));
+
+		return () => setData([]);
+	}, []);
+
+	const links = [
 		{ path: '/accessories', name: 'Accessories' },
 		{ path: '/parts', name: 'Parts' }
 	];
@@ -11,7 +22,9 @@ const Parts = () => {
 	return (
 		<Layout title="Products, Parts – Electra" description="">
 			<div className="container my-4 mt-md-5">
-				<Products dataList={parts} linksCatalog={linksCatalog} />
+				<CatalogLinks links={links} />
+
+				<Products data={data} />
 			</div>
 		</Layout>
 	);

@@ -55,4 +55,5 @@ const handler = async (req, res) => {
 		res.status(500).json({ statusCode: 500, message: errorMessage });
 	}
 };
+
 export default handler;

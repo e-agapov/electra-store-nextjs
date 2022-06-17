@@ -9,6 +9,11 @@ module.exports = {
 		}
 	],
 	images: {
-		domains: ['www.electrasharing.shop', 'electrasharing.shop', 'localhost']
+		domains: [
+			'www.electrasharing.shop',
+			'electrasharing.shop',
+			'localhost',
+			'127.0.0.1'
+		]
 	}
 };

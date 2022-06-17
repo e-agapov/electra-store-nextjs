@@ -4,16 +4,36 @@ import SectionBlockImage from '../assets/images/showrooms/section-block-image.jp
 import CollapseGroup from '../components/CollapseGroup';
 import Layout from '../components/Layout';
 import SectionBlock from '../components/SectionBlock';
-import locationsData from '../data/locations';
 import styles from '../scss/pages/Showrooms.module.scss';
 import ComingSoon from '../components/ComingSoon';
+import { useEffect, useState } from 'react';
 
 export default function Showrooms() {
+	const [locations, setLocations] = useState(false);
+	const [loading, setLoading] = useState(true);
+
+	useEffect(() => {
+		setLoading(true);
+
+		fetch('api/locations')
+			.then((res) => res.json())
+			.then((data) => {
+				setLocations(data);
+				setLoading(false);
+			});
+
+		return () => {
+			setLocations([]);
+			setLoading(false);
+		};
+	}, []);
+
 	return (
 		<Layout title="Showrooms – Electra" description="Internet store">
 			<ComingSoon />
 		</Layout>
 	);
+
 	const texts = {
 		main: `We have showrooms all over Europe, you can always come to our store and choose your transport and accessories to your liking. A large selection will help you find everything you need for comfortable movement through the streets of your city.`
 	};
@@ -35,11 +55,19 @@ export default function Showrooms() {
 					linkName={'Accessories'}
 				/>
 
-				<CollapseGroup
-					title={'Locations'}
-					classes={styles.locations}
-					data={locationsData}
-				/>
+				{loading ? (
+					<div className="text-center">
+						<div className="spinner-border" role="status">
+							<span className="sr-only">Loading...</span>
+						</div>
+					</div>
+				) : (
+					<CollapseGroup
+						title={'Locations'}
+						classes={styles.locations}
+						data={locations}
+					/>
+				)}
 			</div>
 		</Layout>
 	);

@@ -12,7 +12,7 @@ import styles from '../scss/pages/Home.module.scss';
 
 export default function Home() {
 	const texts = {
-		left: `Electric transport is a great opportunity to quickly get to almost any point at a distance of 20–50 km, depending on the type and model. It develops at high speed and is very mobile, which makes it an ideal city transport.
+		left: `Electric transport is a great opportunity to quickly get to almost any point at a distance of 20–80 km, depending on the type and model. It develops at high speed and is very mobile, which makes it an ideal city transport.
 		In the city, an electric bike or scooter is quite capable of competing with a car in terms of speed, but it is much more environmentally friendly.
 		Compared to gasoline counterparts, vehicles powered by electricity are much cheaper to maintain: electricity, unlike gasoline, is inexpensive.`,
 

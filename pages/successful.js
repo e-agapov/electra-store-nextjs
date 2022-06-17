@@ -21,7 +21,9 @@ const Successful = () => {
 			router.push('/');
 		}
 
-		localStorage.clear();
+		return () => {
+			localStorage.clear();
+		};
 	}, [router]);
 
 	return (

@@ -112,46 +112,6 @@
 	}
 }
 
-.links {
-	display: flex;
-	align-items: center;
-	justify-content: space-around;
-
-	@media (max-width: 991.98px) {
-		justify-content: space-between;
-	}
-
-	.link {
-		@media (max-width: 991.98px) {
-			font-size: rem(18);
-			margin-bottom: rem(24);
-		}
-
-		transition: 0.15s;
-		color: $dark-gray;
-		font-size: rem(34);
-		text-decoration: none;
-		font-family: 'CenturyGothic', sans-serif;
-		display: inline-block;
-
-		&:hover,
-		&:focus {
-			transform: scale(1.15);
-			color: $purple;
-		}
-
-		&:active {
-			transform: none;
-			color: $purple;
-		}
-	}
-
-	.activeLink {
-		color: $purple;
-		font-size: rem(36);
-	}
-}
-
 .listIsEmpty {
 	user-select: none;
 	pointer-events: none;

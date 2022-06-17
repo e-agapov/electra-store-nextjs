@@ -1,9 +1,20 @@
+import { useEffect, useState } from 'react';
+import CatalogLinks from '../components/CatalogLinks';
 import Layout from '../components/Layout';
 import Products from '../components/Products';
-import scooters from '../data/scooters';
 
 const Scooters = () => {
-	const linksCatalog = [
+	const [data, setData] = useState([]);
+
+	useEffect(() => {
+		fetch('api/scooters')
+			.then((res) => res.json())
+			.then((data) => setData(data));
+
+		return () => setData([]);
+	}, []);
+
+	const links = [
 		{ path: '/bikes', name: 'Bikes' },
 		{ path: '/scooters', name: 'Scooters' },
 		{ path: '/motorbikes', name: 'Motorbikes' }
@@ -12,7 +23,9 @@ const Scooters = () => {
 	return (
 		<Layout title="Products, Scooters – Electra" description="">
 			<div className="container my-4 mt-md-5">
-				<Products dataList={scooters} linksCatalog={linksCatalog} />
+				<CatalogLinks links={links} />
+
+				<Products data={data} />
 			</div>
 		</Layout>
 	);

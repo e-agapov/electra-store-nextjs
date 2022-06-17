@@ -2,7 +2,6 @@ import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import Checkout from '../components/Checkout';
 import Layout from '../components/Layout';
-import productsData from '../data/products';
 import styles from '../scss/pages/Cart.module.scss';
 import ImageLoader from '../utils/imageLoader';
 
@@ -21,6 +20,7 @@ const isCurrent = (item, uri, color = false) => {
 
 const Cart = () => {
 	const [products, setProducts] = useState([]);
+	const [data, setData] = useState([]);
 	const [goods, setGoods] = useState(0);
 	const [isLoading, setLoading] = useState(true);
 	const [totalCartPrice, setTotalCartPrice] = useState(0);
@@ -28,39 +28,42 @@ const Cart = () => {
 
 	useEffect(() => {
 		setLoading(true);
-		if (isLoading) {
-			const storage = localStorage.getItem('cart')
-				? JSON.parse(localStorage.getItem('cart'))
-				: [];
 
-			storage?.filter((item) => {
-				const data = productsData.find(
-					(product) => product.uri === item.uri
+		const storage = localStorage.getItem('cart')
+			? JSON.parse(localStorage.getItem('cart'))
+			: [];
+
+		// const data = fetch('api/parts')
+		// 	.then((res) => res.json())
+		// 	.then((data) => setData(data));
+
+		console.log(data, storage);
+
+		storage?.filter((item) => {
+			const data = data?.find((product) => product.uri === item.uri);
+
+			const product = { ...data } || {};
+
+			setGoods((prevState) => (prevState += item.count));
+
+			product.image = data?.images[0] || null;
+
+			if (item.color) {
+				const productColor = product?.dataColors?.find(
+					(color) => color.name === item.color
 				);
 
-				const product = { ...data } || {};
+				product.color = productColor;
+				product.name = `${product.name} ${productColor?.name}`;
+			}
 
-				setGoods((prevState) => (prevState += item.count));
+			product.count = item?.count;
+			product.totalPrice = item.totalPrice
+				? item.totalPrice
+				: product.price;
 
-				product.image = data?.dataImages[0]?.src || null;
-
-				if (item.color) {
-					const productColor = product?.dataColors?.find(
-						(color) => color.name === item.color
-					);
-
-					product.color = productColor;
-					product.name = `${product.name} ${productColor?.name}`;
-				}
-
-				product.count = item?.count;
-				product.totalPrice = item.totalPrice
-					? item.totalPrice
-					: product.price;
-
-				setProducts((prevState) => [...prevState, product]);
-			});
-		}
+			setProducts((prevState) => [...prevState, product]);
+		});
 
 		const totalPrice = products.reduce((acc, item) => {
 			return acc + item.totalPrice;
@@ -69,168 +72,160 @@ const Cart = () => {
 		setTotalCartPrice(totalPrice);
 
 		setLoading(false);
-	}, [isLoading, products]);
+	}, [data, isLoading, products]);
 
-	const totalPriceCart = () => {
-		let total = 0;
+	return null;
 
-		products.map((item) => {
-			total += item.totalPrice;
-		});
+	// function removeProduct(uri, color = false) {
+	// 	const storage = localStorage.getItem('cart')
+	// 		? JSON.parse(localStorage.getItem('cart'))
+	// 		: [];
 
-		setTotalCartPrice(total);
-	};
+	// 	setProducts((prevState) =>
+	// 		prevState.filter((item) => isCurrent(item, uri, color.id))
+	// 	);
 
-	function removeProduct(uri, color = false) {
-		const storage = localStorage.getItem('cart')
-			? JSON.parse(localStorage.getItem('cart'))
-			: [];
+	// 	const newStorage = storage.filter((item) =>
+	// 		isCurrent(item, uri, color.name)
+	// 	);
 
-		setProducts((prevState) =>
-			prevState.filter((item) => isCurrent(item, uri, color.id))
-		);
+	// 	localStorage.setItem('cart', JSON.stringify(newStorage));
 
-		const newStorage = storage.filter((item) =>
-			isCurrent(item, uri, color.name)
-		);
+	// 	setGoods(false);
+	// }
 
-		localStorage.setItem('cart', JSON.stringify(newStorage));
+	// const addCount = (uri, color = false) => {
+	// 	const storage = localStorage.getItem('cart')
+	// 		? JSON.parse(localStorage.getItem('cart'))
+	// 		: [];
 
-		setGoods(false);
-	}
+	// 	const newStorage = JSON.stringify(
+	// 		storage.map((item) => {
+	// 			item.price = products.find(
+	// 				(product) => product.uri === item.uri
+	// 			)?.price;
 
-	const addCount = (uri, color = false) => {
-		const storage = localStorage.getItem('cart')
-			? JSON.parse(localStorage.getItem('cart'))
-			: [];
+	// 			const newPrice = item.price * (item.count + 1);
 
-		const newStorage = JSON.stringify(
-			storage.map((item) => {
-				item.price = products.find(
-					(product) => product.uri === item.uri
-				)?.price;
+	// 			if (item.uri === uri) {
+	// 				if (color) {
+	// 					if (color.name === item?.color) {
+	// 						return {
+	// 							...item,
+	// 							count: item.count + 1,
+	// 							totalPrice: newPrice
+	// 						};
+	// 					}
+	// 				} else {
+	// 					return {
+	// 						...item,
+	// 						count: item.count + 1,
+	// 						totalPrice: newPrice
+	// 					};
+	// 				}
+	// 			}
 
-				const newPrice = item.price * (item.count + 1);
+	// 			return item;
+	// 		})
+	// 	);
 
-				if (item.uri === uri) {
-					if (color) {
-						if (color.name === item?.color) {
-							return {
-								...item,
-								count: item.count + 1,
-								totalPrice: newPrice
-							};
-						}
-					} else {
-						return {
-							...item,
-							count: item.count + 1,
-							totalPrice: newPrice
-						};
-					}
-				}
+	// 	setProducts((prevState) =>
+	// 		prevState.map((item) => {
+	// 			const newPrice = item.price * (item.count + 1);
+	// 			if (item.uri === uri) {
+	// 				if (color) {
+	// 					if (color.id === item?.color?.id) {
+	// 						return {
+	// 							...item,
+	// 							count: item.count + 1,
+	// 							totalPrice: newPrice
+	// 						};
+	// 					}
+	// 				} else {
+	// 					return {
+	// 						...item,
+	// 						count: item.count + 1,
+	// 						totalPrice: newPrice
+	// 					};
+	// 				}
+	// 			}
 
-				return item;
-			})
-		);
+	// 			return item;
+	// 		})
+	// 	);
 
-		setProducts((prevState) =>
-			prevState.map((item) => {
-				const newPrice = item.price * (item.count + 1);
-				if (item.uri === uri) {
-					if (color) {
-						if (color.id === item?.color?.id) {
-							return {
-								...item,
-								count: item.count + 1,
-								totalPrice: newPrice
-							};
-						}
-					} else {
-						return {
-							...item,
-							count: item.count + 1,
-							totalPrice: newPrice
-						};
-					}
-				}
+	// 	localStorage.setItem('cart', newStorage);
 
-				return item;
-			})
-		);
+	// 	setGoods((prevState) => (prevState += 1));
+	// };
 
-		localStorage.setItem('cart', newStorage);
+	// const removeCount = (uri, color = false) => {
+	// 	const storage = localStorage.getItem('cart')
+	// 		? JSON.parse(localStorage.getItem('cart'))
+	// 		: [];
 
-		setGoods((prevState) => (prevState += 1));
-	};
+	// 	const newStorage = JSON.stringify(
+	// 		storage.map((item) => {
+	// 			item.price = products.find(
+	// 				(product) => product.uri === item.uri
+	// 			)?.price;
 
-	const removeCount = (uri, color = false) => {
-		const storage = localStorage.getItem('cart')
-			? JSON.parse(localStorage.getItem('cart'))
-			: [];
+	// 			const newPrice =
+	// 				item.price * (item.count != 1 ? item.count - 1 : 1);
+	// 			if (item.uri === uri && item.count > 1) {
+	// 				if (color) {
+	// 					if (color.name === item?.color) {
+	// 						return {
+	// 							...item,
+	// 							count: item.count - 1,
+	// 							totalPrice: newPrice
+	// 						};
+	// 					}
+	// 				} else {
+	// 					return {
+	// 						...item,
+	// 						count: item.count - 1,
+	// 						totalPrice: newPrice
+	// 					};
+	// 				}
+	// 			}
 
-		const newStorage = JSON.stringify(
-			storage.map((item) => {
-				item.price = products.find(
-					(product) => product.uri === item.uri
-				)?.price;
+	// 			return item;
+	// 		})
+	// 	);
 
-				const newPrice =
-					item.price * (item.count != 1 ? item.count - 1 : 1);
-				if (item.uri === uri && item.count > 1) {
-					if (color) {
-						if (color.name === item?.color) {
-							return {
-								...item,
-								count: item.count - 1,
-								totalPrice: newPrice
-							};
-						}
-					} else {
-						return {
-							...item,
-							count: item.count - 1,
-							totalPrice: newPrice
-						};
-					}
-				}
+	// 	setProducts((prevState) =>
+	// 		prevState.map((item) => {
+	// 			const newPrice =
+	// 				item.price * (item.count != 1 ? item.count - 1 : 1);
+	// 			if (item.uri === uri && item.count > 1) {
+	// 				if (color) {
+	// 					if (color.id === item?.color?.id) {
+	// 						return {
+	// 							...item,
+	// 							count: item.count - 1,
+	// 							totalPrice: newPrice
+	// 						};
+	// 					}
+	// 				} else {
+	// 					return {
+	// 						...item,
+	// 						count: item.count - 1,
+	// 						totalPrice: newPrice
+	// 					};
+	// 				}
+	// 			}
 
-				return item;
-			})
-		);
+	// 			return item;
+	// 		})
+	// 	);
 
-		setProducts((prevState) =>
-			prevState.map((item) => {
-				const newPrice =
-					item.price * (item.count != 1 ? item.count - 1 : 1);
-				if (item.uri === uri && item.count > 1) {
-					if (color) {
-						if (color.id === item?.color?.id) {
-							return {
-								...item,
-								count: item.count - 1,
-								totalPrice: newPrice
-							};
-						}
-					} else {
-						return {
-							...item,
-							count: item.count - 1,
-							totalPrice: newPrice
-						};
-					}
-				}
+	// 	localStorage.setItem('cart', newStorage);
 
-				return item;
-			})
-		);
-
-		localStorage.setItem('cart', newStorage);
-
-		setGoods((prevState) =>
-			goods > products.length ? (prevState -= 1) : prevState
-		);
-	};
+	// 	setGoods((prevState) =>
+	// 		goods > products.length ? (prevState -= 1) : prevState
+	// 	);
+	// };
 
 	if (isLoading) {
 		return (
@@ -245,7 +240,7 @@ const Cart = () => {
 	return (
 		<Layout title="Cart – Electra" description="">
 			{isCheckout ? (
-				<div className="col-lg-6 mx-auto">
+				<div className="mx-auto col-lg-6">
 					<Checkout totalPrice={totalCartPrice} />
 				</div>
 			) : (

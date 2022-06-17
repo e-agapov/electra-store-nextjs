@@ -1,38 +1,63 @@
+import axios from 'axios';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import Layout from '../../components/Layout';
-import products from '../../data/products';
 import styles from '../../scss/pages/Product.module.scss';
 import ImageLoader from '../../utils/imageLoader';
 
 const Product = () => {
 	const router = useRouter();
 
-	const product = products.find(
-		(product) => product.uri === router.query['slug']
-	);
-
-	const [image, setImage] = useState(product?.dataImages[0]?.src);
+	const [product, setProduct] = useState(null);
+	const [image, setImage] = useState(null);
 	const [getColor, setColor] = useState(1);
 	const [inCart, setInCart] = useState(false);
+	const [loading, setLoading] = useState(true);
+
+	useEffect(() => {
+		setLoading(true);
+		setImage(image);
+		setInCart(false);
+		setColor(getColor || product?.colors[0].hex || null);
+
+		const slug = router.query.slug;
+
+		if (
+			loading &&
+			product === null &&
+			slug !== undefined &&
+			slug !== null &&
+			slug !== ''
+		) {
+			axios
+				.get(`/api/products/${slug}`)
+				.then((res) => {
+					setProduct(res.data);
+					setLoading(false);
+				})
+				.catch((err) => {
+					console.error(err);
+					setLoading(false);
+					setProduct(null);
+				});
+		}
+
+		if (loading && product === null) {
+			setLoading(false);
+		}
+
+		if (product !== null) {
+			setImage(product?.images[product?.poster_id || 0]);
+		}
+	}, [getColor, image, loading, product, router.query.slug]);
+
+	if (process.env.API_HOST === 'http://127.0.0.1:8000') console.log(product);
 
 	const options =
 		product?.Free20DaysInsurance === true ||
 		product?.freeInStoreRides === true ||
 		product?.Free20DaysInsurance === true;
-
-	useEffect(() => {
-		setImage(image);
-		setInCart(false);
-		setColor(getColor || product?.dataColors[0]?.id || null);
-
-		return () => {
-			setImage(image);
-			setInCart(false);
-			setColor(getColor);
-		};
-	}, [image, getColor, product?.dataColors]);
 
 	function addToCart() {
 		const productColor =
@@ -42,7 +67,7 @@ const Product = () => {
 
 		setInCart(true);
 
-		if (product.dataColors) {
+		if (product.colors) {
 			const hasProducts = cartStorage.filter(
 				(item) =>
 					item.id === product.id && item.color === productColor?.name
@@ -90,39 +115,48 @@ const Product = () => {
 	}
 
 	return (
-		<Layout title={`${product?.name} – Electra`} description={''}>
+		<Layout
+			title={`${product?.name} – Electra`}
+			description={product?.description}
+		>
 			<div className="container my-3 mt-lg-5">
 				<div className="d-flex flex-column flex-lg-row">
-					{product?.dataImages && (
+					{product?.images && (
 						<div className={`${styles.ProductImages} col-lg-8`}>
 							<div
 								className={`${styles.imagesList} order-2 order-sm-1 mt-3 pt-3 mt-sm-0 pt-sm-0`}
 							>
-								{product?.dataImages?.map((image) => (
+								{product?.images?.map((image, index) => (
 									<button
-										onClick={() => setImage(image?.src)}
-										key={image.id}
+										onClick={() => setImage(image)}
+										key={index}
 										className={styles.imageAProduct}
 									>
 										<Image
 											loader={ImageLoader}
 											className={styles.image}
-											src={image?.src}
+											style={{ position: 'relative' }}
+											src={image}
 											alt=""
 											layout="fill"
 										/>
 									</button>
 								))}
 							</div>
-							{(image || product?.dataImages[0]) && (
+							{(image ||
+								product?.images[product?.poster_id || 0]) && (
 								<div
 									className={`${styles.imageAProduct} order-1 order-sm-2`}
 								>
 									<Image
 										loader={ImageLoader}
 										className={styles.image}
+										style={{ position: 'relative' }}
 										src={
-											image || product?.dataImages[0].src
+											image ||
+											product?.images[
+												product?.poster_id || 0
+											]
 										}
 										alt=""
 										layout="fill"
@@ -138,24 +172,24 @@ const Product = () => {
 						<div className={styles.descriptionOfProduct}>
 							{product?.description}
 						</div>
-						<div className={styles.price}> 1000 $ </div>
-						{product?.dataColors && (
+						<div className={styles.price}>{product?.price} $</div>
+						{product?.colors && (
 							<>
 								<div className={styles.colorsHeaderText}>
 									COLORS
 								</div>
 								<div className={styles.colorsList}>
-									{product?.dataColors.map((color) => (
+									{product?.colors.map((color, index) => (
 										<button
 											onClick={() => setColor(color.id)}
 											className={`${styles.colorBtn} ${
 												getColor === color?.id &&
 												styles.currentColor
 											}`}
-											key={color.id}
+											key={index}
 											value={color.name}
 											style={{
-												background: color.code
+												background: color.hex
 											}}
 										/>
 									))}
@@ -164,25 +198,29 @@ const Product = () => {
 						)}
 
 						<div className={styles.btns}>
-							{!inCart ? (
-								<button
-									onClick={addToCart}
-									className={styles.addToCartBtn}
-								>
-									add to cart
-								</button>
-							) : (
-								<>
-									<div className="mt-5 px-3">
-										Added to cart
-									</div>
+							{product?.product_status ? (
+								!inCart ? (
 									<button
-										onClick={() => router.push('/cart')}
-										className={styles.buyNowBtn}
+										onClick={addToCart}
+										className={styles.addToCartBtn}
 									>
-										view in cart
+										add to cart
 									</button>
-								</>
+								) : (
+									<>
+										<div className="px-3 mt-5">
+											Added to cart
+										</div>
+										<button
+											onClick={() => router.push('/cart')}
+											className={styles.buyNowBtn}
+										>
+											view in cart
+										</button>
+									</>
+								)
+							) : (
+								<div className="px-3 mt-5">Not available</div>
 							)}
 						</div>
 					</div>
@@ -191,29 +229,25 @@ const Product = () => {
 					className={`d-flex flex-column flex-lg-row ${styles.moreInfoBlock}`}
 				>
 					<div className={'col-lg-8 pe-lg-5 mb-5 mb-lg-0'}>
-						{product?.dataKeyFeatures && (
+						{product?.key_features && (
 							<>
 								<div className={styles.sectionHeader}>
 									Key features
 								</div>
 								<div className={styles.keyFeaturesList}>
-									{product?.dataKeyFeatures.map(
-										(keyFeature) => (
-											<div
-												className={
-													styles.keyFeaturesItem
-												}
-												key={keyFeature.id}
-											>
-												{keyFeature.text}
-											</div>
-										)
-									)}
+									{product?.key_features.map((key, index) => (
+										<div
+											className={styles.keyFeaturesItem}
+											key={index}
+										>
+											{key.key_feature}
+										</div>
+									))}
 								</div>
 							</>
 						)}
-						{product?.dataSpecifications && (
-							<div className="mt-5 pt-5">
+						{product?.specifications && (
+							<div className="pt-5 mt-5">
 								<div className={styles.sectionHeader}>
 									Specification
 								</div>
@@ -222,17 +256,17 @@ const Product = () => {
 										'd-flex flex-lg-row flex-wrap mt-5'
 									}
 								>
-									{product?.dataSpecifications.map(
-										(specification) => (
+									{product?.specifications.map(
+										(specification, index) => (
 											<div
 												className={`${styles.specificationItem} col-6 col-lg-3 me-auto`}
-												key={specification.id}
+												key={index}
 											>
 												<div className={styles.name}>
-													{specification.name}
+													{specification?.title}
 												</div>
 												<div className={styles.text}>
-													{specification.text}
+													{specification.detail}
 												</div>
 											</div>
 										)
@@ -265,9 +299,9 @@ const Product = () => {
 								/>
 							</svg>
 						</div>
-						{product?.idealFor && (
+						{product?.ideal_for_text && (
 							<div className={styles.idealForText}>
-								{product?.idealFor}
+								{product?.ideal_for_text}
 							</div>
 						)}
 						{options ? (
