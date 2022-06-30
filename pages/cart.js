@@ -1,3 +1,4 @@
+import axios from 'axios';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import Checkout from '../components/Checkout';
@@ -5,22 +6,9 @@ import Layout from '../components/Layout';
 import styles from '../scss/pages/Cart.module.scss';
 import ImageLoader from '../utils/imageLoader';
 
-const isCurrent = (item, uri, color = false) => {
-	if (item.uri === uri) {
-		const currentColor = item?.color?.id ? item.color.id : item.color;
-		if (color) {
-			return currentColor !== color ? item : null;
-		}
-
-		return null;
-	} else {
-		return item;
-	}
-};
-
 const Cart = () => {
 	const [products, setProducts] = useState([]);
-	const [data, setData] = useState([]);
+	const [dataIsLoaded, setDataIsLoaded] = useState(false);
 	const [goods, setGoods] = useState(0);
 	const [isLoading, setLoading] = useState(true);
 	const [totalCartPrice, setTotalCartPrice] = useState(0);
@@ -29,203 +17,72 @@ const Cart = () => {
 	useEffect(() => {
 		setLoading(true);
 
-		const storage = localStorage.getItem('cart')
-			? JSON.parse(localStorage.getItem('cart'))
-			: [];
+		const getStorage = getStorageItems();
+		let data = [];
 
-		// const data = fetch('api/parts')
-		// 	.then((res) => res.json())
-		// 	.then((data) => setData(data));
+		if (
+			!products.length &&
+			getStorage.length &&
+			!dataIsLoaded &&
+			!data.length
+		) {
+			getStorage.map(async (item) => {
+				data = await axios
+					.get(`/api/products/${item?.uri}&color=${item?.color}`)
+					.then((res) => [
+						{
+							...res.data,
+							count: item?.count,
+							colorHex: res.data.colors
+								? res.data.colors.filter((color) =>
+										color.name === res.data.color
+											? color.hex
+											: null
+								  )[0].hex
+								: ''
+						},
+						...data
+					]);
 
-		console.log(data, storage);
+				setProducts(data);
+			});
 
-		storage?.filter((item) => {
-			const data = data?.find((product) => product.uri === item.uri);
+			setDataIsLoaded(true);
+		}
 
-			const product = { ...data } || {};
-
-			setGoods((prevState) => (prevState += item.count));
-
-			product.image = data?.images[0] || null;
-
-			if (item.color) {
-				const productColor = product?.dataColors?.find(
-					(color) => color.name === item.color
-				);
-
-				product.color = productColor;
-				product.name = `${product.name} ${productColor?.name}`;
-			}
-
-			product.count = item?.count;
-			product.totalPrice = item.totalPrice
-				? item.totalPrice
-				: product.price;
-
-			setProducts((prevState) => [...prevState, product]);
-		});
-
-		const totalPrice = products.reduce((acc, item) => {
-			return acc + item.totalPrice;
-		}, 0);
-
-		setTotalCartPrice(totalPrice);
+		setTotalCartPrice(totalAcc(products, 'price'));
+		setGoods(totalAcc(products, 'count'));
 
 		setLoading(false);
-	}, [data, isLoading, products]);
+	}, [dataIsLoaded, products]);
 
-	return null;
+	const updateCount = (uri, color, method, count) => {
+		let newList = [...products];
 
-	// function removeProduct(uri, color = false) {
-	// 	const storage = localStorage.getItem('cart')
-	// 		? JSON.parse(localStorage.getItem('cart'))
-	// 		: [];
+		if (method === 'destroy') {
+			count = 0;
+			newList = products.filter(
+				(item) =>
+					item.uri !== uri ||
+					(item.uri === uri && item.color !== color)
+			);
+		} else {
+			newList = products.map((item) => {
+				item.uri === uri &&
+					color &&
+					item.color === color &&
+					(count =
+						method === 'add'
+							? (item.count += 1)
+							: (item.count -= 1));
 
-	// 	setProducts((prevState) =>
-	// 		prevState.filter((item) => isCurrent(item, uri, color.id))
-	// 	);
+				return item;
+			});
+		}
 
-	// 	const newStorage = storage.filter((item) =>
-	// 		isCurrent(item, uri, color.name)
-	// 	);
-
-	// 	localStorage.setItem('cart', JSON.stringify(newStorage));
-
-	// 	setGoods(false);
-	// }
-
-	// const addCount = (uri, color = false) => {
-	// 	const storage = localStorage.getItem('cart')
-	// 		? JSON.parse(localStorage.getItem('cart'))
-	// 		: [];
-
-	// 	const newStorage = JSON.stringify(
-	// 		storage.map((item) => {
-	// 			item.price = products.find(
-	// 				(product) => product.uri === item.uri
-	// 			)?.price;
-
-	// 			const newPrice = item.price * (item.count + 1);
-
-	// 			if (item.uri === uri) {
-	// 				if (color) {
-	// 					if (color.name === item?.color) {
-	// 						return {
-	// 							...item,
-	// 							count: item.count + 1,
-	// 							totalPrice: newPrice
-	// 						};
-	// 					}
-	// 				} else {
-	// 					return {
-	// 						...item,
-	// 						count: item.count + 1,
-	// 						totalPrice: newPrice
-	// 					};
-	// 				}
-	// 			}
-
-	// 			return item;
-	// 		})
-	// 	);
-
-	// 	setProducts((prevState) =>
-	// 		prevState.map((item) => {
-	// 			const newPrice = item.price * (item.count + 1);
-	// 			if (item.uri === uri) {
-	// 				if (color) {
-	// 					if (color.id === item?.color?.id) {
-	// 						return {
-	// 							...item,
-	// 							count: item.count + 1,
-	// 							totalPrice: newPrice
-	// 						};
-	// 					}
-	// 				} else {
-	// 					return {
-	// 						...item,
-	// 						count: item.count + 1,
-	// 						totalPrice: newPrice
-	// 					};
-	// 				}
-	// 			}
-
-	// 			return item;
-	// 		})
-	// 	);
-
-	// 	localStorage.setItem('cart', newStorage);
-
-	// 	setGoods((prevState) => (prevState += 1));
-	// };
-
-	// const removeCount = (uri, color = false) => {
-	// 	const storage = localStorage.getItem('cart')
-	// 		? JSON.parse(localStorage.getItem('cart'))
-	// 		: [];
-
-	// 	const newStorage = JSON.stringify(
-	// 		storage.map((item) => {
-	// 			item.price = products.find(
-	// 				(product) => product.uri === item.uri
-	// 			)?.price;
-
-	// 			const newPrice =
-	// 				item.price * (item.count != 1 ? item.count - 1 : 1);
-	// 			if (item.uri === uri && item.count > 1) {
-	// 				if (color) {
-	// 					if (color.name === item?.color) {
-	// 						return {
-	// 							...item,
-	// 							count: item.count - 1,
-	// 							totalPrice: newPrice
-	// 						};
-	// 					}
-	// 				} else {
-	// 					return {
-	// 						...item,
-	// 						count: item.count - 1,
-	// 						totalPrice: newPrice
-	// 					};
-	// 				}
-	// 			}
-
-	// 			return item;
-	// 		})
-	// 	);
-
-	// 	setProducts((prevState) =>
-	// 		prevState.map((item) => {
-	// 			const newPrice =
-	// 				item.price * (item.count != 1 ? item.count - 1 : 1);
-	// 			if (item.uri === uri && item.count > 1) {
-	// 				if (color) {
-	// 					if (color.id === item?.color?.id) {
-	// 						return {
-	// 							...item,
-	// 							count: item.count - 1,
-	// 							totalPrice: newPrice
-	// 						};
-	// 					}
-	// 				} else {
-	// 					return {
-	// 						...item,
-	// 						count: item.count - 1,
-	// 						totalPrice: newPrice
-	// 					};
-	// 				}
-	// 			}
-
-	// 			return item;
-	// 		})
-	// 	);
-
-	// 	localStorage.setItem('cart', newStorage);
-
-	// 	setGoods((prevState) =>
-	// 		goods > products.length ? (prevState -= 1) : prevState
-	// 	);
-	// };
+		setProducts(newList);
+		updateStorageItems(uri, 'count', count, color);
+	};
 
 	if (isLoading) {
 		return (
@@ -251,45 +108,44 @@ const Cart = () => {
 						<div className={styles.cartList}>
 							{products?.map((product, index) => (
 								<div key={index} className={styles.cartItem}>
-									<div
-										className={`${styles.mobileInfo} d-block d-md-none`}
-									>
-										<div className={styles.mobileImage}>
+									{product?.image && (
+										<div
+											className={`${styles.mobileInfo} d-block d-md-none`}
+										>
+											<div className={styles.mobileImage}>
+												<Image
+													loader={ImageLoader}
+													src={product?.image}
+													alt={`product ${product?.name}`}
+													layout="fill"
+													className={styles.image}
+												/>
+											</div>
+											<div className={styles.mobileName}>
+												{product?.name}
+											</div>
+											<div className={styles.mobilePrice}>
+												{product?.price} $
+											</div>
+										</div>
+									)}
+									{product?.image && (
+										<div
+											className={`${styles.cartItemImg} d-none d-md-block`}
+										>
 											<Image
 												loader={ImageLoader}
-												src={
-													product?.image ||
-													'_loading.gif'
-												}
-												alt={`product ${product.name}`}
-												layout="fill"
-												className={styles.image}
+												src={product?.image}
+												alt={`product ${product?.name}`}
+												width="210"
+												height="210"
 											/>
 										</div>
-										<div className={styles.mobileName}>
-											{product?.name}
-										</div>
-										<div className={styles.mobilePrice}>
-											{product?.totalPrice} $
-										</div>
-									</div>
-									<div
-										className={`${styles.cartItemImg} d-none d-md-block`}
-									>
-										<Image
-											loader={ImageLoader}
-											src={
-												product?.image || '_loading.gif'
-											}
-											alt={`product ${product.name}`}
-											width="210"
-											height="210"
-										/>
-									</div>
+									)}
 
 									<div
 										className={
-											'align-self-center align-self-md-start'
+											'align-self-center align-self-md-start ms-3'
 										}
 									>
 										<div
@@ -313,7 +169,7 @@ const Cart = () => {
 													className={styles.color}
 													style={{
 														background:
-															product?.color?.code
+															product?.colorHex
 													}}
 												></div>
 											</div>
@@ -321,25 +177,29 @@ const Cart = () => {
 									</div>
 
 									<div
-										className={`${styles.quantity} mx-md-auto`}
+										className={`${styles.quantity} mx-auto `}
 									>
-										<button
-											onClick={() =>
-												removeCount(
-													product.uri,
-													product?.color
-												)
-											}
-											className={styles.actionBtn}
-										>
-											-
-										</button>
+										{product?.count > 1 && (
+											<button
+												onClick={() =>
+													updateCount(
+														product.uri,
+														product?.color,
+														'remove'
+													)
+												}
+												className={styles.actionBtn}
+											>
+												-
+											</button>
+										)}
 										<div>{product?.count}</div>
 										<button
 											onClick={() =>
-												addCount(
+												updateCount(
 													product.uri,
-													product?.color
+													product?.color,
+													'add'
 												)
 											}
 											className={styles.actionBtn}
@@ -350,15 +210,16 @@ const Cart = () => {
 									<div
 										className={`${styles.price} d-none d-md-block align-self-center`}
 									>
-										{product.totalPrice} $
+										{product?.price} $
 									</div>
 
 									<div className={styles.remove}>
 										<button
 											onClick={() =>
-												removeProduct(
+												updateCount(
 													product.uri,
-													product?.color || false
+													product?.color,
+													'destroy'
 												)
 											}
 											className={styles.actionBtn}
@@ -427,5 +288,32 @@ const Cart = () => {
 		</Layout>
 	);
 };
+
+const getStorageItems = () => JSON.parse(localStorage.getItem('cart')) || [];
+const updateStorageItems = (uri, key, value, color = false) => {
+	const items = getStorageItems();
+
+	let newList = items.map((item) => {
+		if (item.uri === uri && (color ? item.color === color : true)) {
+			item[key] = value;
+		}
+
+		return item;
+	});
+
+	newList = newList.filter((item) => item.count > 0);
+
+	localStorage.setItem('cart', JSON.stringify(newList));
+};
+
+const totalAcc = (products, whatIsAcc) =>
+	products.reduce(
+		(acc, item) =>
+			acc +
+			(whatIsAcc !== 'count'
+				? item[whatIsAcc] * item.count
+				: +item.count),
+		0
+	);
 
 export default Cart;

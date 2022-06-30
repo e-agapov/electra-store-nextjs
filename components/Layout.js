@@ -4,7 +4,7 @@ import HeadTag from './HeadTag';
 import MobileMenu from './MobileMenu';
 import Navbar from './Navbar';
 
-function Layout({ home, children, description, themeColor, title }) {
+function Layout({ children, description, themeColor, title }) {
 	const [menuVisibility, setMenuVisibility] = useState(false);
 
 	function toggleMenu() {

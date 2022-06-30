@@ -11,7 +11,7 @@ const Product = () => {
 
 	const [product, setProduct] = useState(null);
 	const [image, setImage] = useState(null);
-	const [getColor, setColor] = useState(1);
+	const [getColor, setColor] = useState(null);
 	const [inCart, setInCart] = useState(false);
 	const [loading, setLoading] = useState(true);
 
@@ -19,7 +19,6 @@ const Product = () => {
 		setLoading(true);
 		setImage(image);
 		setInCart(false);
-		setColor(getColor || product?.colors[0].hex || null);
 
 		const slug = router.query.slug;
 
@@ -31,7 +30,7 @@ const Product = () => {
 			slug !== ''
 		) {
 			axios
-				.get(`/api/products/${slug}`)
+				.get(`/api/products/${slug}&color=false`)
 				.then((res) => {
 					setProduct(res.data);
 					setLoading(false);
@@ -43,16 +42,14 @@ const Product = () => {
 				});
 		}
 
+		if (image == null && product) {
+			setImage(product?.images[product?.poster_id || 0]);
+		}
+
 		if (loading && product === null) {
 			setLoading(false);
 		}
-
-		if (product !== null) {
-			setImage(product?.images[product?.poster_id || 0]);
-		}
 	}, [getColor, image, loading, product, router.query.slug]);
-
-	if (process.env.API_HOST === 'http://127.0.0.1:8000') console.log(product);
 
 	const options =
 		product?.Free20DaysInsurance === true ||
@@ -61,7 +58,7 @@ const Product = () => {
 
 	function addToCart() {
 		const productColor =
-			product?.dataColors?.find((col) => col.id === getColor) || null;
+			product?.colors?.find((col) => col.hex === getColor) || null;
 
 		const cartStorage = JSON.parse(localStorage.getItem('cart') || '[]');
 
@@ -126,38 +123,36 @@ const Product = () => {
 							<div
 								className={`${styles.imagesList} order-2 order-sm-1 mt-3 pt-3 mt-sm-0 pt-sm-0`}
 							>
-								{product?.images?.map((image, index) => (
+								{product?.images?.map((imageSrc, index) => (
 									<button
-										onClick={() => setImage(image)}
+										onClick={() => setImage(imageSrc)}
 										key={index}
 										className={styles.imageAProduct}
+										style={{ position: 'relative' }}
+										width={'100%'}
+										height={'100%'}
 									>
 										<Image
 											loader={ImageLoader}
 											className={styles.image}
-											style={{ position: 'relative' }}
-											src={image}
+											src={imageSrc}
 											alt=""
 											layout="fill"
 										/>
 									</button>
 								))}
 							</div>
-							{(image ||
-								product?.images[product?.poster_id || 0]) && (
+							{image && (
 								<div
 									className={`${styles.imageAProduct} order-1 order-sm-2`}
+									style={{ position: 'relative' }}
+									width={'100%'}
+									height={'100%'}
 								>
 									<Image
 										loader={ImageLoader}
 										className={styles.image}
-										style={{ position: 'relative' }}
-										src={
-											image ||
-											product?.images[
-												product?.poster_id || 0
-											]
-										}
+										src={image}
 										alt=""
 										layout="fill"
 									/>
@@ -181,9 +176,9 @@ const Product = () => {
 								<div className={styles.colorsList}>
 									{product?.colors.map((color, index) => (
 										<button
-											onClick={() => setColor(color.id)}
+											onClick={() => setColor(color.hex)}
 											className={`${styles.colorBtn} ${
-												getColor === color?.id &&
+												getColor === color?.hex &&
 												styles.currentColor
 											}`}
 											key={index}
@@ -196,33 +191,42 @@ const Product = () => {
 								</div>
 							</>
 						)}
-
-						<div className={styles.btns}>
-							{product?.product_status ? (
-								!inCart ? (
-									<button
-										onClick={addToCart}
-										className={styles.addToCartBtn}
-									>
-										add to cart
-									</button>
-								) : (
-									<>
-										<div className="px-3 mt-5">
-											Added to cart
-										</div>
+						{(product?.colors && getColor != null && (
+							<div className={styles.btns}>
+								{product?.product_status ? (
+									!inCart ? (
 										<button
-											onClick={() => router.push('/cart')}
-											className={styles.buyNowBtn}
+											onClick={addToCart}
+											className={styles.addToCartBtn}
 										>
-											view in cart
+											add to cart
 										</button>
-									</>
-								)
-							) : (
-								<div className="px-3 mt-5">Not available</div>
-							)}
-						</div>
+									) : (
+										<>
+											<div className="px-3 mt-5">
+												Added to cart
+											</div>
+											<button
+												onClick={() =>
+													router.push('/cart')
+												}
+												className={styles.buyNowBtn}
+											>
+												view in cart
+											</button>
+										</>
+									)
+								) : (
+									<div className="px-3 mt-5">
+										Not available
+									</div>
+								)}
+							</div>
+						)) || (
+							<div className="px-3 mt-5">
+								Choose a color for add to cart
+							</div>
+						)}
 					</div>
 				</div>
 				<div

@@ -28,6 +28,8 @@ const FormCheckout = ({ totalPrice }) => {
 				setClientSecret(data.client_secret), setPaymentIntent(data.id);
 				setLoading(false);
 			});
+
+		console.log(paymentIntent);
 	}, [paymentIntent, totalPrice]);
 
 	const options = {
@@ -35,11 +37,7 @@ const FormCheckout = ({ totalPrice }) => {
 	};
 
 	if (!clientSecret && !isLoading)
-		return (
-			<>
-				<PageNotFound />
-			</>
-		);
+		return <>Please, wait a few seconds...</>;
 
 	return (
 		<div>

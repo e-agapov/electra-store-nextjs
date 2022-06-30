@@ -69,7 +69,9 @@ const FormComponent = ({ paymentIntent, totalPrice = 0 }) => {
 		const { error } = await stripe.confirmPayment({
 			elements,
 			confirmParams: {
-				return_url: 'http://electrasharing.shop/successful',
+				return_url:
+					process.env.SUCCESSFUL_URI ||
+					'http://localhost:3000/successful',
 				receipt_email: email,
 
 				payment_method_data: {
@@ -186,7 +188,7 @@ const FormComponent = ({ paymentIntent, totalPrice = 0 }) => {
 				)}
 
 				{message && (
-					<div className="d-flex mt-5 text-error">
+					<div className="mt-5 d-flex text-error">
 						<div className="mx-auto">{message}</div>
 					</div>
 				)}

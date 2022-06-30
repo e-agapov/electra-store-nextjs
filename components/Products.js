@@ -30,7 +30,7 @@ const Products = ({ data }) => {
 					{products.map(
 						(product) =>
 							product.id &&
-							product.images[0] &&
+							product?.images[0] &&
 							product.name &&
 							product.price &&
 							product.uri && (
@@ -51,7 +51,7 @@ const Products = ({ data }) => {
 												className={styles.imageWrapper}
 												loader={ImageLoader}
 												alt=""
-												src={product.images[0]}
+												src={product?.images[0]}
 												layout="fill"
 											/>
 										</div>
