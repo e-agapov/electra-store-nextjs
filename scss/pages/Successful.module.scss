@@ -14,18 +14,25 @@
 	text-transform: uppercase;
 }
 
+.fw {
+	font-weight: bold;
+	font-size: rem(24);
+}
+
 .goHomeLink {
+	transition: 0.15s;
 	cursor: pointer;
 	color: black;
 	display: inline-block;
 	margin-top: rem(20);
 	text-decoration: none;
 	padding-bottom: rem(5);
-	border-bottom: rem(2) solid transparent;
+	border-bottom: rem(2) solid #b9b9b9;
 
 	&:hover,
 	&:active,
 	&:focus {
+		border-width: rem(2);
 		border-color: black;
 	}
 }

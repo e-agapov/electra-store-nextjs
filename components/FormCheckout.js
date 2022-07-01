@@ -28,8 +28,6 @@ const FormCheckout = ({ totalPrice }) => {
 				setClientSecret(data.client_secret), setPaymentIntent(data.id);
 				setLoading(false);
 			});
-
-		console.log(paymentIntent);
 	}, [paymentIntent, totalPrice]);
 
 	const options = {

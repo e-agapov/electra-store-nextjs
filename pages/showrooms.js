@@ -9,30 +9,28 @@ import ComingSoon from '../components/ComingSoon';
 import { useEffect, useState } from 'react';
 
 export default function Showrooms() {
+	return (
+		<Layout title="Showrooms – Electra" description="Internet store">
+			<ComingSoon />
+		</Layout>
+	);
+
 	const [locations, setLocations] = useState(false);
 	const [loading, setLoading] = useState(true);
 
 	useEffect(() => {
 		setLoading(true);
 
-		fetch('api/locations')
-			.then((res) => res.json())
-			.then((data) => {
-				setLocations(data);
-				setLoading(false);
-			});
+		const data = fetch('api/locations').then((res) => {
+			setLocations(res.data);
+			setLoading(false);
+		});
 
 		return () => {
 			setLocations([]);
 			setLoading(false);
 		};
 	}, []);
-
-	return (
-		<Layout title="Showrooms – Electra" description="Internet store">
-			<ComingSoon />
-		</Layout>
-	);
 
 	const texts = {
 		main: `We have showrooms all over Europe, you can always come to our store and choose your transport and accessories to your liking. A large selection will help you find everything you need for comfortable movement through the streets of your city.`
