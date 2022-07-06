@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import Layout from '../../components/Layout';
 import styles from '../../scss/pages/Product.module.scss';
-import { imgLoader } from '../../utils/imageLoader';
+import imgLoader from '../../utils/imageLoader';
 
 const Product = () => {
 	const router = useRouter();

@@ -7,6 +7,8 @@ import Router from 'next/router';
 import { useEffect, useState } from 'react';
 import styles from '../scss/components/Checkout.module.scss';
 
+const successfulUri = process.env.SUCCESSFUL_URI;
+
 const FormComponent = ({ paymentIntent, totalPrice = 0 }) => {
 	const [email, setEmail] = useState('');
 	const [firstName, setFirstName] = useState('');
@@ -69,9 +71,7 @@ const FormComponent = ({ paymentIntent, totalPrice = 0 }) => {
 		const { error } = await stripe.confirmPayment({
 			elements,
 			confirmParams: {
-				return_url:
-					process.env.SUCCESSFUL_URI ||
-					'http://localhost:3000/successful',
+				return_url: successfulUri || 'http://localhost:3000/successful',
 				receipt_email: email,
 
 				payment_method_data: {

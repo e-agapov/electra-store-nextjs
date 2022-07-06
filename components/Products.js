@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import styles from '../scss/components/Products.module.scss';
-import { imgLoader } from '../utils/imageLoader';
+import imgLoader from '../utils/imageLoader';
 
 const Products = ({ data }) => {
 	const [products, setProducts] = useState([]);
