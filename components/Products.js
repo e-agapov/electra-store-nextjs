@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import styles from '../scss/components/Products.module.scss';
-import ImageLoader from '../utils/imageLoader';
+import { imgLoader } from '../utils/imageLoader';
 
 const Products = ({ data }) => {
 	const [products, setProducts] = useState([]);
@@ -49,7 +49,7 @@ const Products = ({ data }) => {
 										<div className={styles.image}>
 											<Image
 												className={styles.imageWrapper}
-												loader={ImageLoader}
+												loader={imgLoader}
 												alt=""
 												src={product?.images[0]}
 												layout="fill"
