@@ -1,5 +1,7 @@
 const imgLoader = ({ src }) => {
-	return `${process.env.API_HOST}/storage/${src}`;
+	const host = process.env.API_HOST;
+
+	return `${host}/storage/${src}`;
 };
 
 export default imgLoader;
