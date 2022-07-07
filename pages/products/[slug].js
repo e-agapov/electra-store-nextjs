@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import Layout from '../../components/Layout';
 import styles from '../../scss/pages/Product.module.scss';
 import { imageLoader } from '../../utils/imageLoader';
+import financial from '../utils/financial';
 
 const Product = () => {
 	const router = useRouter();
@@ -170,7 +171,9 @@ const Product = () => {
 						<div className={styles.descriptionOfProduct}>
 							{product?.description}
 						</div>
-						<div className={styles.price}>{product?.price} $</div>
+						<div className={styles.price}>
+							{financial(product?.price)} $
+						</div>
 						{product?.colors && (
 							<>
 								<div className={styles.colorsHeaderText}>

@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import Checkout from '../components/Checkout';
 import Layout from '../components/Layout';
 import styles from '../scss/pages/Cart.module.scss';
+import financial from '../utils/financial';
 import { imageLoader } from '../utils/imageLoader';
 
 const Cart = () => {
@@ -50,7 +51,7 @@ const Cart = () => {
 			setDataIsLoaded(true);
 		}
 
-		setTotalCartPrice(totalAcc(products, 'price'));
+		setTotalCartPrice(financial(totalAcc(products, 'price')));
 		setGoods(totalAcc(products, 'count'));
 
 		setLoading(false);
@@ -125,7 +126,7 @@ const Cart = () => {
 												{product?.name}
 											</div>
 											<div className={styles.mobilePrice}>
-												{product?.price} $
+												{financial(product?.price)} $
 											</div>
 										</div>
 									)}
@@ -210,7 +211,7 @@ const Cart = () => {
 									<div
 										className={`${styles.price} d-none d-md-block align-self-center`}
 									>
-										{product?.price} $
+										{financial(product?.price)} $
 									</div>
 
 									<div className={styles.remove}>
@@ -260,7 +261,7 @@ const Cart = () => {
 						)}
 						<div className={styles.subtotal}>Total</div>
 						<div className={styles.totalPrice}>
-							{totalCartPrice} $
+							{financial(totalCartPrice)} $
 						</div>
 
 						{totalCartPrice !== 0 && (
@@ -290,6 +291,7 @@ const Cart = () => {
 };
 
 const getStorageItems = () => JSON.parse(localStorage.getItem('cart')) || [];
+
 const updateStorageItems = (uri, key, value, color = false) => {
 	const items = getStorageItems();
 

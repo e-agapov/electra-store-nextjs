@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import styles from '../scss/components/Products.module.scss';
+import financial from '../utils/financial';
 import { imageLoader } from '../utils/imageLoader';
 
 const Products = ({ data }) => {
@@ -59,7 +60,7 @@ const Products = ({ data }) => {
 											{product.name}
 										</div>
 										<div className={styles.priceOfProduct}>
-											{product.price} $
+											{financial(product.price)} $
 										</div>
 									</a>
 								</Link>
