@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import Layout from '../../components/Layout';
 import styles from '../../scss/pages/Product.module.scss';
-import imgLoader from '../../utils/imageLoader';
+import { imageLoader } from '../../utils/imageLoader';
 
 const Product = () => {
 	const router = useRouter();
@@ -133,7 +133,7 @@ const Product = () => {
 										height={'100%'}
 									>
 										<Image
-											loader={imgLoader}
+											loader={imageLoader}
 											className={styles.image}
 											src={imageSrc}
 											alt=""
@@ -150,7 +150,7 @@ const Product = () => {
 									height={'100%'}
 								>
 									<Image
-										loader={imgLoader}
+										loader={imageLoader}
 										className={styles.image}
 										src={image}
 										alt=""

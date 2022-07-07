@@ -28,7 +28,7 @@ const Cart = () => {
 				setActive(false);
 			}
 		};
-	});
+	}, []);
 
 	return (
 		<div className={styles.cart + ' ' + (active ? styles.active : null)}>

@@ -7,7 +7,7 @@ import Router from 'next/router';
 import { useEffect, useState } from 'react';
 import styles from '../scss/components/Checkout.module.scss';
 
-const successfulUri = process.env.SUCCESSFUL_URI;
+const successfulUri = process.env.NEXT_PUBLIC_SUCCESSFUL_URI;
 
 const FormComponent = ({ paymentIntent, totalPrice = 0 }) => {
 	const [email, setEmail] = useState('');

@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import Checkout from '../components/Checkout';
 import Layout from '../components/Layout';
 import styles from '../scss/pages/Cart.module.scss';
-import ImageLoader from '../utils/imageLoader';
+import { imageLoader } from '../utils/imageLoader';
 
 const Cart = () => {
 	const [products, setProducts] = useState([]);
@@ -114,7 +114,7 @@ const Cart = () => {
 										>
 											<div className={styles.mobileImage}>
 												<Image
-													loader={ImageLoader}
+													loader={imageLoader}
 													src={product?.image}
 													alt={`product ${product?.name}`}
 													layout="fill"
@@ -134,7 +134,7 @@ const Cart = () => {
 											className={`${styles.cartItemImg} d-none d-md-block`}
 										>
 											<Image
-												loader={ImageLoader}
+												loader={imageLoader}
 												src={product?.image}
 												alt={`product ${product?.name}`}
 												width="210"
