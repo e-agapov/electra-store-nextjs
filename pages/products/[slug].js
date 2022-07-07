@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import Layout from '../../components/Layout';
 import styles from '../../scss/pages/Product.module.scss';
 import { imageLoader } from '../../utils/imageLoader';
-import financial from '../utils/financial';
+import financial from '../../utils/financial';
 
 const Product = () => {
 	const router = useRouter();
