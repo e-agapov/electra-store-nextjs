@@ -120,28 +120,31 @@ const Product = () => {
 				<div className="d-flex flex-column flex-lg-row">
 					{product?.images && (
 						<div className={`${styles.ProductImages} col-lg-8`}>
-							<div
-								className={`${styles.imagesList} order-2 order-sm-1 mt-3 pt-3 mt-sm-0 pt-sm-0`}
-							>
-								{product?.images?.map((imageSrc, index) => (
-									<button
-										onClick={() => setImage(imageSrc)}
-										key={index}
-										className={styles.imageAProduct}
-										style={{ position: 'relative' }}
-										width={'100%'}
-										height={'100%'}
-									>
-										<Image
-											loader={imageLoader}
-											className={styles.image}
-											src={imageSrc}
-											alt=""
-											layout="fill"
-										/>
-									</button>
-								))}
-							</div>
+							{product?.images.length > 1 && (
+								<div
+									className={`${styles.imagesList} order-2 order-sm-1 mt-3 pt-3 mt-sm-0 pt-sm-0`}
+								>
+									{product?.images?.map((imageSrc, index) => (
+										<button
+											onClick={() => setImage(imageSrc)}
+											key={index}
+											className={styles.imageAProduct}
+											style={{ position: 'relative' }}
+											width={'100%'}
+											height={'100%'}
+										>
+											<Image
+												loader={imageLoader}
+												className={styles.image}
+												src={imageSrc}
+												alt=""
+												layout="fill"
+											/>
+										</button>
+									))}
+								</div>
+							)}
+
 							{image && (
 								<div
 									className={`${styles.imageAProduct} order-1 order-sm-2`}
