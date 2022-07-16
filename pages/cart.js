@@ -34,6 +34,7 @@ const Cart = () => {
 						{
 							...res.data,
 							count: item?.count,
+							totalPrice: financial(item?.price * item?.count),
 							colorHex: res.data.colors
 								? res.data.colors.filter((color) =>
 										color.name === res.data.color
@@ -46,6 +47,12 @@ const Cart = () => {
 					]);
 
 				setProducts(data);
+				updateStorageItems(
+					item.uri,
+					'count',
+					item.count,
+					item?.color || false
+				);
 			});
 
 			setDataIsLoaded(true);
@@ -298,6 +305,10 @@ const updateStorageItems = (uri, key, value, color = false) => {
 	let newList = items.map((item) => {
 		if (item.uri === uri && (color ? item.color === color : true)) {
 			item[key] = value;
+
+			if (key === 'count') {
+				item.totalPrice = financial(item.price * item.count);
+			}
 		}
 
 		return item;
@@ -306,7 +317,7 @@ const updateStorageItems = (uri, key, value, color = false) => {
 	newList = newList.filter((item) => item.count > 0);
 
 	localStorage.setItem('cart', JSON.stringify(newList));
-};
+};;
 
 const totalAcc = (products, whatIsAcc) =>
 	products.reduce(

@@ -23,15 +23,12 @@ const FormComponent = ({ paymentIntent, totalPrice = 0 }) => {
 	const stripe = useStripe();
 	const elements = useElements();
 
-	const [data, setData] = useState(JSON.parse(localStorage.getItem('cart')));
-
 	const router = Router;
 
 	if (totalPrice === 0 || !totalPrice) router.push('/');
 
 	useEffect(() => {
 		setLocAmount(totalPrice);
-		setData(localStorage.getItem('cart'));
 
 		if (!stripe) return;
 

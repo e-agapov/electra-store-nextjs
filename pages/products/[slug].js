@@ -80,6 +80,7 @@ const Product = () => {
 					category: product.category,
 					color: productColor ? productColor?.name : false,
 					uri: product.uri,
+					price: product.price,
 					count: 1
 				};
 
