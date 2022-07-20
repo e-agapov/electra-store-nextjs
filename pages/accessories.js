@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import CatalogLinks from '../components/CatalogLinks';
 import Layout from '../components/Layout';
 import Products from '../components/Products';
+import { links } from '../data/partsAndAccessoriesLinks';
 
 const Accessories = () => {
 	const [data, setData] = useState([]);
@@ -13,11 +14,6 @@ const Accessories = () => {
 
 		return () => setData([]);
 	}, []);
-
-	const links = [
-		{ path: '/accessories', name: 'Accessories' },
-		{ path: '/parts', name: 'Parts' }
-	];
 
 	return (
 		<Layout title="Products, Accessories – Electra" description="">

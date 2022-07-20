@@ -25,18 +25,15 @@
 
 		&:hover,
 		&:focus {
-			transform: scale(1.15);
 			color: $purple;
 		}
 
 		&:active {
-			transform: none;
 			color: $purple;
 		}
 	}
 
 	.activeLink {
 		color: $purple;
-		font-size: rem(36);
 	}
 }

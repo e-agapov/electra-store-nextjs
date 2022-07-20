@@ -18,7 +18,7 @@ const TransportSection = ({ classes = null }) => {
 							<Image alt={'scooters link'} src={ScootersImage} />
 							<ArrowToRight styles={styles.ArrowToRight} />
 						</div>
-						<div className={styles.linkTitle}>Scooters</div>
+						<div className={styles.linkTitle}>E-Scooters</div>
 						<div className={styles.description}>
 							We gettered different kinds of scooters. Everyone
 							can find a scooter for themselves.
@@ -34,7 +34,7 @@ const TransportSection = ({ classes = null }) => {
 							<ArrowToRight styles={styles.ArrowToRight} />
 						</div>
 
-						<div className={styles.linkTitle}>Bikes</div>
+						<div className={styles.linkTitle}>E-Bikes</div>
 						<div className={styles.description}>
 							Our store has a large selection of different bikes
 							for everyone.
@@ -53,7 +53,7 @@ const TransportSection = ({ classes = null }) => {
 							<ArrowToRight styles={styles.ArrowToRight} />
 						</div>
 
-						<div className={styles.linkTitle}>Motorbikes</div>
+						<div className={styles.linkTitle}>E-Motorbikes</div>
 						<div className={styles.description}>
 							Do you want to buy a moped? You have come to the
 							right place, a huge selection, different models for

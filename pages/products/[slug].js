@@ -310,11 +310,6 @@ const Product = () => {
 								/>
 							</svg>
 						</div>
-						{product?.ideal_for_text && (
-							<div className={styles.idealForText}>
-								{product?.ideal_for_text}
-							</div>
-						)}
 						{options ? (
 							<div className={styles.idealForBlock}>
 								{product?.freeInStoreRides && (

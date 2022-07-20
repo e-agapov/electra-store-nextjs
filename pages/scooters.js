@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import CatalogLinks from '../components/CatalogLinks';
 import Layout from '../components/Layout';
 import Products from '../components/Products';
+import { links } from '../data/transportLinks';
 
 const Scooters = () => {
 	const [data, setData] = useState([]);
@@ -13,12 +14,6 @@ const Scooters = () => {
 
 		return () => setData([]);
 	}, []);
-
-	const links = [
-		{ path: '/bikes', name: 'Bikes' },
-		{ path: '/scooters', name: 'Scooters' },
-		{ path: '/motorbikes', name: 'Motorbikes' }
-	];
 
 	return (
 		<Layout title="Products, Scooters – Electra" description="">
