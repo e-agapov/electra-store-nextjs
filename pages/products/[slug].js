@@ -230,8 +230,35 @@ const Product = () => {
 								)}
 							</div>
 						)) || (
-							<div className="px-3 mt-5">
-								Choose a color for add to cart
+							<div className={styles.btns}>
+								{product?.product_status ? (
+									!inCart ? (
+										<button
+											onClick={addToCart}
+											className={styles.addToCartBtn}
+										>
+											add to cart
+										</button>
+									) : (
+										<>
+											<div className="px-3 mt-5">
+												Added to cart
+											</div>
+											<button
+												onClick={() =>
+													router.push('/cart')
+												}
+												className={styles.buyNowBtn}
+											>
+												view in cart
+											</button>
+										</>
+									)
+								) : (
+									<div className="px-3 mt-5">
+										Not available
+									</div>
+								)}
 							</div>
 						)}
 					</div>
