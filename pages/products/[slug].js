@@ -175,6 +175,10 @@ const Product = () => {
 						<div className={styles.price}>
 							{financial(product?.price)} $
 						</div>
+
+						{product?.colors && getColor == null && (
+							<div className="mt-5 mb-3">Select color</div>
+						)}
 						{product?.colors && (
 							<>
 								<div className={styles.colorsHeaderText}>
@@ -198,69 +202,42 @@ const Product = () => {
 								</div>
 							</>
 						)}
-						{(product?.colors && getColor != null && (
-							<div className={styles.btns}>
-								{product?.product_status ? (
-									!inCart ? (
-										<button
-											onClick={addToCart}
-											className={styles.addToCartBtn}
-										>
-											add to cart
-										</button>
-									) : (
-										<>
-											<div className="px-3 mt-5">
-												Added to cart
-											</div>
-											<button
-												onClick={() =>
-													router.push('/cart')
-												}
-												className={styles.buyNowBtn}
-											>
-												view in cart
-											</button>
-										</>
-									)
-								) : (
-									<div className="px-3 mt-5">
-										Not available
-									</div>
+						<div className={styles.btns}>
+							{product?.product_status &&
+								product?.colors &&
+								getColor != null && (
+									<button
+										onClick={addToCart}
+										className={styles.addToCartBtn}
+									>
+										add to cart
+									</button>
 								)}
-							</div>
-						)) || (
-							<div className={styles.btns}>
-								{product?.product_status ? (
-									!inCart ? (
-										<button
-											onClick={addToCart}
-											className={styles.addToCartBtn}
-										>
-											add to cart
-										</button>
-									) : (
-										<>
-											<div className="px-3 mt-5">
-												Added to cart
-											</div>
-											<button
-												onClick={() =>
-													router.push('/cart')
-												}
-												className={styles.buyNowBtn}
-											>
-												view in cart
-											</button>
-										</>
-									)
-								) : (
-									<div className="px-3 mt-5">
-										Not available
-									</div>
+							{product?.product_status &&
+								!product?.colors &&
+								getColor == null && (
+									<button
+										onClick={addToCart}
+										className={styles.addToCartBtn}
+									>
+										add to cart
+									</button>
 								)}
-							</div>
-						)}
+
+							{inCart && (
+								<>
+									<div className="px-3 mt-5">
+										Added to cart
+									</div>
+									<button
+										onClick={() => router.push('/cart')}
+										className={styles.buyNowBtn}
+									>
+										view in cart
+									</button>
+								</>
+							)}
+						</div>
 					</div>
 				</div>
 				<div
