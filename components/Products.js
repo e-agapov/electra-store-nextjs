@@ -48,7 +48,7 @@ const Products = ({ data }) => {
 												waterproof
 											</div>
 										)}
-										{part?.images[0] && (
+										{product?.images[0] && (
 											<div className={styles.image}>
 												<Image
 													className={
