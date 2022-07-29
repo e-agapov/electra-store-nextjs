@@ -31,7 +31,7 @@ const Products = ({ data }) => {
 					{products.map(
 						(product) =>
 							product.id &&
-							part?.images &&
+							product?.images &&
 							product?.images[0] &&
 							product.name &&
 							product.price &&
