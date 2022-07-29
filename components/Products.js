@@ -31,6 +31,7 @@ const Products = ({ data }) => {
 					{products.map(
 						(product) =>
 							product.id &&
+							part?.images &&
 							product?.images[0] &&
 							product.name &&
 							product.price &&
@@ -47,15 +48,19 @@ const Products = ({ data }) => {
 												waterproof
 											</div>
 										)}
-										<div className={styles.image}>
-											<Image
-												className={styles.imageWrapper}
-												loader={imageLoader}
-												alt=""
-												src={product?.images[0]}
-												layout="fill"
-											/>
-										</div>
+										{part?.images[0] && (
+											<div className={styles.image}>
+												<Image
+													className={
+														styles.imageWrapper
+													}
+													loader={imageLoader}
+													alt=""
+													src={product?.images[0]}
+													layout="fill"
+												/>
+											</div>
+										)}
 										<div className={styles.nameOfProduct}>
 											{product.name}
 										</div>
