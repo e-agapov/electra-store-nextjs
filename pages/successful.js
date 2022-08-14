@@ -26,19 +26,16 @@ const Successful = () => {
 				? JSON.parse(localStorage.getItem('cart'))
 				: [];
 
-			axios
-				.post('/api/successful', { data })
-				.then(function (response) {
-					if (localStorage.getItem('cart')) {
-						localStorage.clear();
-						setData(response.data);
+			axios.post('/api/successful', { data }).then(function (response) {
+				if (localStorage.getItem('cart')) {
+					localStorage.clear();
+					setData(response.data);
 
 					setTimeout(() => {
 						router.push('/');
 					}, 1000 * 60 * 15);
-					}
-				})
-				.catch((err) => console.error(err));
+				}
+			});
 		}
 
 		return () => {

@@ -15,28 +15,27 @@ export default function Transport() {
 	};
 
 	return (
-		<Layout title="Transport – Electra" description="">
+		<Layout title='Transport – Electra' description=''>
 			<Swiper
 				rewind={true}
 				navigation={true}
 				pagination={true}
-				modules={[Navigation, Pagination]}
-			>
+				modules={[Navigation, Pagination]}>
 				<SwiperSlide>
-					<Image src={HeaderImage} alt="" priority />
+					<Image src={HeaderImage} alt={''} priority />
 				</SwiperSlide>
 				<SwiperSlide>
-					<Image src={HeaderImage} alt="" priority />
+					<Image src={HeaderImage} alt={''} priority />
 				</SwiperSlide>
 				<SwiperSlide>
-					<Image src={HeaderImage} alt="" priority />
+					<Image src={HeaderImage} alt={''} priority />
 				</SwiperSlide>
 				<SwiperSlide>
-					<Image src={HeaderImage} alt="" priority />
+					<Image src={HeaderImage} alt={''} priority />
 				</SwiperSlide>
 			</Swiper>
 
-			<div className="container">
+			<div className='container'>
 				<TransportSection />
 
 				<SectionBlock

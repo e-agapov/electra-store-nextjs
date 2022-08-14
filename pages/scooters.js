@@ -16,8 +16,8 @@ const Scooters = () => {
 	}, []);
 
 	return (
-		<Layout title="Products, Scooters – Electra" description="">
-			<div className="container my-4 mt-md-5">
+		<Layout title='Products, Scooters – Electra' description=''>
+			<div className='container my-4 mt-md-5'>
 				<CatalogLinks links={links} />
 
 				<Products data={data} />

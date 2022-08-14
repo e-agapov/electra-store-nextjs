@@ -18,13 +18,7 @@ const PageNotFound = () => {
 					The page you are looking for was moved, removed or maybe
 					never existed. Please go to the main page.
 				</div>
-				<button
-					type="button"
-					onClick={() => router.back()}
-					className={styles.goHomeBtn}
-				>
-					Go back
-				</button>
+
 				<div className={`${styles.moreInfoText} mt-3`}>or</div>
 				<Link href={'/'}>
 					<a className={styles.goHomeBtn}>Go home</a>

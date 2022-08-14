@@ -9,7 +9,6 @@ import { imageLoader } from '../utils/imageLoader';
 
 const Cart = () => {
 	const [products, setProducts] = useState([]);
-	const [dataIsLoaded, setDataIsLoaded] = useState(false);
 	const [goods, setGoods] = useState(0);
 	const [isLoading, setLoading] = useState(true);
 	const [totalCartPrice, setTotalCartPrice] = useState(0);
@@ -19,53 +18,38 @@ const Cart = () => {
 		setLoading(true);
 
 		const getStorage = getStorageItems();
-		let data = [];
 
-		if (
-			!products.length &&
-			getStorage.length &&
-			!dataIsLoaded &&
-			!data.length
-		) {
+		if (!products.length) {
 			getStorage.map(async (item) => {
-				data = await axios
-					.get(`/api/products/${item?.uri}&color=${item?.color}`)
-					.then((res) => [
-						{
-							...res.data,
-							count: item?.count,
-							totalPrice: financial(item?.price * item?.count),
-							colorHex: res.data.colors
-								? res.data.colors.filter((color) =>
-										color.name === res.data.color
-											? color.hex
-											: null
-								  )[0].hex
-								: ''
-						},
-						...data
-					]);
-
-				setProducts(data);
-				updateStorageItems(
-					item.uri,
-					'count',
-					item.count,
-					item?.color || false
-				);
+				await axios
+					.get(
+						`/api/products/${item?.uri}${
+							item?.color ? `?color=${item?.color}` : ''
+						}`
+					)
+					.then((res) => {
+						setProducts((prevState) => [
+							{
+								...res.data,
+								count: item.count || 1,
+								totalPrice:
+									financial(item.count * res.data.price) || 0,
+								colorHex: item.color || ''
+							},
+							...prevState
+						]);
+					});
 			});
-
-			setDataIsLoaded(true);
 		}
 
-		setTotalCartPrice(financial(totalAcc(products, 'price')));
 		setGoods(totalAcc(products, 'count'));
+		setTotalCartPrice(financial(totalAcc(products, 'price')));
 
 		setLoading(false);
-	}, [dataIsLoaded, products]);
+	}, [products]);
 
-	const updateCount = (uri, color, method, count) => {
-		let newList = [...products];
+	const updateCount = (uri, color = '', method, count) => {
+		let newList = null;
 
 		if (method === 'destroy') {
 			count = 0;
@@ -76,13 +60,15 @@ const Cart = () => {
 			);
 		} else {
 			newList = products.map((item) => {
-				item.uri === uri &&
-					color &&
-					item.color === color &&
-					(count =
+				if (
+					item.uri === uri &&
+					(color !== '' ? item.color === color : true)
+				) {
+					count =
 						method === 'add'
 							? (item.count += 1)
-							: (item.count -= 1));
+							: (item.count -= 1);
+				}
 
 				return item;
 			});
@@ -94,22 +80,22 @@ const Cart = () => {
 
 	if (isLoading) {
 		return (
-			<Layout title="Products – Electra" description="">
-				<div className="cart-page">
-					<div className="cart-page__loader">loading...</div>
+			<Layout title='Products – Electra' description=''>
+				<div className='cart-page'>
+					<div className='cart-page__loader'>loading...</div>
 				</div>
 			</Layout>
 		);
 	}
 
 	return (
-		<Layout title="Cart – Electra" description="">
+		<Layout title='Cart – Electra' description=''>
 			{isCheckout ? (
-				<div className="mx-auto col-lg-6">
+				<div className='mx-auto col-lg-6'>
 					<Checkout totalPrice={totalCartPrice} />
 				</div>
 			) : (
-				<div className="container my-3 my-lg-5">
+				<div className='container my-3 my-lg-5'>
 					<div className={styles.headline}>Shopping cart</div>
 
 					{products ? (
@@ -118,14 +104,13 @@ const Cart = () => {
 								<div key={index} className={styles.cartItem}>
 									{product?.image && (
 										<div
-											className={`${styles.mobileInfo} d-block d-md-none`}
-										>
+											className={`${styles.mobileInfo} d-block d-md-none`}>
 											<div className={styles.mobileImage}>
 												<Image
 													loader={imageLoader}
 													src={product?.image}
 													alt={`product ${product?.name}`}
-													layout="fill"
+													layout='fill'
 													className={styles.image}
 												/>
 											</div>
@@ -139,14 +124,13 @@ const Cart = () => {
 									)}
 									{product?.image && (
 										<div
-											className={`${styles.cartItemImg} d-none d-md-block`}
-										>
+											className={`${styles.cartItemImg} d-none d-md-block`}>
 											<Image
 												loader={imageLoader}
 												src={product?.image}
 												alt={`product ${product?.name}`}
-												width="210"
-												height="210"
+												width='210'
+												height='210'
 											/>
 										</div>
 									)}
@@ -154,23 +138,19 @@ const Cart = () => {
 									<div
 										className={
 											'align-self-center align-self-md-start ms-3'
-										}
-									>
+										}>
 										<div
-											className={`${styles.cartItemName} d-none d-md-block`}
-										>
+											className={`${styles.cartItemName} d-none d-md-block`}>
 											{product?.name}
 										</div>
 
 										{product?.color && (
 											<div
-												className={`${styles.cartItemColor}`}
-											>
+												className={`${styles.cartItemColor}`}>
 												<div
 													className={
 														styles.nameOfColumn
-													}
-												>
+													}>
 													Color
 												</div>
 												<div
@@ -178,26 +158,25 @@ const Cart = () => {
 													style={{
 														background:
 															product?.colorHex
-													}}
-												></div>
+													}}></div>
 											</div>
 										)}
 									</div>
 
 									<div
-										className={`${styles.quantity} mx-auto `}
-									>
+										className={`${styles.quantity} mx-auto `}>
 										{product?.count > 1 && (
 											<button
 												onClick={() =>
 													updateCount(
 														product.uri,
-														product?.color,
+														(product?.color &&
+															product?.color) ||
+															'',
 														'remove'
 													)
 												}
-												className={styles.actionBtn}
-											>
+												className={styles.actionBtn}>
 												-
 											</button>
 										)}
@@ -206,18 +185,18 @@ const Cart = () => {
 											onClick={() =>
 												updateCount(
 													product.uri,
-													product?.color,
+													(product?.color &&
+														product?.color) ||
+														'',
 													'add'
 												)
 											}
-											className={styles.actionBtn}
-										>
+											className={styles.actionBtn}>
 											+
 										</button>
 									</div>
 									<div
-										className={`${styles.price} d-none d-md-block align-self-center`}
-									>
+										className={`${styles.price} d-none d-md-block align-self-center`}>
 										{financial(product?.price)} $
 									</div>
 
@@ -226,31 +205,31 @@ const Cart = () => {
 											onClick={() =>
 												updateCount(
 													product.uri,
-													product?.color,
+													(product?.color &&
+														product?.color) ||
+														'',
 													'destroy'
 												)
 											}
-											className={styles.actionBtn}
-										>
+											className={styles.actionBtn}>
 											<svg
-												width="20"
-												height="20"
-												viewBox="0 0 20 20"
-												fill="none"
-											>
+												width='20'
+												height='20'
+												viewBox='0 0 20 20'
+												fill='none'>
 												<line
-													x1="0"
-													y1="0"
-													x2="20"
-													y2="20"
-													stroke="#6f6f6f"
+													x1='0'
+													y1='0'
+													x2='20'
+													y2='20'
+													stroke='#6f6f6f'
 												/>
 												<line
-													x1="0"
-													y1="20"
-													x2="20"
-													y2="0"
-													stroke="#6f6f6f"
+													x1='0'
+													y1='20'
+													x2='20'
+													y2='0'
+													stroke='#6f6f6f'
 												/>
 											</svg>
 										</button>
@@ -283,8 +262,7 @@ const Cart = () => {
 												(prevState) => !prevState
 											)
 										}
-										className={styles.checkoutBtn}
-									>
+										className={styles.checkoutBtn}>
 										Check out
 									</a>
 								</div>
@@ -299,11 +277,11 @@ const Cart = () => {
 
 const getStorageItems = () => JSON.parse(localStorage.getItem('cart')) || [];
 
-const updateStorageItems = (uri, key, value, color = false) => {
+const updateStorageItems = (uri, key, value, color = '') => {
 	const items = getStorageItems();
 
 	let newList = items.map((item) => {
-		if (item.uri === uri && (color ? item.color === color : true)) {
+		if (item.uri === uri && (color !== '' ? item.color === color : true)) {
 			item[key] = value;
 
 			if (key === 'count') {
@@ -317,7 +295,7 @@ const updateStorageItems = (uri, key, value, color = false) => {
 	newList = newList.filter((item) => item.count > 0);
 
 	localStorage.setItem('cart', JSON.stringify(newList));
-};;
+};
 
 const totalAcc = (products, whatIsAcc) =>
 	products.reduce(

@@ -6,76 +6,57 @@ import financial from '../utils/financial';
 import { imageLoader } from '../utils/imageLoader';
 
 const Products = ({ data }) => {
-	const [products, setProducts] = useState([]);
-	const [loading, setLoading] = useState(true);
+	const [products, setProducts] = useState();
 
 	useEffect(() => {
-		setLoading(true);
+		setProducts(
+			data.filter(
+				(item) => item.images !== null && item.product_status !== 0
+			)
+		);
 
-		data ? setProducts(data) : setProducts([]);
-
-		setLoading(false);
-
-		return () => {
-			setProducts([]);
-			setLoading(false);
-		};
+		return () => setProducts(null);
 	}, [data]);
 
 	return (
-		<div className="d-flex flex-column">
-			{loading && <div className={styles.listIsEmpty}>Loading...</div>}
-
-			{products?.length && !loading ? (
+		(!products?.length && (
+			<div className={styles.listInfo}>no products</div>
+		)) || (
+			<div className='d-flex flex-column'>
 				<div className={styles.productsListWrapper}>
-					{products.map(
-						(product) =>
-							product.id &&
-							product?.images &&
-							product?.images[0] &&
-							product.name &&
-							product.price &&
-							product.uri && (
-								<Link
-									key={product.id}
-									href={`/products/${product.uri}`}
-								>
-									<a className={styles.productItem}>
-										{product?.waterproof && (
-											<div
-												className={styles.isWaterproof}
-											>
-												waterproof
-											</div>
-										)}
-										{product?.images[0] && (
-											<div className={styles.image}>
-												<Image
-													className={
-														styles.imageWrapper
-													}
-													loader={imageLoader}
-													alt=""
-													src={product?.images[0]}
-													layout="fill"
-												/>
-											</div>
-										)}
-										<div className={styles.nameOfProduct}>
-											{product.name}
-										</div>
-										<div className={styles.priceOfProduct}>
-											{financial(product.price)} $
-										</div>
-									</a>
-								</Link>
-							)
-					)}
+					{products?.map((product) => (
+						<Link
+							key={product.id}
+							href={`/products/${product.uri}`}>
+							<a className={styles.productItem}>
+								{product?.waterproof && (
+									<div className={styles.isWaterproof}>
+										waterproof
+									</div>
+								)}
+
+								<div className={styles.image}>
+									<Image
+										className={styles.imageWrapper}
+										loader={imageLoader}
+										alt=''
+										src={product?.images[0]}
+										layout='fill'
+									/>
+								</div>
+
+								<div className={styles.nameOfProduct}>
+									{product.name}
+								</div>
+								<div className={styles.priceOfProduct}>
+									{financial(product.price)} $
+								</div>
+							</a>
+						</Link>
+					))}
 				</div>
-			) : (
-				<div className={styles.listIsEmpty}>List is empty</div>
-			)}
-		</div>
+			</div>
+		)
 	);
 };
 
