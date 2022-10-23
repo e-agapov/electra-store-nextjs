@@ -48,7 +48,7 @@ const FormComponent = ({ totalPrice = 0 }) => {
 		})
 			.then((res) => res.data.public_id)
 			.then((order_id) =>
-				RevolutCheckout(String(order_id), 'sandbox').then(function (
+				RevolutCheckout(String(order_id), 'prod').then(function (
 					instance
 				) {
 					instance.payWithPopup({

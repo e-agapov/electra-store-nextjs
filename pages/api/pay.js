@@ -3,7 +3,7 @@ async function handleCreateOrder(req, res) {
 	const { amount, currency, description, email, name } = req.query;
 
 	await axios({
-		url: 'https://sandbox-merchant.revolut.com/api/1.0/orders',
+		url: 'https://merchant.revolut.com/api/1.0/orders',
 		method: 'POST',
 		headers: {
 			Authorization: `Bearer ${process.env.REVOLUT_API_KEY}`,
