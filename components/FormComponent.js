@@ -1,15 +1,20 @@
-import {
-	PaymentElement,
-	useElements,
-	useStripe
-} from '@stripe/react-stripe-js';
+import RevolutCheckout from '@revolut/checkout';
+import axios from 'axios';
 import Router from 'next/router';
 import { useEffect, useState } from 'react';
 import styles from '../scss/components/Checkout.module.scss';
 
-const successfulUri = process.env.NEXT_PUBLIC_SUCCESSFUL_URI;
+async function finishOrder(id) {
+	const response = await fetch(`/api/orders/${id}/finish`, {
+		method: 'POST'
+	});
 
-const FormComponent = ({ paymentIntent, totalPrice = 0 }) => {
+	const order = await response.json();
+
+	if (order.isCompleted) Router.replace('/success');
+}
+
+const FormComponent = ({ totalPrice = 0 }) => {
 	const [email, setEmail] = useState('');
 	const [firstName, setFirstName] = useState('');
 	const [lastName, setLastName] = useState('');
@@ -18,189 +23,190 @@ const FormComponent = ({ paymentIntent, totalPrice = 0 }) => {
 	const [address, setAddress] = useState('');
 	const [zip, setZipCode] = useState('');
 	const [locAmount, setLocAmount] = useState(0);
-	const [message, setMessage] = useState('');
-	const [isLoading, setIsLoading] = useState(false);
-	const stripe = useStripe();
-	const elements = useElements();
 
 	const router = Router;
 
-	if (totalPrice === 0 || !totalPrice) router.push('/');
+	if (totalPrice == 0 || !totalPrice) router.push('/');
 
 	useEffect(() => {
 		setLocAmount(totalPrice);
+	}, [totalPrice]);
 
-		if (!stripe) return;
-
-		const clientSecret = new URLSearchParams(window.location.search).get(
-			'payment_intent_client_secret'
-		);
-
-		if (!clientSecret) return;
-
-		stripe.retrievePaymentIntent(clientSecret).then(({ paymentIntent }) => {
-			switch (paymentIntent.status) {
-				case 'succeeded':
-					setMessage('Payment succeeded!');
-					break;
-				case 'processing':
-					setMessage('Your payment is processing.');
-					break;
-				case 'requires_payment_method':
-					setMessage(
-						'Your payment was not successful, please try again.'
-					);
-					break;
-				default:
-					setMessage('Something went wrong.');
-					break;
-			}
-		});
-	}, [stripe, totalPrice]);
-
-	const handleSubmit = async (e) => {
+	async function handleSubmit(e) {
 		e.preventDefault();
 
-		if (!stripe || !elements) return;
-
-		setIsLoading(true);
-
-		const { error } = await stripe.confirmPayment({
-			elements,
-			confirmParams: {
-				return_url: successfulUri || 'http://localhost:3000/successful',
-				receipt_email: email,
-
-				payment_method_data: {
-					billing_details: {
-						name: `${firstName} ${lastName}` || 'Noname',
-						email: email || '',
-						phone: phoneNumber || '',
-						address: {
-							city: city || '',
-							line1: address || '',
-							postal_code: zip || ''
-						}
-					}
-				}
+		await axios({
+			url: '/api/pay',
+			'Content-Type': 'application/json',
+			params: {
+				name: `${firstName} ${lastName}` ?? null,
+				email: `${email}` ?? null,
+				amount: locAmount || totalPrice || null,
+				currency: 'USD',
+				description: ''
 			}
-		});
+		})
+			.then((res) => res.data.public_id)
+			.then((order_id) =>
+				RevolutCheckout(String(order_id), 'sandbox').then(function (
+					instance
+				) {
+					instance.payWithPopup({
+						name: `${firstName} ${lastName}` ?? null,
+						email: `${email}` ?? null,
+						phone: `${phoneNumber}` ?? '',
 
-		if (error.type === 'card_error' || error.type === 'validation_error') {
-			setMessage(error.message);
-		} else {
-			setMessage(error.message);
-		}
+						billingAddress: {
+							city: `${city}` ?? '',
+							streetLine1: address ?? '',
+							postcode: `${zip}` ?? '',
+							region: '',
+							streetLine2: '',
+							countryCode: 'UA'
+						},
 
-		setIsLoading(false);
-	};
+						shippingAddress: {
+							city: `${city}` ?? '',
+							streetLine1: address ?? '',
+							postcode: `${zip}` ?? '',
+							region: '',
+							streetLine2: '',
+							countryCode: 'UA'
+						},
+						onSuccess() {
+							// finishOrder(order_id);
+							Router.replace('/success');
+						}
+					});
+				})
+			)
+			.catch((err) => console.error(err));
+	}
 
 	return (
 		<>
 			<div className={styles.headline}>Check out</div>
 
 			<div className={styles.h2}>Contact information</div>
-			<form id="payment-form" onSubmit={handleSubmit} className="m-auto">
-				<div className="row row-cols-1 row-cols-md-2">
-					<div className="mb-3">
+			<form id='payment-form' onSubmit={handleSubmit} className='m-auto'>
+				<div className='row row-cols-1 row-cols-md-2'>
+					<div className='mb-3'>
 						<input
 							className={styles.input}
-							id="firstName"
-							type="text"
+							id='firstName'
+							type='text'
 							value={firstName}
-							placeholder="Enter your first name"
+							placeholder='Enter your first name'
+							name='name'
 							onChange={(e) => setFirstName(e.target.value)}
 						/>
 					</div>
-					<div className="mb-3">
+					<div className='mb-3'>
 						<input
 							className={styles.input}
-							id="lastName"
-							type="text"
+							id='lastName'
+							type='text'
 							value={lastName}
 							onChange={(e) => setLastName(e.target.value)}
-							placeholder="Enter your last name"
+							placeholder='Enter your last name'
 						/>
 					</div>
-					<div className="mb-3">
+					<div className='mb-3'>
 						<input
 							className={styles.input}
-							id="email"
-							type="text"
+							id='email'
+							type='text'
 							value={email}
+							name='email'
 							onChange={(e) => setEmail(e.target.value)}
-							placeholder="Enter email address"
+							placeholder='Enter email address'
 						/>
 					</div>
-					<div className="mb-3">
+					<div className='mb-3'>
 						<input
 							className={styles.input}
-							id="phoneNumber"
-							type="text"
+							id='phoneNumber'
+							type='text'
 							value={phoneNumber}
+							name='phone'
 							onChange={(e) => setPhoneNumber(e.target.value)}
-							placeholder="Enter phone number"
+							placeholder='Enter phone number'
 						/>
 					</div>
 				</div>
 
 				<div className={styles.h2}>Delivery Address</div>
 
-				<div className="mb-3">
+				<div className='mb-3'>
 					<input
 						className={styles.input}
-						id="city"
-						type="text"
+						id='city'
+						type='text'
 						value={city}
+						name='city'
 						onChange={(e) => setCity(e.target.value)}
-						placeholder="Enter city"
+						placeholder='Enter city'
 					/>
 				</div>
-				<div className="mb-3">
+				<div className='mb-3'>
 					<input
 						className={styles.input}
-						id="address"
-						type="text"
+						id='address'
+						type='text'
 						value={address}
 						onChange={(e) => setAddress(e.target.value)}
-						placeholder="Enter address"
+						placeholder='Enter address'
 					/>
 				</div>
-				<div className="mb-3">
+				<div className='mb-3'>
 					<input
 						className={styles.input}
-						id="zip"
-						type="text"
+						id='zip'
+						type='text'
 						value={zip}
 						onChange={(e) => setZipCode(e.target.value)}
-						placeholder="Enter zip-code"
+						placeholder='Enter zip-code'
 					/>
 				</div>
 
-				{paymentIntent && elements && (
-					<PaymentElement
-						id="payment-element"
-						className={`${styles.paymentInfo} mt-3 my-md-5`}
-					/>
-				)}
-
-				{message && (
-					<div className="mt-5 d-flex text-error">
-						<div className="mx-auto">{message}</div>
-					</div>
-				)}
-
-				<div className="d-flex justify-content-center">
-					<div className={styles.totalPrice}>
+				<div className='d-flex justify-content-center'>
+					<div
+						className={
+							((!firstName ||
+								!lastName ||
+								!email ||
+								!address ||
+								!zip ||
+								!phoneNumber ||
+								!city) &&
+								'd-none') ||
+							styles.totalPrice
+						}>
 						Cart Total {locAmount} $
 					</div>
+
 					<button
 						className={styles.payNowBtn}
-						disabled={isLoading || !stripe || !elements}
-						id="submit"
-					>
-						<span id="button-text">
-							{isLoading ? <div>Please, wait...</div> : 'Pay now'}
+						disabled={
+							!firstName ||
+							!lastName ||
+							!email ||
+							!address ||
+							!zip ||
+							!phoneNumber ||
+							!city
+						}
+						id='submit'>
+						<span id='button-text'>
+							{((!firstName ||
+								!lastName ||
+								!email ||
+								!address ||
+								!zip ||
+								!phoneNumber ||
+								!city) &&
+								'Please, fill all fields...') ||
+								'Pay now'}
 						</span>
 					</button>
 				</div>
