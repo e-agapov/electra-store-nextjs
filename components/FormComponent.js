@@ -14,7 +14,7 @@ async function finishOrder(id) {
 	if (order.isCompleted) Router.replace('/success');
 }
 
-const FormComponent = ({ totalPrice = 0 }) => {
+const FormComponent = ({ totalPrice = 0, products }) => {
 	const [email, setEmail] = useState('');
 	const [firstName, setFirstName] = useState('');
 	const [lastName, setLastName] = useState('');
@@ -35,6 +35,79 @@ const FormComponent = ({ totalPrice = 0 }) => {
 	async function handleSubmit(e) {
 		e.preventDefault();
 
+		function getProducts(products) {
+			let data = '';
+			for (let key in products) {
+				let product = products[key];
+				data += `
+
+				`;
+
+				console.log(product);
+
+				for (let key in product) {
+					if (
+						key == 'name' ||
+						key == 'color' ||
+						key == 'count' ||
+						key == 'price' ||
+						key == 'brand_id' ||
+						key == 'product_quantity' ||
+						key == 'product_status'
+					) {
+						data += `
+						${key}: ${JSON.stringify(product[key])}`;
+					}
+
+					if (key == 'totalPrice') {
+						data += `
+						${key}: ${JSON.stringify(product[key] * product.count)}`;
+					}
+
+					if (key == 'uri') {
+						data += `
+						${key}: (https://electrasharing.shop/products/${product[key]})`;
+					}
+				}
+			}
+
+			return data;
+		}
+
+		var data = {
+			service_id: 'service_egucrqq',
+			template_id: 'template_3qnwc1e',
+			user_id: 'tEEoEmoIB05ySbT4U',
+			template_params: {
+				email: email,
+				firstName: firstName,
+				lastName: lastName,
+				phoneNumber: phoneNumber,
+				city: city,
+				address: address,
+				zip: zip,
+				locAmount: locAmount,
+				data: `
+					Name: ${firstName} ${lastName}
+					E-Mail: ${email}
+					Phone Number: ${phoneNumber}
+					Address: ${city}, ${address}, ${zip}
+					LocAmount: ${locAmount}
+
+					Products:`,
+				products: getProducts(products),
+				mail_to: 'evgenyagap@icloud.com, nsberegaev@gmail.com'
+			}
+		};
+
+		axios
+			.post('https://api.emailjs.com/api/v1.0/email/send', { ...data })
+			.then(() => {
+				Router.replace('/success');
+			})
+			.catch((err) => alert(err));
+
+		return true;
 		await axios({
 			url: '/api/pay',
 			'Content-Type': 'application/json',
@@ -88,7 +161,11 @@ const FormComponent = ({ totalPrice = 0 }) => {
 			<div className={styles.headline}>Check out</div>
 
 			<div className={styles.h2}>Contact information</div>
-			<form id='payment-form' onSubmit={handleSubmit} className='m-auto'>
+			<form
+				id='payment-form'
+				onSubmit={handleSubmit}
+				className='m-auto'
+				encType='multipart/form-data'>
 				<div className='row row-cols-1 row-cols-md-2'>
 					<div className='mb-3'>
 						<input

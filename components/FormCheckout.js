@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import CheckoutForm from './FormComponent';
 
-const FormCheckout = ({ totalPrice }) => {
+const FormCheckout = ({ totalPrice, products }) => {
 	const [isLoading, setLoading] = useState(false);
 
 	useEffect(() => {
@@ -16,7 +16,7 @@ const FormCheckout = ({ totalPrice }) => {
 			{isLoading ? (
 				<div>Please, wait...</div>
 			) : (
-				<CheckoutForm totalPrice={totalPrice} />
+				<CheckoutForm products={products} totalPrice={totalPrice} />
 			)}
 		</div>
 	);

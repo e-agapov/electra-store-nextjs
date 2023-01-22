@@ -92,7 +92,7 @@ const Cart = () => {
 		<Layout title='Cart – Electra' description=''>
 			{isCheckout ? (
 				<div className='mx-auto col-lg-6'>
-					<Checkout totalPrice={totalCartPrice} />
+					<Checkout products={products} totalPrice={totalCartPrice} />
 				</div>
 			) : (
 				<div className='container my-3 my-lg-5'>
