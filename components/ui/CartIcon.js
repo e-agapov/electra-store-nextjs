@@ -4,11 +4,7 @@ import styles from '../../scss/components/ui/Cart.module.scss';
 const Cart = () => {
   const [active, setActive] = useState(false);
 
-  function getCartStorage() {
-    if (localStorage.getItem('cart')) {
-      return JSON.parse(localStorage.getItem('cart')).length ? true : false;
-    }
-  }
+  const getCartStorage = () => !!localStorage.getItem('cart');
 
   useEffect(() => {
     const cartStorage = getCartStorage();

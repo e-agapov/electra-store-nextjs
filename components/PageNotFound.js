@@ -1,11 +1,8 @@
 import Head from 'next/head';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 import styles from '../scss/pages/404.module.scss';
 
 const PageNotFound = () => {
-  const router = useRouter();
-
   return (
     <div className={styles.wrapper}>
       <Head>

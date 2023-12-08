@@ -18,7 +18,7 @@ const SectionBlock = ({
       className={`d-flex flex-column flex-lg-row align-items-center justify-content-between px-3 px-lg-5 ${classes}`}
     >
       {imgSrc && (
-        <div className={`col-lg-${colWidthText ? 12 - colWidthText : false || 6} mt-4 mb-5 my-lg-0`}>
+        <div className={`col-lg-${colWidthText ? 12 - colWidthText : 6} mt-4 mb-5 my-lg-0`}>
           <Image
             alt={imgAlt}
             src={imgSrc}
@@ -37,7 +37,7 @@ const SectionBlock = ({
 
         {link && (
           <div className={'my-4'}>
-            <ArrowBtn href={link} name={linkName ? linkName : 'set: linkName for component'} />
+            <ArrowBtn href={link} name={linkName ?? 'set: linkName for component'} />
           </div>
         )}
       </div>
@@ -53,7 +53,7 @@ const SectionBlock = ({
 
         {link && (
           <div className={'my-4'}>
-            <ArrowBtn href={link} name={linkName ? linkName : 'set: linkName for component'} />
+            <ArrowBtn href={link} name={linkName ?? 'set: linkName for component'} />
           </div>
         )}
       </div>

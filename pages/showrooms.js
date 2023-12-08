@@ -21,7 +21,7 @@ export default function Showrooms() {
   useEffect(() => {
     setLoading(true);
 
-    const data = fetch('api/locations').then((res) => {
+    fetch('api/locations').then((res) => {
       setLocations(res.data);
       setLoading(false);
     });

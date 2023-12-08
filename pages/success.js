@@ -55,46 +55,45 @@ const Successful = () => {
 
           <div className={styles.text}>
             Our contact information have
-            <Link href="/service">
-              <a
-                className={styles.goHomeLink}
-                onClick={(e) => {
-                  e.preventDefault(false);
-                  localStorage.clear();
-                  router.push('/');
-                }}
-              >
-                service page
-              </a>
+            <Link
+              href="/service"
+              className={styles.goHomeLink}
+              onClick={(e) => {
+                e.preventDefault();
+                localStorage.clear();
+                router.push('/');
+              }}
+            >
+              service page
             </Link>
             .
           </div>
 
-          <a
+          <Link
             className={styles.goHomeLink}
             onClick={(e) => {
-              e.preventDefault(false);
+              e.preventDefault();
               localStorage.clear();
               router.push('/');
             }}
           >
             Go home...
-          </a>
+          </Link>
         </div>
       )) || (
         <div className={'container'}>
           <div className={styles.h1}>Error!</div>
 
-          <a
+          <button
             className={styles.goHomeLink}
-            onClick={(e) => {
-              e.preventDefault(false);
+            onClick={(event) => {
+              event.preventDefault();
               localStorage.clear();
               router.push('/');
             }}
           >
             Go home...
-          </a>
+          </button>
         </div>
       )}
     </Layout>

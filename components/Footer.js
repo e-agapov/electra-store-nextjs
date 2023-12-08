@@ -36,8 +36,8 @@ const Footer = () => {
         </div>
         <div className="container">
           <div className={styles.footerContentWrapper}>
-            {footerLinks.map((footerLink, index) => (
-              <Link href={footerLink.href} key={index} className={styles.footerLink}>
+            {footerLinks.map((footerLink) => (
+              <Link href={footerLink.href} key={footerLink.href} className={styles.footerLink}>
                 {footerLink.name}
               </Link>
             ))}
@@ -46,8 +46,8 @@ const Footer = () => {
         <div className={styles.SubNavbar}>
           <div className="container">
             <div className="row row-cols-auto align-items-center">
-              {subFooterLinks.map((subFooterLink, index) => (
-                <Link href={subFooterLink.href} key={index} className={styles.footerLink}>
+              {subFooterLinks.map((subFooterLink) => (
+                <Link href={subFooterLink.href} key={subFooterLink.href} className={styles.footerLink}>
                   {subFooterLink.name}
                 </Link>
               ))}
