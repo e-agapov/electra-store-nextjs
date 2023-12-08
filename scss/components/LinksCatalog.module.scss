@@ -2,38 +2,38 @@
 @import '../functions/rem';
 
 .links {
-	display: flex;
-	align-items: center;
-	justify-content: space-around;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
 
-	@media (max-width: 991.98px) {
-		justify-content: space-between;
-	}
+  @media (max-width: 991.98px) {
+    justify-content: space-between;
+  }
 
-	.link {
-		@media (max-width: 991.98px) {
-			font-size: rem(18);
-			margin-bottom: rem(24);
-		}
+  .link {
+    @media (max-width: 991.98px) {
+      font-size: rem(18);
+      margin-bottom: rem(24);
+    }
 
-		transition: 0.15s;
-		color: $dark-gray;
-		font-size: rem(34);
-		text-decoration: none;
-		font-family: 'CenturyGothic', sans-serif;
-		display: inline-block;
+    transition: 0.15s;
+    color: $dark-gray;
+    font-size: rem(34);
+    text-decoration: none;
+    font-family: 'CenturyGothic', sans-serif;
+    display: inline-block;
 
-		&:hover,
-		&:focus {
-			color: $purple;
-		}
+    &:hover,
+    &:focus {
+      color: $purple;
+    }
 
-		&:active {
-			color: $purple;
-		}
-	}
+    &:active {
+      color: $purple;
+    }
+  }
 
-	.activeLink {
-		color: $purple;
-	}
+  .activeLink {
+    color: $purple;
+  }
 }

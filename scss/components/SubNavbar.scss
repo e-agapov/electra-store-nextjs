@@ -1,54 +1,54 @@
 @import '../functions/rem';
 
 .subNavbar {
-	@include media-breakpoint-down(md) {
-		display: none;
-		visibility: hidden;
-	}
+  @include media-breakpoint-down(md) {
+    display: none;
+    visibility: hidden;
+  }
 
-	background: #363636;
-	padding: rem(9) 0;
+  background: #363636;
+  padding: rem(9) 0;
 
-	.linkWrapper {
-		display: flex;
+  .linkWrapper {
+    display: flex;
 
-		align-items: center;
-		justify-content: space-around;
+    align-items: center;
+    justify-content: space-around;
 
-		flex-flow: nowrap;
+    flex-flow: nowrap;
 
-		.subNavLink {
-			transition: 0.15s;
-			color: #c0c0c0;
+    .subNavLink {
+      transition: 0.15s;
+      color: #c0c0c0;
 
-			font-size: rem(16);
-			text-decoration: none;
+      font-size: rem(16);
+      text-decoration: none;
 
-			.icon {
-				margin: 0 0 0 rem(8);
-				padding: 0;
+      .icon {
+        margin: 0 0 0 rem(8);
+        padding: 0;
 
-				svg {
-					transition: 0.15s;
-					transform: translateY(10%) scale(1);
-				}
-			}
+        svg {
+          transition: 0.15s;
+          transform: translateY(10%) scale(1);
+        }
+      }
 
-			&:hover,
-			&:focus {
-				color: #eee;
-			}
+      &:hover,
+      &:focus {
+        color: #eee;
+      }
 
-			&:active {
-				color: #b4b4b4;
-				transform: scale(0.95);
+      &:active {
+        color: #b4b4b4;
+        transform: scale(0.95);
 
-				.icon {
-					svg {
-						transform: translateY(20%) scale(0.95);
-					}
-				}
-			}
-		}
-	}
+        .icon {
+          svg {
+            transform: translateY(20%) scale(0.95);
+          }
+        }
+      }
+    }
+  }
 }

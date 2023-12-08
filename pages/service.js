@@ -10,64 +10,74 @@ import styles from '../scss/pages/Service.module.scss';
 import ComingSoon from '../components/ComingSoon';
 
 export default function Service() {
-	return (
-		<Layout title="Service – Electra" description="Internet store">
-			<ComingSoon />
-		</Layout>
-	);
-	const texts = {
-		main: `Every client and his peace of mind is important to us. That is why we provide our service for the maintenance and repair of your electric transport. For your convenience, our services are located near the showrooms, you can always ask for help from our team of craftsmen. We employ only certified masters with experience in the repair and maintenance of electric vehicles.`,
+  return (
+    <Layout title="Service – Electra" description="Internet store">
+      <ComingSoon />
+    </Layout>
+  );
 
-		second: ``
-	};
+  const texts = {
+    main: `Every client and his peace of mind is important to us. That is why we provide our service for the maintenance and repair of your electric transport. For your convenience, our services are located near the showrooms, you can always ask for help from our team of craftsmen. We employ only certified masters with experience in the repair and maintenance of electric vehicles.`,
 
-	// const divSection = (
-	// 	<div className="d-flex flex-column flex-lg-row">
-	// 		<div className="col-lg-4 px-3">
-	// 			<div className={`${styles.decimal} mx-auto mx-sm-0`}>1</div>
-	// 			<div className={`${styles.text} mt-3`}>
-	// 				We gethered differend kinds of scooters. Everyone can find a
-	// 				scooter for themselves.
-	// 			</div>
-	// 		</div>
-	// 		<div className="col-lg-4 mt-5 mt-lg-0 px-3">
-	// 			<div className={`${styles.decimal} mx-auto mx-sm-0`}>2</div>
-	// 			<div className={`${styles.text} mt-3`}>
-	// 				We gethered differend kinds of scooters. Everyone can find a
-	// 				scooter for themselves.
-	// 			</div>
-	// 		</div>
-	// 		<div className="col-lg-4 mt-5 mt-lg-0 px-3">
-	// 			<div className={`${styles.decimal} mx-auto mx-sm-0`}>3</div>
-	// 			<div className={`${styles.text} mt-3`}>
-	// 				We gethered differend kinds of scooters.
-	// 			</div>
-	// 		</div>
-	// 	</div>
-	// );
+    second: ``,
+  };
 
-	return (
-		<Layout title="Service – Electra" description="Internet store">
-			<section
-				className={`py-5 px-4 px-md-5 headerImage ${styles.headerImage}`}
-			>
-				<Image src={HeaderImage} alt="" priority />
-			</section>
+  const divSection = (
+    <div className="d-flex flex-column flex-lg-row">
+      <div className="col-lg-4 px-3">
+        <div className={`${styles.decimal} mx-auto mx-sm-0`}>1</div>
+        <div className={`${styles.text} mt-3`}>
+          We gethered differend kinds of scooters. Everyone can find a scooter for themselves.
+        </div>
+      </div>
+      <div className="col-lg-4 mt-5 mt-lg-0 px-3">
+        <div className={`${styles.decimal} mx-auto mx-sm-0`}>2</div>
+        <div className={`${styles.text} mt-3`}>
+          We gethered differend kinds of scooters. Everyone can find a scooter for themselves.
+        </div>
+      </div>
+      <div className="col-lg-4 mt-5 mt-lg-0 px-3">
+        <div className={`${styles.decimal} mx-auto mx-sm-0`}>3</div>
+        <div className={`${styles.text} mt-3`}>We gethered differend kinds of scooters.</div>
+      </div>
+    </div>
+  );
 
-			<div className="container">
-				<SectionBlock
-					classes={styles.textSectionWithText}
-					title={'We provide service for every client'}
-					imgSrc={carbonFibersImage}
-					textForColumn={texts.main}
-					link={'/accessories'}
-					linkName={'Accessories'}
-				/>
-			</div>
+  return (
+    <Layout title="Service – Electra" description="Internet store">
+      <section className={`py-5 px-4 px-md-5 headerImage ${styles.headerImage}`}>
+        <Image
+          src={HeaderImage}
+          alt=""
+          priority
+          style={{
+            width: '100%',
+            height: 'auto',
+          }}
+        />
+      </section>
 
-			<Image src={ImgWithManAndScooter} alt="" />
+      <div className="container">
+        <SectionBlock
+          classes={styles.textSectionWithText}
+          title={'We provide service for every client'}
+          imgSrc={carbonFibersImage}
+          textForColumn={texts.main}
+          link={'/accessories'}
+          linkName={'Accessories'}
+        />
+      </div>
 
-			{/* <SectionBlock
+      <Image
+        src={ImgWithManAndScooter}
+        alt=""
+        style={{
+          width: '100%',
+          height: 'auto',
+        }}
+      />
+
+      {/* <SectionBlock
 				classes={styles.textSectionWithText}
 				title={'WE ARE HAPPY TO HELP YOU WITH:'}
 				imgSrc={scooterImage}
@@ -75,15 +85,15 @@ export default function Service() {
 				colWidthText={7}
 			/> */}
 
-			<div className="container">
-				<SectionBlock
-					classes={styles.textSectionWithText}
-					title={'Check our news'}
-					textForColumn={texts.second}
-					link={'/news'}
-					linkName={'More News'}
-				/>
-			</div>
-		</Layout>
-	);
+      <div className="container">
+        <SectionBlock
+          classes={styles.textSectionWithText}
+          title={'Check our news'}
+          textForColumn={texts.second}
+          link={'/news'}
+          linkName={'More News'}
+        />
+      </div>
+    </Layout>
+  );
 }

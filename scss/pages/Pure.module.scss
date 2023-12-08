@@ -1,24 +1,24 @@
 @import '../functions/rem';
 
 .headerImage {
-	user-select: none;
-	pointer-events: none;
+  user-select: none;
+  pointer-events: none;
 
-	img {
-		transform: scale(1.15);
-	}
+  img {
+    transform: scale(1.15);
+  }
 }
 
 .textSectionWithText {
-	margin: 15vmin 0;
+  margin: 15vmin 0;
 }
 
 .textWeCreateTransportSystem {
-	margin-top: rem(40);
-	font-size: rem(24);
-	line-height: rem(50);
+  margin-top: rem(40);
+  font-size: rem(24);
+  line-height: rem(50);
 }
 
 .faq {
-	margin-top: 30vmin;
+  margin-top: 30vmin;
 }

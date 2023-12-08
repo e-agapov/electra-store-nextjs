@@ -6,53 +6,47 @@ import BurgerMenuBtn from './ui/BurgerMenuBtn';
 import CartIcon from './ui/CartIcon';
 
 function Navbar({ toggleMenu }) {
-	return (
-		<div className="navbar">
-			<div className="container">
-				<nav
-					className={
-						'd-flex align-items-center justify-content-start'
-					}
-				>
-					<div className="navbarLogotypeLink">
-						<Link href={'/'}>
-							<a>
-								<Image
-									className="navbarLogotypeImg"
-									alt={'Logo'}
-									src={LogoImage}
-									priority
-								/>
-							</a>
-						</Link>
-					</div>
+  return (
+    <div className="navbar">
+      <div className="container">
+        <nav className={'d-flex align-items-center justify-content-start'}>
+          <div className="navbarLogotypeLink">
+            <Link href="/">
+              <Image
+                className="navbarLogotypeImg"
+                alt="Logo"
+                src={LogoImage}
+                style={{
+                  width: '100%',
+                  height: 'auto',
+                }}
+                priority
+              />
+            </Link>
+          </div>
 
-					<div className="rowContainer">
-						<div className="NavLinksContainer">
-							<Link href={'/transport'}>
-								<a className="navLink">Transport</a>
-							</Link>
-							<Link href={'/accessories'}>
-								<a className="navLink">
-									Accessories {'&'} Parts
-								</a>
-							</Link>
-						</div>
+          <div className="rowContainer">
+            <div className="NavLinksContainer">
+              <Link href="/transport" className="navLink">
+                Transport
+              </Link>
+              <Link href="/accessories" className="navLink">
+                Accessories & Parts
+              </Link>
+            </div>
 
-						<Link href={'/cart'}>
-							<a className="navbarCartLink ms-auto">
-								<CartIcon />
-							</a>
-						</Link>
+            <Link href="/cart" className="navbarCartLink ms-auto">
+              <CartIcon />
+            </Link>
 
-						<BurgerMenuBtn action={toggleMenu} />
-					</div>
-				</nav>
-			</div>
+            <BurgerMenuBtn action={toggleMenu} />
+          </div>
+        </nav>
+      </div>
 
-			<SubNavbar />
-		</div>
-	);
+      <SubNavbar />
+    </div>
+  );
 }
 
 export default Navbar;

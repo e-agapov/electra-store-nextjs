@@ -2,32 +2,32 @@
 @import '../variables';
 
 .headerImage {
-	display: flex;
-	align-items: center;
-	justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-	img {
-		max-height: 80vh;
-	}
+  img {
+    max-height: 80vh;
+  }
 }
 
 .textSectionWithText {
-	margin: 15vmin 0;
+  margin: 15vmin 0;
 }
 
 .decimal {
-	font-family: 'CenturyGothic', sans-serif;
-	font-size: rem(36);
-	border-radius: rem(50);
-	border: rem(2) solid black;
-	display: flex;
-	justify-content: center;
-	height: rem(50);
-	width: rem(50);
-	align-items: center;
+  font-family: 'CenturyGothic', sans-serif;
+  font-size: rem(36);
+  border-radius: rem(50);
+  border: rem(2) solid black;
+  display: flex;
+  justify-content: center;
+  height: rem(50);
+  width: rem(50);
+  align-items: center;
 }
 
 .text {
-	font-size: rem(16);
-	color: $dark;
+  font-size: rem(16);
+  color: $dark;
 }

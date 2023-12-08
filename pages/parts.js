@@ -5,25 +5,25 @@ import Products from '../components/Products';
 import { links } from '../data/partsAndAccessoriesLinks';
 
 const Parts = () => {
-	const [data, setData] = useState([]);
+  const [data, setData] = useState([]);
 
-	useEffect(() => {
-		fetch('api/parts')
-			.then((res) => res.json())
-			.then((data) => setData(data));
+  useEffect(() => {
+    fetch('api/parts')
+      .then((res) => res.json())
+      .then((data) => setData(data));
 
-		return () => setData([]);
-	}, []);
+    return () => setData([]);
+  }, []);
 
-	return (
-		<Layout title="Products, Parts – Electra" description="">
-			<div className="container my-4 mt-md-5">
-				<CatalogLinks links={links} />
+  return (
+    <Layout title="Products, Parts – Electra" description="">
+      <div className="container my-4 mt-md-5">
+        <CatalogLinks links={links} />
 
-				<Products data={data} />
-			</div>
-		</Layout>
-	);
+        <Products data={data} />
+      </div>
+    </Layout>
+  );
 };
 
 export default Parts;

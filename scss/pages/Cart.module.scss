@@ -2,183 +2,183 @@
 @import '../variables';
 
 .headline {
-	font-size: rem(36);
-	text-transform: uppercase;
+  font-size: rem(36);
+  text-transform: uppercase;
 }
 
 .cartIsEmpty {
-	font-size: rem(36);
-	margin: rem(48) auto;
+  font-size: rem(36);
+  margin: rem(48) auto;
 }
 
 .cartList {
-	margin-top: rem(60);
+  margin-top: rem(60);
 
-	.cartItem {
-		display: flex;
-		flex-direction: row;
-		flex-wrap: wrap;
+  .cartItem {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
 
-		border-top: rem(1) solid $light-gray;
-		padding: rem(20) rem(10);
-		margin: rem(10) 0;
+    border-top: rem(1) solid $light-gray;
+    padding: rem(20) rem(10);
+    margin: rem(10) 0;
 
-		.mobileInfo {
-			width: 100%;
+    .mobileInfo {
+      width: 100%;
 
-			.mobilePrice,
-			.mobileName {
-				font-size: rem(16);
-				margin-top: rem(15);
-			}
+      .mobilePrice,
+      .mobileName {
+        font-size: rem(16);
+        margin-top: rem(15);
+      }
 
-			.mobileImage {
-				height: rem(200);
-				min-width: 100%;
-				overflow: hidden;
-				background: white;
-				position: relative;
-				display: flex;
-				align-items: center;
-				justify-content: center;
+      .mobileImage {
+        height: rem(200);
+        min-width: 100%;
+        overflow: hidden;
+        background: white;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
 
-				.image {
-					object-fit: contain;
-					position: relative !important;
+        .image {
+          object-fit: contain;
+          position: relative !important;
 
-					width: 100%;
-					height: 100%;
-				}
-			}
-		}
+          width: 100%;
+          height: 100%;
+        }
+      }
+    }
 
-		.cartItemName {
-			margin-bottom: rem(20);
-			font-size: rem(24);
-			font-weight: 400;
-			max-width: 50vw;
-			min-width: rem(300);
+    .cartItemName {
+      margin-bottom: rem(20);
+      font-size: rem(24);
+      font-weight: 400;
+      max-width: 50vw;
+      min-width: rem(300);
 
-			@media (max-width: 550.98px) {
-				order: 2;
-			}
-		}
+      @media (max-width: 550.98px) {
+        order: 2;
+      }
+    }
 
-		.price {
-			font-size: rem(20);
-			align-self: center;
-			margin-top: rem(20);
-		}
+    .price {
+      font-size: rem(20);
+      align-self: center;
+      margin-top: rem(20);
+    }
 
-		.remove {
-			margin-left: auto;
-		}
+    .remove {
+      margin-left: auto;
+    }
 
-		.quantity {
-			font-size: rem(24);
-			color: $dark-gray;
-			display: flex;
-			align-items: center;
-			align-self: center;
+    .quantity {
+      font-size: rem(24);
+      color: $dark-gray;
+      display: flex;
+      align-items: center;
+      align-self: center;
 
-			@media screen and (max-width: 768px) {
-				font-size: rem(16);
-			}
-		}
+      @media screen and (max-width: 768px) {
+        font-size: rem(16);
+      }
+    }
 
-		.actionBtn {
-			cursor: pointer;
-			background: none;
-			border: none;
-			outline: none;
-			box-shadow: none;
-			margin: 0 rem(15);
-			font-size: rem(24);
-			color: $light-gray;
-			border-radius: rem(2.5);
-			padding: rem(5) rem(10);
+    .actionBtn {
+      cursor: pointer;
+      background: none;
+      border: none;
+      outline: none;
+      box-shadow: none;
+      margin: 0 rem(15);
+      font-size: rem(24);
+      color: $light-gray;
+      border-radius: rem(2.5);
+      padding: rem(5) rem(10);
 
-			&:hover,
-			&:active {
-				background: $dark;
-				color: white;
-			}
+      &:hover,
+      &:active {
+        background: $dark;
+        color: white;
+      }
 
-			&:active {
-				background: black;
-			}
-		}
+      &:active {
+        background: black;
+      }
+    }
 
-		.cartItemColor {
-			display: flex;
-			align-items: center;
-			font-size: rem(18);
-			font-weight: 400;
-			text-transform: uppercase;
+    .cartItemColor {
+      display: flex;
+      align-items: center;
+      font-size: rem(18);
+      font-weight: 400;
+      text-transform: uppercase;
 
-			.color {
-				margin-left: rem(15);
-				transform: scale(1.15);
-				background: transparent;
-				height: rem(20);
-				width: rem(20);
-				border-radius: 100%;
-			}
+      .color {
+        margin-left: rem(15);
+        transform: scale(1.15);
+        background: transparent;
+        height: rem(20);
+        width: rem(20);
+        border-radius: 100%;
+      }
 
-			@media screen and (max-width: 768px) {
-				font-size: rem(12);
+      @media screen and (max-width: 768px) {
+        font-size: rem(12);
 
-				.color {
-					height: rem(10);
-					width: rem(10);
-				}
-			}
-		}
-	}
+        .color {
+          height: rem(10);
+          width: rem(10);
+        }
+      }
+    }
+  }
 }
 
 .goods {
-	color: $light-gray;
-	margin-bottom: rem(20);
+  color: $light-gray;
+  margin-bottom: rem(20);
 }
 
 .subtotal {
-	margin-bottom: rem(5);
-	font-size: rem(28);
+  margin-bottom: rem(5);
+  font-size: rem(28);
 }
 
 .totalPrice {
-	font-size: rem(36);
-	font-weight: bold;
-	margin-bottom: rem(25);
+  font-size: rem(36);
+  font-weight: bold;
+  margin-bottom: rem(25);
 }
 
 .checkoutBlock {
-	.moreInfoText {
-		color: $light-gray;
-	}
+  .moreInfoText {
+    color: $light-gray;
+  }
 
-	.checkoutBtn {
-		text-transform: uppercase;
-		transition: 0.15s;
-		margin-top: rem(30);
-		background: black;
-		color: white;
-		padding: rem(15) rem(60);
-		border-radius: rem(25);
-		font-weight: bold;
-		font-size: rem(20);
-		text-decoration: none;
+  .checkoutBtn {
+    text-transform: uppercase;
+    transition: 0.15s;
+    margin-top: rem(30);
+    background: black;
+    color: white;
+    padding: rem(15) rem(60);
+    border-radius: rem(25);
+    font-weight: bold;
+    font-size: rem(20);
+    text-decoration: none;
 
-		cursor: pointer;
+    cursor: pointer;
 
-		&:hover,
-		&:focus {
-			transform: scale(1.15);
-		}
+    &:hover,
+    &:focus {
+      transform: scale(1.15);
+    }
 
-		&:active {
-			transform: none;
-		}
-	}
+    &:active {
+      transform: none;
+    }
+  }
 }

@@ -1,59 +1,59 @@
 @import '../functions/rem';
 
 .wrapper {
-	min-height: 100vh;
-	min-width: 100vw;
+  min-height: 100vh;
+  min-width: 100vw;
 
-	background: url('../../assets/images/404.png') no-repeat;
-	background-size: cover;
+  background: url('../../assets/images/404.png') no-repeat;
+  background-size: cover;
 
-	.infoWrapper {
-		min-height: 100vh;
-		min-width: 100vw;
+  .infoWrapper {
+    min-height: 100vh;
+    min-width: 100vw;
 
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 
-		background: transparentize(white, 0.35);
+    background: transparentize(white, 0.35);
 
-		.titlePage {
-			font-size: rem(36);
-		}
+    .titlePage {
+      font-size: rem(36);
+    }
 
-		.text404 {
-			font-size: rem(142);
-			font-weight: bold;
-		}
+    .text404 {
+      font-size: rem(142);
+      font-weight: bold;
+    }
 
-		.moreInfoText {
-			max-width: rem(400);
-			font-weight: bold;
-		}
+    .moreInfoText {
+      max-width: rem(400);
+      font-weight: bold;
+    }
 
-		.goHomeBtn {
-			transition: 0.15s;
-			margin-top: rem(30);
-			background: black;
-			color: white;
-			padding: rem(15) rem(30);
-			border-radius: rem(25);
-			font-weight: bold;
-			font-size: rem(20);
-			text-decoration: none;
+    .goHomeBtn {
+      transition: 0.15s;
+      margin-top: rem(30);
+      background: black;
+      color: white;
+      padding: rem(15) rem(30);
+      border-radius: rem(25);
+      font-weight: bold;
+      font-size: rem(20);
+      text-decoration: none;
 
-			cursor: pointer;
+      cursor: pointer;
 
-			&:hover,
-			&:focus {
-				transform: scale(1.15);
-			}
+      &:hover,
+      &:focus {
+        transform: scale(1.15);
+      }
 
-			&:active {
-				transform: none;
-			}
-		}
-	}
+      &:active {
+        transform: none;
+      }
+    }
+  }
 }
