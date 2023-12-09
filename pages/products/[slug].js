@@ -1,11 +1,39 @@
 import axios from 'axios';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, memo } from 'react';
 import Layout from '../../components/Layout';
 import styles from '../../scss/pages/Product.module.scss';
 import { imageLoader } from '../../utils/imageLoader';
 import financial from '../../utils/financial';
+
+const ImagesOfProduct = memo(function ImagesOfProduct({ product, setImage }) {
+  return product?.images?.map((imageSrc) => (
+    <button
+      key={imageSrc + new Date().getTime()}
+      onClick={() => setImage(imageSrc)}
+      width={'100%'}
+      height={'100%'}
+      className={styles.imageAProduct}
+      style={{
+        position: 'relative',
+      }}
+    >
+      <Image
+        loader={imageLoader}
+        className={styles.image}
+        src={imageSrc}
+        alt=""
+        width={500}
+        height={500}
+        style={{
+          width: '100%',
+          height: 'auto',
+        }}
+      />
+    </button>
+  ));
+});
 
 const Product = () => {
   const router = useRouter();
@@ -61,31 +89,7 @@ const Product = () => {
             <div className={`${styles.ProductImages} col-xxl-8`}>
               {product?.images?.length && (
                 <div className={`${styles.imagesList} order-2 order-sm-1 mt-3 pt-3 mt-sm-0 pt-sm-0`}>
-                  {product?.images?.map((imageSrc) => (
-                    <button
-                      key={imageSrc + new Date().getTime()}
-                      onClick={() => setImage(imageSrc)}
-                      width={'100%'}
-                      height={'100%'}
-                      className={styles.imageAProduct}
-                      style={{
-                        position: 'relative',
-                      }}
-                    >
-                      <Image
-                        loader={imageLoader}
-                        className={styles.image}
-                        src={imageSrc}
-                        alt=""
-                        width={500}
-                        height={500}
-                        style={{
-                          width: '100%',
-                          height: 'auto',
-                        }}
-                      />
-                    </button>
-                  ))}
+                  <ImagesOfProduct product={product} setImage={setImage} />
                 </div>
               )}
 
