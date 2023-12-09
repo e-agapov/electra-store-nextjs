@@ -10,35 +10,31 @@ import financial from '../../utils/financial';
 const Product = () => {
   const router = useRouter();
 
+  const { slug } = router.query;
+
   const [product, setProduct] = useState(null);
+  const [currentColor, setCurrentColor] = useState(null);
   const [image, setImage] = useState(null);
   const [inCart, setInCart] = useState(false);
-  const [getColor, setColor] = useState(null);
-  const [renderCount, setRenderCount] = useState(0);
 
   useEffect(() => {
-    const { slug } = router.query;
-
-    async function fetchProduct() {
+    async function fetchData() {
       await axios
         .get(`/api/products/${slug}`)
-        .then((res) => {
-          res.data.colors && setColor(res.data.colors[0].hex);
-          res.data.images && setImage(res.data.images[res.data.poster_id]);
-
-          res.data.status !== 404 && setProduct(res.data);
+        .then((response) => {
+          response.data.colors && setCurrentColor(response.data.colors[0].hex);
+          response.data.images && setImage(response.data.images[response.data.poster_id]);
+          return response;
         })
-        .catch(() => router.replace('/404'));
+        .then((response) => setProduct(response.data))
+        .catch(() => router.push('/'));
     }
 
-    !product && fetchProduct();
-    !product && renderCount <= 0 && setRenderCount((prev) => prev + 1);
-
-    return () => setInCart(false);
-  }, [product, renderCount, router, router.query.slug]);
+    fetchData();
+  }, [router, slug]);
 
   function addToCart() {
-    const productColor = product?.colors?.find((col) => col.hex === getColor) || false;
+    const productColor = product?.colors?.find((col) => col.hex === currentColor) || false;
 
     const cartStorage = JSON.parse(localStorage.getItem('cart') || '[]');
 
@@ -62,76 +58,73 @@ const Product = () => {
       <Layout title={`${product?.name} – Electra`} description={product?.description}>
         <div className="container my-3 mt-lg-5">
           <div className="d-flex flex-column flex-xxl-row">
-            {product?.images && (
-              <div className={`${styles.ProductImages} col-xxl-8`}>
-                {product?.images.length > 1 && (
-                  <div className={`${styles.imagesList} order-2 order-sm-1 mt-3 pt-3 mt-sm-0 pt-sm-0`}>
-                    {product?.images?.map((imageSrc) => (
-                      <button
-                        key={imageSrc + new Date().getTime()}
-                        onClick={() => setImage(imageSrc)}
-                        width={'100%'}
-                        height={'100%'}
-                        className={styles.imageAProduct}
-                        style={{
-                          position: 'relative',
-                        }}
-                      >
-                        <Image
-                          loader={imageLoader}
-                          className={styles.image}
-                          src={imageSrc}
-                          alt=""
-                          width={500}
-                          height={500}
-                          style={{
-                            width: '100%',
-                            height: 'auto',
-                          }}
-                        />
-                      </button>
-                    ))}
-                  </div>
-                )}
-
-                {image && (
-                  <div
-                    className={`${styles.imageAProduct} order-1 order-md-2`}
-                    style={{ position: 'relative' }}
-                    width={'100%'}
-                    height={'100%'}
-                  >
-                    <Image
-                      loader={imageLoader}
-                      className={styles.image}
-                      src={image}
-                      alt=""
-                      width={500}
-                      height={500}
+            <div className={`${styles.ProductImages} col-xxl-8`}>
+              {product?.images?.length && (
+                <div className={`${styles.imagesList} order-2 order-sm-1 mt-3 pt-3 mt-sm-0 pt-sm-0`}>
+                  {product?.images?.map((imageSrc) => (
+                    <button
+                      key={imageSrc + new Date().getTime()}
+                      onClick={() => setImage(imageSrc)}
+                      width={'100%'}
+                      height={'100%'}
+                      className={styles.imageAProduct}
                       style={{
-                        width: '100%',
-                        height: 'auto',
+                        position: 'relative',
                       }}
-                    />
-                  </div>
-                )}
-              </div>
-            )}
+                    >
+                      <Image
+                        loader={imageLoader}
+                        className={styles.image}
+                        src={imageSrc}
+                        alt=""
+                        width={500}
+                        height={500}
+                        style={{
+                          width: '100%',
+                          height: 'auto',
+                        }}
+                      />
+                    </button>
+                  ))}
+                </div>
+              )}
 
+              {image && (
+                <div
+                  className={`${styles.imageAProduct} order-1 order-md-2`}
+                  style={{ position: 'relative' }}
+                  width={'100%'}
+                  height={'100%'}
+                >
+                  <Image
+                    loader={imageLoader}
+                    className={styles.image}
+                    src={image}
+                    alt=""
+                    width={500}
+                    height={500}
+                    style={{
+                      width: '100%',
+                      height: 'auto',
+                    }}
+                  />
+                </div>
+              )}
+            </div>
             <div className="col-lg-4">
               <div className={styles.nameOfProduct}>{product?.name}</div>
               <div className={styles.descriptionOfProduct}>{product?.description}</div>
               <div className={styles.price}>{financial(product?.price)} $</div>
 
-              {product?.colors && getColor == null && <div className="mt-5 mb-3">Select color</div>}
+              {product?.colors && currentColor == null && <div className="mt-5 mb-3">Select color</div>}
               {product?.colors && (
                 <>
                   <div className={styles.colorsHeaderText}>COLORS</div>
                   <div className={styles.colorsList}>
                     {product?.colors.map((color, index) => (
                       <button
-                        onClick={() => setColor(color.hex)}
-                        className={`${styles.colorBtn} ${getColor === color?.hex && styles.currentColor}`}
+                        onClick={() => setCurrentColor(color.hex)}
+                        className={`${styles.colorBtn} ${currentColor === color?.hex && styles.currentColor}`}
                         key={index}
                         value={color.name}
                         style={{
@@ -158,6 +151,7 @@ const Product = () => {
               </div>
             </div>
           </div>
+
           <div className={`d-flex flex-column flex-lg-row ${styles.moreInfoBlock}`}>
             <div className={'col-lg-12 mb-5 mb-lg-0'}>
               {product?.key_features && (
